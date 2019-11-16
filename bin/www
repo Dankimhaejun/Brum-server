@@ -3,7 +3,6 @@ require('dotenv').config();
 /**
  * Module dependencies.
  */
-
 const app = require('../app');
 const debug = require('debug')('brum-server:server');
 const http = require('http');
@@ -24,7 +23,7 @@ const server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-const models = require('../models/index');
+const models = require('../database/models/index');
 //sequelize 연결후 서버연결
 models.sequelize
   .sync()
