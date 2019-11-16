@@ -3,7 +3,6 @@ require('dotenv').config();
 /**
  * Module dependencies.
  */
-
 const app = require('../app');
 const debug = require('debug')('brum-server:server');
 const http = require('http');
