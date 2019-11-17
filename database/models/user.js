@@ -4,9 +4,10 @@ module.exports = function(sequelize, Datatypes) {
   const user = sequelize.define(
     'User',
     {
-      phoneNumber: {
+      phone: {
         type: Datatypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
       },
       password: {
         type: Datatypes.STRING,

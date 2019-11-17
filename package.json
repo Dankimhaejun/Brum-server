@@ -3,11 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www --exec babel-node --presets @babel/preset-env"
+    "start": "nodemon ./bin/www --exec babel-node --presets @babel/preset-env",
+    "lint": "eslint ./",
+    "lint:fix": "eslint ./ --fix"
   },
   "dependencies": {
     "@babel/polyfill": "^7.7.0",
     "cookie-parser": "~1.4.4",
+    "crypto": "^1.0.1",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "eslint-plugin-prettier": "^3.1.1",
@@ -20,6 +23,7 @@
     "morgan": "~1.9.1",
     "mysql2": "^2.0.0",
     "nodemon": "^1.19.4",
+    "prettier-eslint": "^9.0.0",
     "sequelize": "^5.21.2"
   },
   "devDependencies": {
@@ -28,7 +32,7 @@
     "@babel/node": "^7.7.0",
     "@babel/preset-env": "^7.7.1",
     "eslint": "^6.6.0",
-    "eslint-config-prettier": "^6.5.0",
+    "eslint-config-prettier": "^6.6.0",
     "eslint-plugin-react": "^7.16.0",
     "prettier": "1.19.1"
   },
