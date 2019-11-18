@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
-import { main, login, resister, checkDuplicatedPhone } from '../controllers/resister_controller';
+import {
+  main,
+  login,
+  resister,
+  checkDuplicatedPhone
+} from '../controllers/resister_controller';
 
 /* GET home page. */
 router.get('/', main);
