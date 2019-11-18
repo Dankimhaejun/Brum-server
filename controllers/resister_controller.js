@@ -1,8 +1,4 @@
-import {
-  handleLogin,
-  checkPhone,
-  resisterUser
-} from '../models/resister_model';
+import { handleLogin, checkPhone, resisterUser } from '../models/resister_model';
 import { vroomRes } from '../middlewares/vroomRes';
 import { createToken } from '../middlewares/jwt';
 
@@ -17,13 +13,7 @@ const main = async (req, res, next) => {
 const resister = async (req, res, next) => {
   try {
     const { phone, password, name, sex, agreementAd } = req.body;
-    const isResister = await resisterUser(
-      phone,
-      password,
-      name,
-      sex,
-      agreementAd
-    );
+    const isResister = await resisterUser(phone, password, name, sex, agreementAd);
     if (!isResister) {
       res.json(vroomRes(false, false, 'Failed resister', null));
       return;
@@ -52,20 +42,19 @@ const checkDuplicatedPhone = async (req, res, next) => {
 const login = async (req, res, next) => {
   try {
     const { phone, password } = req.body;
+    console.log('phone, password', phone, password);
     const isLogin = await handleLogin(phone, password);
-    if (!isLogin) {
+    console.log('isLogin', isLogin);
+    if (isLogin === null) {
       res.json(vroomRes(false, false, 'Incorrect information', null));
       return;
     }
-    console.log('isLogin.dataValues', isLogin.dataValues);
     const userId = isLogin.dataValues.id;
     const userPhone = isLogin.dataValues.phone;
     console.log('userId, userPhone', userId, userPhone);
     const token = await createToken(userId, userPhone);
     console.log('tokeasdsadn', token);
-    res.json(
-      vroomRes(true, true, null, { result: 'Success login', token: token })
-    );
+    await res.json(vroomRes(true, true, null, { result: 'Success login', token: token }));
   } catch (e) {
     next(e);
   }
