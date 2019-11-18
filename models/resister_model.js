@@ -19,7 +19,7 @@ const resisterUser = async (phone, password, name, sex, agreementAd) => {
 };
 
 const handleLogin = async (phone, password) => {
-  const hashedPassword = hashPassword(password);
+  const hashedPassword = await hashPassword(password);
   return await db.User.findOne({
     where: { phone: phone, password: hashedPassword }
   }).catch(err => console.error(err));
