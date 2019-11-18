@@ -3,7 +3,7 @@ require('dotenv').config();
 /**
  * Module dependencies.
  */
-const app = require('../app');
+const app = require('../server/app');
 const debug = require('debug')('brum-server:server');
 const http = require('http');
 
@@ -24,11 +24,13 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 const models = require('../database/models/index');
+const { s3 } = require('../server/middlewares/s3');
 //sequelize 연결후 서버연결
 models.sequelize
   .sync()
   .then(() => {
     console.log('Database connected');
+    console.log('S3 connected, region is : ', s3.config.region);
     server.listen(port);
     server.on('error', onError);
     server.on('listening', onListening);

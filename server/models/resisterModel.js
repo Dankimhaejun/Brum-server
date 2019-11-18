@@ -1,4 +1,4 @@
-const db = require('../database/models');
+const db = require('../../database/models');
 import { hashPassword } from '../middlewares/hash';
 
 const checkPhone = async phone => {
@@ -7,7 +7,7 @@ const checkPhone = async phone => {
   }).catch(err => console.error(err));
 };
 
-const resisterUser = async (phone, password, name, sex, agreementAd) => {
+const createUser = async (phone, password, name, sex, agreementAd) => {
   const hashedPassword = hashPassword(password);
   return await db.User.create({
     phone: phone,
@@ -28,5 +28,5 @@ const handleLogin = async (phone, password) => {
 module.exports = {
   handleLogin,
   checkPhone,
-  resisterUser
+  createUser
 };

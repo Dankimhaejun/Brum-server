@@ -1,4 +1,4 @@
-import { handleLogin, checkPhone, resisterUser } from '../models/resister_model';
+import { handleLogin, checkPhone, createUser } from '../models/resisterModel';
 import { vroomRes } from '../middlewares/vroomRes';
 import { createToken } from '../middlewares/jwt';
 
@@ -13,13 +13,22 @@ const main = async (req, res, next) => {
 const resister = async (req, res, next) => {
   try {
     const { phone, password, name, sex, agreementAd } = req.body;
-    const isResister = await resisterUser(phone, password, name, sex, agreementAd);
-    if (!isResister) {
-      res.json(vroomRes(false, false, 'Failed resister', null));
-      return;
+    const isResister = await createUser(phone, password, name, sex, agreementAd);
+    if (isResister.dataValues) {
+      const userId = isResister.dataValues.id;
+      const userPhone = isResister.dataValues.phone;
+      const token = await createToken(userId, userPhone);
+      res.cookie('jwt', token, {
+        maxAge: 24 * 1000 * 60 * 60 * 30,
+        httpOnly: true
+      });
+      res.json(
+        vroomRes(true, true, null, {
+          result: 'Success resister and token issued',
+          token
+        })
+      );
     }
-    res.json(vroomRes(true, true, null, 'Success resister'));
-    res.send();
   } catch (e) {
     next(e);
   }
@@ -42,27 +51,36 @@ const checkDuplicatedPhone = async (req, res, next) => {
 const login = async (req, res, next) => {
   try {
     const { phone, password } = req.body;
-    console.log('phone, password', phone, password);
     const isLogin = await handleLogin(phone, password);
-    console.log('isLogin', isLogin);
-    if (isLogin === null) {
+    if (!isLogin) {
       res.json(vroomRes(false, false, 'Incorrect information', null));
       return;
     }
     const userId = isLogin.dataValues.id;
     const userPhone = isLogin.dataValues.phone;
-    console.log('userId, userPhone', userId, userPhone);
     const token = await createToken(userId, userPhone);
-    console.log('tokeasdsadn', token);
-    await res.json(vroomRes(true, true, null, { result: 'Success login', token: token }));
+    res.cookie('jwt', token, {
+      maxAge: 24 * 1000 * 60 * 60 * 30,
+      httpOnly: true
+    });
+    res.json(vroomRes(true, true, null, { result: 'Success login', token }));
   } catch (e) {
     next(e);
   }
 };
 
+const logout = (req, res, next) => {
+  try {
+    res.clearCookie('jwt');
+    res.json(vroomRes(true, false, null, 'Logged out, token is deleted'));
+  } catch (e) {
+    next(e);
+  }
+};
 module.exports = {
   main,
   login,
   resister,
-  checkDuplicatedPhone
+  checkDuplicatedPhone,
+  logout
 };

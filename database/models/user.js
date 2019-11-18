@@ -1,4 +1,4 @@
-const models = require('../models');
+const models = require('.');
 
 module.exports = function(sequelize, Datatypes) {
   const user = sequelize.define(
@@ -33,7 +33,7 @@ module.exports = function(sequelize, Datatypes) {
       introduction: {
         type: Datatypes.STRING
       },
-      photo: {
+      image: {
         type: Datatypes.STRING
       },
       agreementAd: {
