@@ -1,4 +1,4 @@
-const db = require('../database/models');
+const db = require('../../database/models');
 import { hashPassword } from '../middlewares/hash';
 
 const checkPhone = async phone => {
