@@ -5,18 +5,27 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const resisterRouter = require('./routes/resister_route');
-const usersRouter = require('./routes/users');
+const resisterRouter = require('./routes/resisterRoute');
+const userRouter = require('./routes/userRoute');
 
 const app = express();
 
+app.all('/*', function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', req.headers.origin);
+  res.header('Access-Control-Allow-Methods', 'POST, PUT, GET, DELETE');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
+  res.header('Access-Control-Allow-Credentials', true);
+  next();
+});
+
+// Middlewares
+app.use(cookieParser());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 
 app.use('/', resisterRouter);
-app.use('/users', usersRouter);
+app.use('/user', userRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
