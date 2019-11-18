@@ -1,11 +1,22 @@
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
-const token = jwt.sign({ foo: 'bar' }, 'secret-key', { expiresIn: '7d' }, (err, token) => {
-  if (err) {
-    console.log(err);
-    return;
-  }
-  console.log(token);
-});
+const createToken = (id, phone) =>
+  new Promise((resolve, reject) => {
+    jwt.sign(
+      { id: id, phone: phone },
+      process.env.JWT_SECRET,
+      { expiresIn: '7d' },
+      (err, token) => {
+        if (err) {
+          console.log(err);
+          reject(err);
+          return;
+        }
+        console.log(token);
+        resolve(token);
+      }
+    );
+  });
 
-module.exports = { token };
+module.exports = { createToken };

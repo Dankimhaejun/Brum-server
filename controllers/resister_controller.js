@@ -4,6 +4,7 @@ import {
   resisterUser
 } from '../models/resister_model';
 import { vroomRes } from '../middlewares/vroomRes';
+import { createToken } from '../middlewares/jwt';
 
 const main = async (req, res, next) => {
   try {
@@ -56,7 +57,15 @@ const login = async (req, res, next) => {
       res.json(vroomRes(false, false, 'Incorrect information', null));
       return;
     }
-    res.json(vroomRes(true, true, null, 'Success login'));
+    console.log('isLogin.dataValues', isLogin.dataValues);
+    const userId = isLogin.dataValues.id;
+    const userPhone = isLogin.dataValues.phone;
+    console.log('userId, userPhone', userId, userPhone);
+    const token = await createToken(userId, userPhone);
+    console.log('tokeasdsadn', token);
+    res.json(
+      vroomRes(true, true, null, { result: 'Success login', token: token })
+    );
   } catch (e) {
     next(e);
   }
