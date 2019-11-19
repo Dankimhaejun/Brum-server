@@ -18,7 +18,9 @@ const baseDbSetting = {
   define: {
     charset: 'utf8mb4',
     collate: 'utf8mb4_unicode_ci',
-    timestamps: true
+    timestamps: true,
+    dateStrings: true,
+    typeCast: true
   }
 };
 

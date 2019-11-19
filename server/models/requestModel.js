@@ -15,6 +15,29 @@ const createRequest = async body => {
     })
     .catch(err => console.error(err));
 };
+
+const readAllRequests = async () => {
+  return await db.request.findAll({
+    include: [
+      {
+        model: db.requestImage,
+        attributes: ['id', 'requestImage']
+      },
+      {
+        model: db.user,
+        as: 'host',
+        attributes: ['name', 'sex', 'age', 'university', 'major', 'introduction', 'image']
+      },
+      {
+        model: db.user,
+        as: 'deliver',
+        attributes: ['name', 'sex', 'age', 'university', 'major', 'introduction', 'image']
+      }
+    ]
+  });
+};
+
 module.exports = {
-  createRequest
+  createRequest,
+  readAllRequests
 };
