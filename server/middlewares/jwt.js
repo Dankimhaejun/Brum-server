@@ -16,7 +16,7 @@ const createToken = (id, phone) =>
   });
 
 const checkToken = (req, res, next) => {
-  const token = req.cookies.jwt;
+  const token = req.headers['x-access-token'];
   if (!token) {
     return res.json(vroomRes(false, false, 'token is required', null));
   } else {

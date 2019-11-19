@@ -1,7 +1,7 @@
-const vroomRes = (isSuccess, isToken, error, data) => {
+const vroomRes = (isSuccess, token, error, data) => {
   return {
     isSuccess: isSuccess,
-    isToken: isToken,
+    token: token,
     error: error,
     data: data
   };

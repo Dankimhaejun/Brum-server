@@ -1,8 +1,8 @@
-const models = require('.');
+const models = require('../models/index');
 
 module.exports = function(sequelize, Datatypes) {
   const user = sequelize.define(
-    'User',
+    'user',
     {
       phone: {
         type: Datatypes.STRING,
@@ -45,5 +45,9 @@ module.exports = function(sequelize, Datatypes) {
       freezeTableName: true
     }
   );
+  user.associate = function(db) {
+    user.hasOne(db.request, { foreignKey: 'hostId' });
+    user.hasOne(db.request, { foreignKey: 'deliverId' });
+  };
   return user;
 };
