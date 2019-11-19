@@ -56,6 +56,8 @@ module.exports = function(sequelize, Datatypes) {
   );
   request.associate = function(db) {
     request.hasMany(db.requestImage, { foreignKey: 'requestId' });
+    request.belongsTo(db.user, { as: 'host', foreignKey: 'hostId' });
+    request.belongsTo(db.user, { as: 'deliver', foreignKey: 'deliverId' });
   };
   return request;
 };

@@ -1,4 +1,4 @@
-import { handleLogin, checkPhone, createUser } from '../models/resisterModel';
+import { handleLogin, checkPhone, createUser, updateUserPassword } from '../models/resisterModel';
 import { vroomRes } from '../middlewares/vroomRes';
 import { createToken } from '../middlewares/jwt';
 
@@ -56,6 +56,25 @@ const login = async (req, res, next) => {
   }
 };
 
+const changePassword = async (req, res, next) => {
+  try {
+    const { phone, password } = req.body;
+    const isUser = await checkPhone(phone);
+    if (!isUser) {
+      return res.json(vroomRes(false, null, 'Not a registered user', null));
+    }
+    const resultChangePassword = await updateUserPassword(phone, password);
+    // 업데이트 성공시 [1]이 뜨기 때문에 [1]로 성공여부 확인
+    if (resultChangePassword[0] === 1) {
+      res.json(vroomRes(true, true, null, 'Updated password, login again'));
+    } else {
+      res.json(vroomRes(false, true, 'Failed update password', null));
+    }
+    res.send();
+  } catch (e) {
+    next(e);
+  }
+};
 const logout = (req, res, next) => {
   try {
     res.clearCookie('jwt');
@@ -69,5 +88,6 @@ module.exports = {
   login,
   resister,
   checkDuplicatedPhone,
+  changePassword,
   logout
 };

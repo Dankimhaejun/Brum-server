@@ -31,8 +31,13 @@ const handleLogin = async (phone, password) => {
     .catch(err => console.error(err));
 };
 
+const updateUserPassword = async (phone, password) => {
+  const hashedPassword = await hashPassword(password);
+  return await db.user.update({ password: hashedPassword }, { where: { phone: phone } }).catch(err => console.error(err));
+};
 module.exports = {
   handleLogin,
   checkPhone,
-  createUser
+  createUser,
+  updateUserPassword
 };

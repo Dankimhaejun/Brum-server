@@ -1,4 +1,4 @@
-const models = require('../models/index');
+const db = require('./index');
 
 module.exports = function(sequelize, Datatypes) {
   const user = sequelize.define(
@@ -38,6 +38,10 @@ module.exports = function(sequelize, Datatypes) {
       },
       agreementAd: {
         type: Datatypes.BOOLEAN
+      },
+      isAdmin: {
+        type: Datatypes.BOOLEAN,
+        defaultValue: false
       }
     },
     {
@@ -46,8 +50,8 @@ module.exports = function(sequelize, Datatypes) {
     }
   );
   user.associate = function(db) {
-    user.hasOne(db.request, { foreignKey: 'hostId' });
-    user.hasOne(db.request, { foreignKey: 'deliverId' });
+    user.hasMany(db.request, { foreignKey: 'hostId' });
+    user.hasMany(db.request, { foreignKey: 'deliverId' });
   };
   return user;
 };
