@@ -18,16 +18,7 @@ const resister = async (req, res, next) => {
       const userId = isResister.dataValues.id;
       const userPhone = isResister.dataValues.phone;
       const token = await createToken(userId, userPhone);
-      res.cookie('jwt', token, {
-        maxAge: 24 * 1000 * 60 * 60 * 30,
-        httpOnly: true
-      });
-      res.json(
-        vroomRes(true, true, null, {
-          result: 'Success resister and token issued',
-          token
-        })
-      );
+      res.json(vroomRes(true, token, null, 'Success resister and token issued'));
     }
   } catch (e) {
     next(e);
@@ -59,11 +50,7 @@ const login = async (req, res, next) => {
     const userId = isLogin.dataValues.id;
     const userPhone = isLogin.dataValues.phone;
     const token = await createToken(userId, userPhone);
-    res.cookie('jwt', token, {
-      maxAge: 24 * 1000 * 60 * 60 * 30,
-      httpOnly: true
-    });
-    res.json(vroomRes(true, true, null, { result: 'Success login', token }));
+    res.json(vroomRes(true, token, null, 'Success login and token is issued'));
   } catch (e) {
     next(e);
   }

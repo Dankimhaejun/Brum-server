@@ -8,6 +8,7 @@ const path = require('path');
 
 const resisterRouter = require('./routes/resisterRoute');
 const userRouter = require('./routes/userRoute');
+const requestRouter = require('./routes/requestRoute');
 
 const app = express();
 
@@ -20,7 +21,7 @@ app.use(express.static('public', options));
 app.all('/*', function(req, res, next) {
   res.header('Access-Control-Allow-Origin', req.headers.origin);
   res.header('Access-Control-Allow-Methods', 'POST, PUT, GET, DELETE');
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, x-access-token');
   res.header('Access-Control-Allow-Credentials', true);
   next();
 });
@@ -34,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', resisterRouter);
 app.use('/user', userRouter);
+app.use('/request', requestRouter);
 app.use('/users', express.static('uploads'));
 
 // catch 404 and forward to error handler
