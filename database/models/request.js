@@ -25,11 +25,11 @@ module.exports = function(sequelize, Datatypes) {
         allowNull: false
       },
       desiredArrivalTime: {
-        type: Datatypes.STRING,
-        allowNull: false
+        type: Datatypes.STRING
       },
       details: {
-        type: Datatypes.STRING
+        type: Datatypes.STRING,
+        allowNull: false
       },
       price: {
         type: Datatypes.STRING
@@ -42,8 +42,8 @@ module.exports = function(sequelize, Datatypes) {
         type: Datatypes.INTEGER
       },
       isCompleted: {
-        type: Datatypes.BOOLEAN,
-        defaultValue: false
+        type: Datatypes.INTEGER,
+        defaultValue: 0
       },
       actualArrivalTime: {
         type: Datatypes.STRING

@@ -15,6 +15,10 @@ module.exports = function(sequelize, Datatypes) {
       bidPrice: {
         type: Datatypes.STRING,
         defaultValue: null
+      },
+      applyStatus: {
+        type: Datatypes.STRING,
+        defaultValue: 'applied'
       }
     },
     {

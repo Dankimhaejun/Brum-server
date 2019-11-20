@@ -22,8 +22,8 @@ const postRequest = async (req, res, next) => {
 const getRequests = async (req, res, next) => {
   try {
     const getAllRequests = await readAllRequests();
-    console.log('getAllRequests', getAllRequests);
-    res.json(vroomRes(true, true, null, getAllRequests));
+    const userId = req.decoded.id;
+    res.json(vroomRes(true, true, null, { userId: userId, requests: getAllRequests }));
   } catch (e) {
     next(e);
   }

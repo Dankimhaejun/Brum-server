@@ -8,7 +8,7 @@ module.exports = function(sequelize, Datatypes) {
         type: Datatypes.INTEGER,
         allowNull: false
       },
-      requestImage: {
+      requestImageURL: {
         type: Datatypes.STRING,
         allowNull: false
       }
