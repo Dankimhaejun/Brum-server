@@ -33,7 +33,9 @@ const handleLogin = async (phone, password) => {
 
 const updateUserPassword = async (phone, password) => {
   const hashedPassword = await hashPassword(password);
-  return await db.user.update({ password: hashedPassword }, { where: { phone: phone } }).catch(err => console.error(err));
+  return await db.user
+    .update({ password: hashedPassword }, { where: { phone: phone } })
+    .catch(err => console.error(err));
 };
 module.exports = {
   handleLogin,

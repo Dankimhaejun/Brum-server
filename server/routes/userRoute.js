@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+
 import { getMyInfo, postUserImage } from '../controllers/userController';
 import { checkToken } from '../middlewares/jwt';
 import { uploadUserImage } from '../middlewares/s3';

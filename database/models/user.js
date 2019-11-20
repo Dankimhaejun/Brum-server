@@ -52,6 +52,9 @@ module.exports = function(sequelize, Datatypes) {
   user.associate = function(db) {
     user.hasMany(db.request, { foreignKey: 'hostId' });
     user.hasMany(db.request, { foreignKey: 'deliverId' });
+    user.hasMany(db.mannerRate, { foreignKey: 'raterId' });
+    user.hasMany(db.mannerRate, { foreignKey: 'rateeId' });
+    user.hasMany(db.applicant, { foreignKey: 'applicantId' });
   };
   return user;
 };

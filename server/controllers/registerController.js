@@ -1,4 +1,4 @@
-import { handleLogin, checkPhone, createUser, updateUserPassword } from '../models/resisterModel';
+import { handleLogin, checkPhone, createUser, updateUserPassword } from '../models/registerModel';
 import { vroomRes } from '../middlewares/vroomRes';
 import { createToken } from '../middlewares/jwt';
 
@@ -10,15 +10,15 @@ const main = async (req, res, next) => {
   }
 };
 
-const resister = async (req, res, next) => {
+const register = async (req, res, next) => {
   try {
     const { phone, password, name, sex, agreementAd } = req.body;
-    const isResister = await createUser(phone, password, name, sex, agreementAd);
-    if (isResister.dataValues) {
-      const userId = isResister.dataValues.id;
-      const userPhone = isResister.dataValues.phone;
+    const isRegister = await createUser(phone, password, name, sex, agreementAd);
+    if (isRegister.dataValues) {
+      const userId = isRegister.dataValues.id;
+      const userPhone = isRegister.dataValues.phone;
       const token = await createToken(userId, userPhone);
-      res.json(vroomRes(true, token, null, 'Success resister and token issued'));
+      res.json(vroomRes(true, token, null, 'Success register and token issued'));
     }
   } catch (e) {
     next(e);
@@ -86,7 +86,7 @@ const logout = (req, res, next) => {
 module.exports = {
   main,
   login,
-  resister,
+  register,
   checkDuplicatedPhone,
   changePassword,
   logout
