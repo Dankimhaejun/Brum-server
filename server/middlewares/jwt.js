@@ -22,7 +22,7 @@ const checkToken = (req, res, next) => {
   } else {
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
-        return res.json(vroomRes(false, true, 'Invalidated token, login again'));
+        return res.json(vroomRes(false, true, 'Invalid token, login again'));
       } else {
         req.decoded = decoded;
         next();

@@ -8,8 +8,6 @@ const postRequest = async (req, res, next) => {
     const body = req.body;
     const filesArray = req.files;
     body.hostId = hostId;
-    console.log('body', body);
-    console.log('req.files', req.files);
     const newRequest = await createRequest(body);
     const requestId = newRequest.dataValues.id;
     if (filesArray.length) {

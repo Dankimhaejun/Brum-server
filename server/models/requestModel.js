@@ -29,6 +29,22 @@ const readAllRequests = async () => {
         attributes: ['name', 'sex', 'age', 'university', 'major', 'introduction', 'image']
       },
       {
+        model: db.applicant,
+        attributes: ['bidPrice', 'createdAt'],
+        include: [
+          {
+            model: db.user,
+            as: 'applicant',
+            attributes: ['id', 'phone', 'name', 'sex', 'age', 'major', 'introduction', 'image'],
+            include: [
+              {
+                model: db.mannerRate
+              }
+            ]
+          }
+        ]
+      },
+      {
         model: db.user,
         as: 'deliver',
         attributes: ['name', 'sex', 'age', 'university', 'major', 'introduction', 'image']

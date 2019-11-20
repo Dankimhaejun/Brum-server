@@ -38,16 +38,5 @@
     "multer": "^1.4.2",
     "multer-s3": "^2.9.0",
     "prettier": "^1.17.0"
-  },
-  "lint-staged": {
-    "*.{js,jsx}": [
-      "eslint --fix",
-      "git add"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }
