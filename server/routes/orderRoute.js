@@ -6,6 +6,7 @@ import { postOrder, getOrders, getIdOrder } from '../controllers/orderController
 import { uploadOrderImages } from '../middlewares/s3';
 /* GET home page. */
 
+// getOrders는 토큰 확인 필요없음
 router.get('/', getOrders);
 
 router.use('/', checkToken);
