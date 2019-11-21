@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const path = require('path');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const registerRouter = require('./routes/registerRoute');
 const userRouter = require('./routes/userRoute');
 const orderRouter = require('./routes/orderRoute');
@@ -35,7 +36,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('public'));
 app.use(express.static('files'));
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 // Routes
 app.use('/', registerRouter);
 app.use('/order', orderRouter);
