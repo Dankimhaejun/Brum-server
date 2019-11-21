@@ -6,7 +6,7 @@ module.exports = {
       {
         id: 1,
         requestId: 2,
-        applicantId: 2,
+        applicantId: 1,
         bidPrice: '5000',
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'

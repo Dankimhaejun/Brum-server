@@ -51,11 +51,16 @@ module.exports = function(sequelize, Datatypes) {
     }
   );
   user.associate = function(db) {
+    user.belongsToMany(db.request, {
+      through: 'applicant',
+      as: 'applicantUsers',
+      foreignKey: 'applicantId'
+    });
+    user.hasMany(db.applicant, { foreignKey: 'applicantId' });
     user.hasMany(db.request, { foreignKey: 'hostId' });
     user.hasMany(db.request, { foreignKey: 'deliverId' });
     user.hasMany(db.mannerRate, { foreignKey: 'rateeId' });
     user.hasMany(db.mannerRate, { foreignKey: 'raterId' });
-    user.hasMany(db.applicant, { foreignKey: 'applicantId' });
   };
   return user;
 };

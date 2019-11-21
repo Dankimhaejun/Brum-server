@@ -1,5 +1,5 @@
 import { vroomRes } from '../middlewares/vroomRes';
-import { createRequest, readAllRequests } from '../models/requestModel';
+import { createRequest, readAllRequests, readOneRequest } from '../models/requestModel';
 import { createRequestImages } from '../models/requestImageModel';
 
 const postRequest = async (req, res, next) => {
@@ -15,6 +15,7 @@ const postRequest = async (req, res, next) => {
     }
     return res.json(vroomRes(true, true, null, 'Created new request'));
   } catch (e) {
+    console.error(e);
     next(e);
   }
 };
@@ -25,11 +26,24 @@ const getRequests = async (req, res, next) => {
     const userId = req.decoded.id;
     res.json(vroomRes(true, true, null, { userId: userId, requests: getAllRequests }));
   } catch (e) {
+    console.error(e);
     next(e);
   }
 };
 
+const getIdRequest = async (req, res, next) => {
+  try {
+    const userId = req.decoded.id;
+    const requestId = req.params.id;
+    const getRequest = await readOneRequest(requestId);
+    res.json(vroomRes(true, true, null, { userId: userId, request: getRequest }));
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+};
 module.exports = {
   postRequest,
-  getRequests
+  getRequests,
+  getIdRequest
 };

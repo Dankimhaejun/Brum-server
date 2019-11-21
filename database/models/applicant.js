@@ -4,6 +4,11 @@ module.exports = function(sequelize, Datatypes) {
   const applicant = sequelize.define(
     'applicant',
     {
+      id: {
+        type: Datatypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+      },
       requestId: {
         type: Datatypes.INTEGER,
         allowNull: false
@@ -28,10 +33,9 @@ module.exports = function(sequelize, Datatypes) {
   );
   applicant.associate = function(db) {
     applicant.belongsTo(db.request, {
-      as: 'applicantRequest',
       foreignKey: 'requestId'
     });
-    applicant.belongsTo(db.user, { as: 'applicant', foreignKey: 'applicantId' });
+    applicant.belongsTo(db.user, { foreignKey: 'applicantId' });
   };
   return applicant;
 };

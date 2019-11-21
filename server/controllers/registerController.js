@@ -6,6 +6,7 @@ const main = async (req, res, next) => {
   try {
     return res.json({ message: 'welcome' });
   } catch (e) {
+    console.error(e);
     next(e);
   }
 };
@@ -21,6 +22,7 @@ const register = async (req, res, next) => {
       res.json(vroomRes(true, token, null, 'Success register and token issued'));
     }
   } catch (e) {
+    console.error(e);
     next(e);
   }
 };
@@ -35,6 +37,7 @@ const checkDuplicatedPhone = async (req, res, next) => {
     }
     res.json(vroomRes(false, null, 'Duplicated phone', null));
   } catch (e) {
+    console.error(e);
     next(e);
   }
 };
@@ -52,6 +55,7 @@ const login = async (req, res, next) => {
     const token = await createToken(userId, userPhone);
     res.json(vroomRes(true, token, null, 'Success login and token is issued'));
   } catch (e) {
+    console.error(e);
     next(e);
   }
 };
@@ -72,6 +76,7 @@ const changePassword = async (req, res, next) => {
     }
     res.send();
   } catch (e) {
+    console.error(e);
     next(e);
   }
 };
@@ -80,6 +85,7 @@ const logout = (req, res, next) => {
     res.clearCookie('jwt');
     res.json(vroomRes(true, false, null, 'Logged out, token is deleted'));
   } catch (e) {
+    console.error(e);
     next(e);
   }
 };

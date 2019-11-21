@@ -22,7 +22,7 @@ module.exports = function(sequelize, Datatypes) {
     }
   );
   mannerRate.associate = function(db) {
-    // mannerRate.belongsTo(db.user, { as: 'rater', foreignKey: 'raterId' });
+    mannerRate.belongsTo(db.user, { as: 'rater', foreignKey: 'raterId' });
     mannerRate.belongsTo(db.user, { as: 'ratee', foreignKey: 'rateeId' });
   };
   return mannerRate;
