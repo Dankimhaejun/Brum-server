@@ -43,7 +43,7 @@ app.use('/', registerRouter);
 app.use('/order', orderRouter);
 app.use('/user', userRouter);
 
-app.use('/users', express.static('uploads'));
+app.use('/user', express.static('public'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
