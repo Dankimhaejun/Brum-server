@@ -7,9 +7,11 @@ const logger = require('morgan');
 const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+
 const registerRouter = require('./routes/registerRoute');
 const userRouter = require('./routes/userRoute');
 const orderRouter = require('./routes/orderRoute');
+const userOrderRouter = require('./routes/userOrderRoute');
 
 const app = express();
 
@@ -42,6 +44,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', registerRouter);
 app.use('/order', orderRouter);
 app.use('/user', userRouter);
+app.use('/user/order', userOrderRouter);
 
 app.use('/user', express.static('public'));
 

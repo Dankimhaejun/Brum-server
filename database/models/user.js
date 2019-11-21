@@ -56,7 +56,7 @@ module.exports = function(sequelize, Datatypes) {
     }
   );
   user.associate = function(db) {
-    user.hasMany(db.applicant, { foreignKey: 'applicantId' });
+    user.hasMany(db.applicant, { foreignKey: 'userId' });
     user.hasMany(db.order, { foreignKey: 'hostId' });
     user.hasMany(db.order, { foreignKey: 'deliverId' });
     user.hasMany(db.mannerScore, { as: 'evaluator', foreignKey: 'evaluatorId' });

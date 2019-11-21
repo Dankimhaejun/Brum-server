@@ -39,7 +39,7 @@ module.exports = function(sequelize, Datatypes) {
     applicant.belongsTo(db.order, {
       foreignKey: 'orderId'
     });
-    applicant.belongsTo(db.user, { as: 'applicant', foreignKey: 'userId' });
+    applicant.belongsTo(db.user, { as: 'applicantInfo', foreignKey: 'userId' });
   };
   return applicant;
 };

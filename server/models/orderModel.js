@@ -94,7 +94,7 @@ const readMyOrders = async userId => {
           include: [
             {
               model: db.user,
-              as: 'applicant',
+              as: 'applicantInfo',
               attributes: ['userId', 'phone', 'name', 'sex', 'age', 'major', 'introduction', 'image'],
               include: [
                 {

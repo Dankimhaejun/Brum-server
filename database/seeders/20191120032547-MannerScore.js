@@ -113,7 +113,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('score', null, {});
+    return queryInterface.bulkDelete('mannerScore', null, {});
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.
