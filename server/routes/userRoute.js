@@ -8,7 +8,7 @@ import { uploadUserImage } from '../middlewares/s3';
 
 // router.use('/', checkToken);
 
-router.post('/image', uploadUserImage.array('img'), postUserImage);
+router.post('/image', uploadUserImage.array('file'), postUserImage);
 
 router.get('/mypage', getMyInfo);
 
