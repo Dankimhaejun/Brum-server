@@ -5,7 +5,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const path = require('path');
-
+const cors = require('cors');
 const registerRouter = require('./routes/registerRoute');
 const userRouter = require('./routes/userRoute');
 const orderRouter = require('./routes/orderRoute');
@@ -18,26 +18,30 @@ app.set('etag', false);
 const options = { etag: false };
 app.use(express.static('public', options));
 
-app.all('/*', function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', req.headers.origin);
-  res.header('Access-Control-Allow-Methods', 'POST, PUT, GET, DELETE');
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, x-access-token');
-  res.header('Access-Control-Allow-Credentials', true);
-  next();
-});
+// app.all('/*', function(req, res, next) {
+//   res.header('Access-Control-Allow-Origin', req.headers.origin);
+//   res.header('Access-Control-Allow-Methods', 'POST, PUT, GET, DELETE');
+//   res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, x-access-token');
+//   res.header('Access-Control-Allow-Credentials', true);
+//   next();
+// });
 
 // Middlewares
+app.use(cors());
 app.use(cookieParser());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
+app.use(express.static('files'));
 
 // Routes
 app.use('/', registerRouter);
 app.use('/order', orderRouter);
 app.use('/user', userRouter);
-// app.use('/users', express.static('uploads'));
+
+app.use('/users', express.static('uploads'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
