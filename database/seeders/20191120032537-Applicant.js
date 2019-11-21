@@ -4,33 +4,33 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('applicant', [
       {
-        id: 1,
-        orderId: 2,
         applicantId: 1,
+        orderId: 2,
+        userId: 1,
         bidPrice: '5000',
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       },
       {
-        id: 2,
+        applicantId: 2,
         orderId: 2,
-        applicantId: 3,
+        userId: 3,
         bidPrice: '3000',
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       },
       {
-        id: 3,
+        applicantId: 3,
         orderId: 2,
-        applicantId: 4,
+        userId: 4,
         bidPrice: '10000',
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       },
       {
-        id: 4,
+        applicantId: 4,
         orderId: 1,
-        applicantId: 2,
+        userId: 2,
         bidPrice: null,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'

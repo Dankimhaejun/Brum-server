@@ -16,7 +16,7 @@ const register = async (req, res, next) => {
     const { phone, password, name, sex, agreementAd } = req.body;
     const isRegister = await createUser(phone, password, name, sex, agreementAd);
     if (isRegister.dataValues) {
-      const userId = isRegister.dataValues.id;
+      const userId = isRegister.dataValues.userId;
       const userPhone = isRegister.dataValues.phone;
       const token = await createToken(userId, userPhone);
       res.json(vroomRes(true, token, null, 'Success register and token issued'));
@@ -50,7 +50,7 @@ const login = async (req, res, next) => {
       res.json(vroomRes(false, false, 'Incorrect information', null));
       return;
     }
-    const userId = isLogin.dataValues.id;
+    const userId = isLogin.dataValues.userId;
     const userPhone = isLogin.dataValues.phone;
     const token = await createToken(userId, userPhone);
     res.json(vroomRes(true, token, null, 'Success login and token is issued'));

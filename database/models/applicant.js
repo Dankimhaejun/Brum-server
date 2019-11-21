@@ -4,7 +4,7 @@ module.exports = function(sequelize, Datatypes) {
   const applicant = sequelize.define(
     'applicant',
     {
-      id: {
+      applicantId: {
         type: Datatypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
@@ -13,7 +13,7 @@ module.exports = function(sequelize, Datatypes) {
         type: Datatypes.INTEGER,
         allowNull: false
       },
-      applicantId: {
+      userId: {
         type: Datatypes.INTEGER,
         allowNull: false
       },
@@ -35,7 +35,7 @@ module.exports = function(sequelize, Datatypes) {
     applicant.belongsTo(db.order, {
       foreignKey: 'orderId'
     });
-    applicant.belongsTo(db.user, { foreignKey: 'applicantId' });
+    applicant.belongsTo(db.user, { as: 'applicant', foreignKey: 'userId' });
   };
   return applicant;
 };

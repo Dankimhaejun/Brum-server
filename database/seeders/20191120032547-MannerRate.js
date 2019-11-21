@@ -2,100 +2,100 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('mannerRate', [
+    return queryInterface.bulkInsert('mannerScore', [
       {
-        id: 1,
-        raterId: 2,
-        rateeId: 1,
-        mannerRate: 5,
+        mannerScoreId: 1,
+        evaluatorId: 2,
+        receiverId: 1,
+        score: 5,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       },
       {
-        id: 2,
-        raterId: 3,
-        rateeId: 1,
-        mannerRate: 4,
+        mannerScoreId: 2,
+        evaluatorId: 3,
+        receiverId: 1,
+        score: 4,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       },
       {
-        id: 3,
-        raterId: 4,
-        rateeId: 1,
-        mannerRate: 2,
+        mannerScoreId: 3,
+        evaluatorId: 4,
+        receiverId: 1,
+        score: 2,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       },
       {
-        id: 4,
-        raterId: 1,
-        rateeId: 2,
-        mannerRate: 5,
+        mannerScoreId: 4,
+        evaluatorId: 1,
+        receiverId: 2,
+        score: 5,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       },
       {
-        id: 5,
-        raterId: 3,
-        rateeId: 2,
-        mannerRate: 4,
+        mannerScoreId: 5,
+        evaluatorId: 3,
+        receiverId: 2,
+        score: 4,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       },
       {
-        id: 6,
-        raterId: 4,
-        rateeId: 2,
-        mannerRate: 1,
+        mannerScoreId: 6,
+        evaluatorId: 4,
+        receiverId: 2,
+        score: 1,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       },
       {
-        id: 7,
-        raterId: 1,
-        rateeId: 3,
-        mannerRate: 2,
+        mannerScoreId: 7,
+        evaluatorId: 1,
+        receiverId: 3,
+        score: 2,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       },
       {
-        id: 8,
-        raterId: 2,
-        rateeId: 3,
-        mannerRate: 5,
+        mannerScoreId: 8,
+        evaluatorId: 2,
+        receiverId: 3,
+        score: 5,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       },
       {
-        id: 9,
-        raterId: 4,
-        rateeId: 3,
-        mannerRate: 4,
+        mannerScoreId: 9,
+        evaluatorId: 4,
+        receiverId: 3,
+        score: 4,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       },
       {
-        id: 10,
-        raterId: 1,
-        rateeId: 4,
-        mannerRate: 3,
+        mannerScoreId: 10,
+        evaluatorId: 1,
+        receiverId: 4,
+        score: 3,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       },
       {
-        id: 11,
-        raterId: 2,
-        rateeId: 4,
-        mannerRate: 3,
+        mannerScoreId: 11,
+        evaluatorId: 2,
+        receiverId: 4,
+        score: 3,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       },
       {
-        id: 12,
-        raterId: 3,
-        rateeId: 4,
-        mannerRate: 4,
+        mannerScoreId: 12,
+        evaluatorId: 3,
+        receiverId: 4,
+        score: 4,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       }
@@ -113,7 +113,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('mannerRate', null, {});
+    return queryInterface.bulkDelete('score', null, {});
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.

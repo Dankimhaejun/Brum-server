@@ -4,6 +4,11 @@ module.exports = function(sequelize, Datatypes) {
   const orderImage = sequelize.define(
     'orderImage',
     {
+      orderImageId: {
+        type: Datatypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+      },
       orderId: {
         type: Datatypes.INTEGER,
         allowNull: false

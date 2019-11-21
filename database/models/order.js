@@ -4,6 +4,11 @@ module.exports = function(sequelize, Datatypes) {
   const order = sequelize.define(
     'order',
     {
+      orderId: {
+        type: Datatypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+      },
       views: {
         type: Datatypes.INTEGER,
         allowNull: false,
@@ -55,15 +60,10 @@ module.exports = function(sequelize, Datatypes) {
     }
   );
   order.associate = function(db) {
-    order.belongsToMany(db.user, {
-      through: 'applicant',
-      as: 'applicantOrders',
-      foreignKey: 'orderId'
-    });
     order.hasMany(db.applicant, { foreignKey: 'orderId' });
     order.hasMany(db.orderImage, { foreignKey: 'orderId' });
-    order.belongsTo(db.user, { as: 'host', foreignKey: 'hostId' });
-    order.belongsTo(db.user, { as: 'deliver', foreignKey: 'deliverId' });
+    order.belongsTo(db.user, { as: 'hostInfo', foreignKey: 'hostId' });
+    order.belongsTo(db.user, { as: 'deliverInfo', foreignKey: 'deliverId' });
   };
   return order;
 };

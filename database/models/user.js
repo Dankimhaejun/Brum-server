@@ -4,6 +4,11 @@ module.exports = function(sequelize, Datatypes) {
   const user = sequelize.define(
     'user',
     {
+      userId: {
+        type: Datatypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+      },
       phone: {
         type: Datatypes.STRING,
         allowNull: false,
@@ -51,16 +56,11 @@ module.exports = function(sequelize, Datatypes) {
     }
   );
   user.associate = function(db) {
-    user.belongsToMany(db.order, {
-      through: 'applicant',
-      as: 'applicantUsers',
-      foreignKey: 'applicantId'
-    });
     user.hasMany(db.applicant, { foreignKey: 'applicantId' });
     user.hasMany(db.order, { foreignKey: 'hostId' });
     user.hasMany(db.order, { foreignKey: 'deliverId' });
-    user.hasMany(db.mannerRate, { foreignKey: 'rateeId' });
-    user.hasMany(db.mannerRate, { foreignKey: 'raterId' });
+    user.hasMany(db.mannerScore, { as: 'evaluator', foreignKey: 'evaluatorId' });
+    user.hasMany(db.mannerScore, { as: 'received', foreignKey: 'receiverId' });
   };
   return user;
 };

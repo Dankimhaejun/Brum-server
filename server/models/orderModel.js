@@ -19,15 +19,15 @@ const createOrder = async body => {
 const readAllOrders = async () => {
   return await db.order
     .findAll({
-      order: [['id', 'ASC']],
+      order: [['orderId', 'ASC']],
       include: [
         {
           model: db.orderImage,
-          attributes: ['id', 'orderImageURL']
+          attributes: ['orderImageId', 'orderImageURL']
         },
         {
           model: db.user,
-          as: 'host',
+          as: 'hostInfo',
           attributes: ['name', 'sex', 'age', 'university', 'major', 'introduction', 'image']
         }
         //TODO: 상세한 정보 필요시 참고해서 추가할 것!!!!!!!
@@ -86,27 +86,22 @@ const readMyOrders = async userId => {
       include: [
         {
           model: db.orderImage,
-          attributes: ['id', 'orderImageURL']
+          attributes: ['orderImageId', 'orderImageURL']
         },
-        // {
-        //   model: db.user,
-        //   as: 'host',
-        //   attributes: ['name', 'sex', 'age', 'university', 'major', 'introduction', 'image']
-        // },
         {
           model: db.applicant,
           attributes: ['bidPrice', 'createdAt'],
           include: [
             {
               model: db.user,
-              foreignKey: 'applicantId',
-              attributes: ['id', 'phone', 'name', 'sex', 'age', 'major', 'introduction', 'image'],
+              as: 'applicant',
+              attributes: ['userId', 'phone', 'name', 'sex', 'age', 'major', 'introduction', 'image'],
               include: [
                 {
-                  model: db.mannerRate,
-                  foreignKey: 'rateeId',
-                  // attributes: ['mannerRate']
-                  attributes: [[db.sequelize.fn('AVG', db.sequelize.col('mannerRate')), 'rateAvg']]
+                  model: db.mannerScore,
+                  as: 'received',
+                  // attributes: ['score']
+                  attributes: [[db.sequelize.fn('sum', db.sequelize.col('score')), 'rateAvg']]
                 }
               ]
             }
@@ -114,7 +109,7 @@ const readMyOrders = async userId => {
         },
         {
           model: db.user,
-          as: 'deliver',
+          as: 'deliverInfo',
           attributes: ['name', 'sex', 'age', 'university', 'major', 'introduction', 'image']
           /*   include: [
             {}

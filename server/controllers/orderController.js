@@ -9,7 +9,7 @@ const postOrder = async (req, res, next) => {
     const filesArray = req.files;
     body.hostId = hostId;
     const newOrder = await createOrder(body);
-    const orderId = newOrder.dataValues.id;
+    const orderId = newOrder.dataValues.orderId;
     if (filesArray.length) {
       await createOrderImages(filesArray, orderId);
     }

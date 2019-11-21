@@ -4,7 +4,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('order', [
       {
-        id: 1,
+        orderId: 1,
         views: 1,
         hostId: 1,
         title: '한양대 공학관 -> 우리집으로',
@@ -21,7 +21,7 @@ module.exports = {
         updatedAt: '2019-12-07 00:00:00'
       },
       {
-        id: 2,
+        orderId: 2,
         views: 1,
         hostId: 2,
         title: '한양대 인문학과 2층 화장실 휴지좀',
