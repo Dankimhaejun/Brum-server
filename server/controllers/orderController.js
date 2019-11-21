@@ -13,7 +13,11 @@ const postOrder = async (req, res, next) => {
     if (filesArray.length) {
       await createOrderImages(filesArray, orderId);
     }
-    return res.json(vroomRes(true, true, null, 'Created new order'));
+    return res.json(
+      vroomRes(true, true, '새로운 주문이 추가되었습니다. 주문 정보는', {
+        order: newOrder
+      })
+    );
   } catch (e) {
     console.error(e);
     next(e);
@@ -23,7 +27,11 @@ const postOrder = async (req, res, next) => {
 const getOrders = async (req, res, next) => {
   try {
     const getAllOrders = await readAllOrders();
-    res.json(vroomRes(true, true, null, { orders: getAllOrders }));
+    res.json(
+      vroomRes(true, true, '전체 주문 내역을 배열형태로 제공합니다.', {
+        orders: getAllOrders
+      })
+    );
   } catch (e) {
     console.error(e);
     next(e);
@@ -35,7 +43,14 @@ const getIdOrder = async (req, res, next) => {
     const userId = req.decoded.id;
     const orderId = req.params.orderId;
     const getOrder = await readOneOrder(orderId);
-    res.json(vroomRes(true, true, null, { userId: userId, order: getOrder }));
+    res.json(
+      vroomRes(
+        true,
+        true,
+        'orderId의 주문 정보를 제공합니다. userId는 필요시 사용하세요.(내 요청은 다르게 표현하고 싶을때, hostId를 비교하세요)',
+        { userId: userId, order: getOrder }
+      )
+    );
   } catch (e) {
     console.error(e);
     next(e);
