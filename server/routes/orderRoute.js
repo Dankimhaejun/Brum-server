@@ -6,9 +6,9 @@ import { postOrder, getOrders, getIdOrder } from '../controllers/orderController
 import { uploadOrderImages } from '../middlewares/s3';
 /* GET home page. */
 
-router.use('/', checkToken);
-
 router.get('/', getOrders);
+
+router.use('/', checkToken);
 
 router.get('/:id', getIdOrder);
 
