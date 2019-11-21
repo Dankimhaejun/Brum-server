@@ -59,19 +59,19 @@ const readAllOrders = async () => {
 };
 
 const readOneOrder = async orderId => {
-  const views = await db.order.findOne({ where: { id: orderId } }).then(result => result.dataValues.views);
-  await db.order.update({ views: views + 1 }, { where: { id: orderId }, silent: true });
+  const views = await db.order.findOne({ where: { orderId: orderId } }).then(result => result.dataValues.views);
+  await db.order.update({ views: views + 1 }, { where: { orderId: orderId }, silent: true });
   return await db.order
     .findOne({
-      where: { id: orderId },
+      where: { orderId: orderId },
       include: [
         {
           model: db.orderImage,
-          attributes: ['id', 'orderImageURL']
+          attributes: ['orderImageId', 'orderImageURL']
         },
         {
           model: db.user,
-          as: 'host',
+          as: 'hostInfo',
           attributes: ['name', 'sex', 'age', 'university', 'major', 'introduction', 'image']
         }
       ]
@@ -122,9 +122,32 @@ const readMyOrders = async userId => {
     })
     .catch(err => console.error(err));
 };
+
+const readMyOneOrder = async (userId, orderId) => {
+  return db.order
+    .findOne({
+      where: { hostId: userId, orderId: orderId },
+      include: [
+        {
+          model: db.orderImage,
+          attributes: ['orderImageId', 'orderImageURL']
+        },
+        {
+          model: db.user,
+          as: 'deliverInfo',
+          attributes: ['name', 'sex', 'age', 'university', 'major', 'introduction', 'image']
+          /*   include: [
+            {}
+          ] */
+        }
+      ]
+    })
+    .catch(err => console.error(err));
+};
 module.exports = {
   createOrder,
   readAllOrders,
   readOneOrder,
-  readMyOrders
+  readMyOrders,
+  readMyOneOrder
 };
