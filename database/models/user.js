@@ -60,7 +60,7 @@ module.exports = function(sequelize, Datatypes) {
     user.hasMany(db.order, { foreignKey: 'hostId' });
     user.hasMany(db.order, { foreignKey: 'deliverId' });
     user.hasMany(db.mannerScore, { as: 'evaluator', foreignKey: 'evaluatorId' });
-    user.hasMany(db.mannerScore, { as: 'received', foreignKey: 'receiverId' });
+    user.hasMany(db.mannerScore, { as: 'getScore', foreignKey: 'receiverId' });
   };
   return user;
 };

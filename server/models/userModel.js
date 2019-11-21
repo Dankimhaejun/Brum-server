@@ -4,7 +4,17 @@ const readUserInfo = async userId => {
   return await db.user
     .findOne({
       where: { userId: userId },
-      attributes: ['userId', 'phone', 'name', 'sex', 'age', 'university', 'major', 'introduction', 'image']
+      attributes: ['userId', 'phone', 'name', 'sex', 'age', 'university', 'major', 'introduction', 'image'],
+      include: [
+        {
+          model: db.mannerScore,
+          as: 'getScore',
+          attributes: [
+            [db.sequelize.fn('count', '*'), 'count'],
+            [db.sequelize.fn('AVG', db.sequelize.col('score')), 'scoreAvg']
+          ]
+        }
+      ]
     })
     .catch(err => console.error(err));
 };

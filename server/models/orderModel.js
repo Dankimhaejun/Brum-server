@@ -99,11 +99,12 @@ const readMyOrders = async userId => {
               include: [
                 {
                   model: db.mannerScore,
-                  as: 'received',
+                  as: 'getScore',
+                  attributes: ['score']
                   // attributes: [[db.sequelize.fn('sum', db.sequelize.col('score')), 'rateAvg']],
-                  attributes: ['score', [db.sequelize.fn('sum', db.sequelize.col('score')), 'scoreAvg']],
-                  group: ['receiverId'],
-                  order: [[db.sequelize.fn('AVG', db.sequelize.col('score')), 'DESC']]
+                  // attributes: ['score', [db.sequelize.fn('sum', db.sequelize.col('score')), 'scoreAvg']],
+                  // group: ['receiverId'],
+                  // order: [[db.sequelize.fn('AVG', db.sequelize.col('score')), 'DESC']]
                 }
               ]
             }

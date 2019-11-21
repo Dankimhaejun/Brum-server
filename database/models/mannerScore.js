@@ -31,7 +31,7 @@ module.exports = function(sequelize, Datatypes) {
       as: 'evaluator',
       foreignKey: 'evaluatorId'
     });
-    mannerScore.belongsTo(db.user, { as: 'received', foreignKey: 'receiverId' });
+    mannerScore.belongsTo(db.user, { as: 'getScore', foreignKey: 'receiverId' });
   };
   return mannerScore;
 };
