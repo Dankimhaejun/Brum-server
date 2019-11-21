@@ -1,8 +1,8 @@
 const db = require('./index');
 
 module.exports = function(sequelize, Datatypes) {
-  const request = sequelize.define(
-    'request',
+  const order = sequelize.define(
+    'order',
     {
       views: {
         type: Datatypes.INTEGER,
@@ -54,16 +54,16 @@ module.exports = function(sequelize, Datatypes) {
       freezeTableName: true
     }
   );
-  request.associate = function(db) {
-    request.belongsToMany(db.user, {
+  order.associate = function(db) {
+    order.belongsToMany(db.user, {
       through: 'applicant',
-      as: 'applicantRequests',
-      foreignKey: 'requestId'
+      as: 'applicantOrders',
+      foreignKey: 'orderId'
     });
-    request.hasMany(db.applicant, { foreignKey: 'requestId' });
-    request.hasMany(db.requestImage, { foreignKey: 'requestId' });
-    request.belongsTo(db.user, { as: 'host', foreignKey: 'hostId' });
-    request.belongsTo(db.user, { as: 'deliver', foreignKey: 'deliverId' });
+    order.hasMany(db.applicant, { foreignKey: 'orderId' });
+    order.hasMany(db.orderImage, { foreignKey: 'orderId' });
+    order.belongsTo(db.user, { as: 'host', foreignKey: 'hostId' });
+    order.belongsTo(db.user, { as: 'deliver', foreignKey: 'deliverId' });
   };
-  return request;
+  return order;
 };

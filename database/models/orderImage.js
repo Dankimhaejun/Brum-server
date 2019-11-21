@@ -1,14 +1,14 @@
 const db = require('./index');
 
 module.exports = function(sequelize, Datatypes) {
-  const requestImage = sequelize.define(
-    'requestImage',
+  const orderImage = sequelize.define(
+    'orderImage',
     {
-      requestId: {
+      orderId: {
         type: Datatypes.INTEGER,
         allowNull: false
       },
-      requestImageURL: {
+      orderImageURL: {
         type: Datatypes.STRING,
         allowNull: false
       }
@@ -18,8 +18,8 @@ module.exports = function(sequelize, Datatypes) {
       freezeTableName: true
     }
   );
-  requestImage.associate = function(db) {
-    requestImage.belongsTo(db.request, { foreignKey: 'requestId' });
+  orderImage.associate = function(db) {
+    orderImage.belongsTo(db.order, { foreignKey: 'orderId' });
   };
-  return requestImage;
+  return orderImage;
 };

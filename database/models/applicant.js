@@ -9,7 +9,7 @@ module.exports = function(sequelize, Datatypes) {
         autoIncrement: true,
         primaryKey: true
       },
-      requestId: {
+      orderId: {
         type: Datatypes.INTEGER,
         allowNull: false
       },
@@ -32,8 +32,8 @@ module.exports = function(sequelize, Datatypes) {
     }
   );
   applicant.associate = function(db) {
-    applicant.belongsTo(db.request, {
-      foreignKey: 'requestId'
+    applicant.belongsTo(db.order, {
+      foreignKey: 'orderId'
     });
     applicant.belongsTo(db.user, { foreignKey: 'applicantId' });
   };

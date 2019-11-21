@@ -5,7 +5,7 @@ module.exports = {
     return queryInterface.bulkInsert('applicant', [
       {
         id: 1,
-        requestId: 2,
+        orderId: 2,
         applicantId: 1,
         bidPrice: '5000',
         createdAt: '2019-12-07 00:00:00',
@@ -13,7 +13,7 @@ module.exports = {
       },
       {
         id: 2,
-        requestId: 2,
+        orderId: 2,
         applicantId: 3,
         bidPrice: '3000',
         createdAt: '2019-12-07 00:00:00',
@@ -21,7 +21,7 @@ module.exports = {
       },
       {
         id: 3,
-        requestId: 2,
+        orderId: 2,
         applicantId: 4,
         bidPrice: '10000',
         createdAt: '2019-12-07 00:00:00',
@@ -29,7 +29,7 @@ module.exports = {
       },
       {
         id: 4,
-        requestId: 1,
+        orderId: 1,
         applicantId: 2,
         bidPrice: null,
         createdAt: '2019-12-07 00:00:00',
