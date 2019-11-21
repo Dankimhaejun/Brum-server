@@ -146,7 +146,10 @@ const readMyOneOrder = async (userId, orderId) => {
 };
 
 const updateMyOrderDeliver = async (orderId, deliverId) => {
-  return db.order.update({ deliverId: deliverId }, { where: { orderId: orderId } });
+  await db.applicant.update({ applyStatus: 'chosen' }, { where: { orderId: orderId, userId: deliverId } });
+  return await db.order
+    .update({ deliverId: deliverId, deliverStatus: 1 }, { where: { orderId: orderId }, silent: true })
+    .catch(err => console.error(err));
 };
 module.exports = {
   createOrder,
