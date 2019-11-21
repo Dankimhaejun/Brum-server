@@ -144,10 +144,15 @@ const readMyOneOrder = async (userId, orderId) => {
     })
     .catch(err => console.error(err));
 };
+
+const updateMyOrderDeliver = async (orderId, deliverId) => {
+  return db.order.update({ deliverId: deliverId }, { where: { orderId: orderId } });
+};
 module.exports = {
   createOrder,
   readAllOrders,
   readOneOrder,
   readMyOrders,
-  readMyOneOrder
+  readMyOneOrder,
+  updateMyOrderDeliver
 };
