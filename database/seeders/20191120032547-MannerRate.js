@@ -6,80 +6,96 @@ module.exports = {
       {
         id: 1,
         raterId: 2,
-        rateeId: 3,
-        mannerRate: 10,
-        createdAt: '2019-12-07 00:00:00',
-        updatedAt: '2019-12-07 00:00:00'
-      },
-      {
-        id: 2,
-        raterId: 1,
-        rateeId: 4,
+        rateeId: 1,
         mannerRate: 5,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       },
       {
-        id: 3,
+        id: 2,
         raterId: 3,
         rateeId: 1,
-        mannerRate: 9,
+        mannerRate: 4,
+        createdAt: '2019-12-07 00:00:00',
+        updatedAt: '2019-12-07 00:00:00'
+      },
+      {
+        id: 3,
+        raterId: 4,
+        rateeId: 1,
+        mannerRate: 2,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       },
       {
         id: 4,
         raterId: 1,
-        rateeId: 4,
+        rateeId: 2,
         mannerRate: 5,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       },
       {
         id: 5,
-        raterId: 2,
-        rateeId: 1,
-        mannerRate: 9,
+        raterId: 3,
+        rateeId: 2,
+        mannerRate: 4,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       },
       {
         id: 6,
-        raterId: 3,
+        raterId: 4,
         rateeId: 2,
-        mannerRate: 10,
+        mannerRate: 1,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       },
       {
         id: 7,
-        raterId: 4,
-        rateeId: 2,
-        mannerRate: 3,
+        raterId: 1,
+        rateeId: 3,
+        mannerRate: 2,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       },
       {
         id: 8,
-        raterId: 1,
+        raterId: 2,
+        rateeId: 3,
+        mannerRate: 5,
+        createdAt: '2019-12-07 00:00:00',
+        updatedAt: '2019-12-07 00:00:00'
+      },
+      {
+        id: 9,
+        raterId: 4,
         rateeId: 3,
         mannerRate: 4,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       },
       {
-        id: 9,
-        raterId: 2,
-        rateeId: 3,
-        mannerRate: 10,
+        id: 10,
+        raterId: 1,
+        rateeId: 4,
+        mannerRate: 3,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       },
       {
-        id: 10,
-        raterId: 1,
-        rateeId: 2,
-        mannerRate: 10,
+        id: 11,
+        raterId: 2,
+        rateeId: 4,
+        mannerRate: 3,
+        createdAt: '2019-12-07 00:00:00',
+        updatedAt: '2019-12-07 00:00:00'
+      },
+      {
+        id: 12,
+        raterId: 3,
+        rateeId: 4,
+        mannerRate: 4,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
       }

@@ -1,9 +1,10 @@
 const db = require('../../database/models');
 
-const getUserInfo = async id => {
+const readUserInfo = async id => {
   return await db.user
     .findOne({
-      where: { id: id }
+      where: { id: id },
+      attributes: ['id', 'phone', 'name', 'sex', 'age', 'university', 'major', 'introduction', 'image']
     })
     .catch(err => console.error(err));
 };
@@ -13,6 +14,6 @@ const updateUserImage = async (id, image) => {
 };
 
 module.exports = {
-  getUserInfo,
+  readUserInfo,
   updateUserImage
 };

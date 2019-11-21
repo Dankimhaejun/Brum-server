@@ -23,7 +23,7 @@ module.exports = {
       {
         id: 2,
         views: 1,
-        hostId: 3,
+        hostId: 2,
         title: '한양대 인문학과 2층 화장실 휴지좀',
         departures: null,
         arrivals: '한양대 인문학과 2층 화장실',
