@@ -17,6 +17,7 @@ const postUserImage = async (req, res, next) => {
     console.log('req.body', req.body);
     console.log('req.headers', req.headers);
     console.log('req.file', req.file);
+    console.log('req.files', req.files);
     const userId = req.decoded.id;
     const image = req.file.location;
 
