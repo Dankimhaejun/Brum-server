@@ -60,7 +60,14 @@ const putMyOrderApplicant = async (req, res, next) => {
     const putApplicant = await updateMyOrderDeliver(orderId, deliverId);
     console.log('putApplicant', putApplicant);
     const deliverInfo = await readUserInfo(deliverId);
-    res.json(vroomRes(true, true, '배달자의 정보를 드립니다.', deliverInfo));
+    res.json(
+      vroomRes(
+        true,
+        true,
+        '내가 선택한 배달자를 주문내역에 업데이트 하고, 배달상태를 0에서 1로 변경합니다. 그리고 배달자의 정보를 드립니다.',
+        deliverInfo
+      )
+    );
   } catch (e) {
     console.error(e);
     next(e);

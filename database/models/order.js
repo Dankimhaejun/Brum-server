@@ -46,7 +46,7 @@ module.exports = function(sequelize, Datatypes) {
       deliverId: {
         type: Datatypes.INTEGER
       },
-      isCompleted: {
+      deliverStatus: {
         type: Datatypes.INTEGER,
         defaultValue: 0
       },
