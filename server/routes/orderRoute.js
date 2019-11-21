@@ -10,7 +10,7 @@ router.get('/', getOrders);
 
 router.use('/', checkToken);
 
-router.get('/:id', getIdOrder);
+router.get('/:orderId', getIdOrder);
 
 router.post('/', uploadOrderImages.array('file'), postOrder);
 

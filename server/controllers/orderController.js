@@ -23,8 +23,7 @@ const postOrder = async (req, res, next) => {
 const getOrders = async (req, res, next) => {
   try {
     const getAllOrders = await readAllOrders();
-    const userId = req.decoded.id;
-    res.json(vroomRes(true, true, null, { userId: userId, orders: getAllOrders }));
+    res.json(vroomRes(true, true, null, { orders: getAllOrders }));
   } catch (e) {
     console.error(e);
     next(e);
@@ -34,7 +33,7 @@ const getOrders = async (req, res, next) => {
 const getIdOrder = async (req, res, next) => {
   try {
     const userId = req.decoded.id;
-    const orderId = req.params.id;
+    const orderId = req.params.orderId;
     const getOrder = await readOneOrder(orderId);
     res.json(vroomRes(true, true, null, { userId: userId, order: getOrder }));
   } catch (e) {
