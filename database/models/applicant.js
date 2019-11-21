@@ -21,6 +21,10 @@ module.exports = function(sequelize, Datatypes) {
         type: Datatypes.STRING,
         defaultValue: null
       },
+      applyComment: {
+        type: Datatypes.STRING,
+        defaultValue: null
+      },
       applyStatus: {
         type: Datatypes.STRING,
         defaultValue: 'applied'

@@ -1,6 +1,6 @@
 import { vroomRes } from '../middlewares/vroomRes';
 import { readUserInfo, updateUserImage } from '../models/userModel';
-import { readMyOrders } from '../models/orderModel';
+import { readMyOrders, readMyOneOrder } from '../models/orderModel';
 const getMyInfo = async (req, res, next) => {
   try {
     const userId = req.decoded.id;
@@ -45,8 +45,22 @@ const getMyOrders = async (req, res, next) => {
   }
 };
 
+const getMyOneOrder = async (req, res, next) => {
+  try {
+    const userId = req.decoded.id;
+    const orderId = req.params.orderId;
+    const getMyOneOrder = await readMyOneOrder(userId, orderId);
+    const getMyInfo = await readUserInfo(userId);
+    res.json(vroomRes(true, true, null, { myInfo: getMyInfo, order: getMyOneOrder }));
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+};
+
 module.exports = {
   getMyInfo,
   postUserImage,
-  getMyOrders
+  getMyOrders,
+  getMyOneOrder
 };
