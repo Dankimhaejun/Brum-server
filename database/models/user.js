@@ -51,14 +51,14 @@ module.exports = function(sequelize, Datatypes) {
     }
   );
   user.associate = function(db) {
-    user.belongsToMany(db.request, {
+    user.belongsToMany(db.order, {
       through: 'applicant',
       as: 'applicantUsers',
       foreignKey: 'applicantId'
     });
     user.hasMany(db.applicant, { foreignKey: 'applicantId' });
-    user.hasMany(db.request, { foreignKey: 'hostId' });
-    user.hasMany(db.request, { foreignKey: 'deliverId' });
+    user.hasMany(db.order, { foreignKey: 'hostId' });
+    user.hasMany(db.order, { foreignKey: 'deliverId' });
     user.hasMany(db.mannerRate, { foreignKey: 'rateeId' });
     user.hasMany(db.mannerRate, { foreignKey: 'raterId' });
   };

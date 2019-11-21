@@ -1,8 +1,8 @@
 const db = require('../../database/models');
 
-const createRequest = async body => {
+const createOrder = async body => {
   const { title, hostId, departures, arrivals, desiredArrivalTime, details, price, isPrice } = body;
-  return db.request
+  return db.order
     .create({
       title,
       hostId,
@@ -16,14 +16,14 @@ const createRequest = async body => {
     .catch(err => console.error(err));
 };
 
-const readAllRequests = async () => {
-  return await db.request
+const readAllOrders = async () => {
+  return await db.order
     .findAll({
       order: [['id', 'ASC']],
       include: [
         {
-          model: db.requestImage,
-          attributes: ['id', 'requestImageURL']
+          model: db.orderImage,
+          attributes: ['id', 'orderImageURL']
         },
         {
           model: db.user,
@@ -58,16 +58,16 @@ const readAllRequests = async () => {
     .catch(err => console.error(err));
 };
 
-const readOneRequest = async requestId => {
-  const views = await db.request.findOne({ where: { id: requestId } }).then(result => result.dataValues.views);
-  await db.request.update({ views: views + 1 }, { where: { id: requestId }, silent: true });
-  return await db.request
+const readOneOrder = async orderId => {
+  const views = await db.order.findOne({ where: { id: orderId } }).then(result => result.dataValues.views);
+  await db.order.update({ views: views + 1 }, { where: { id: orderId }, silent: true });
+  return await db.order
     .findOne({
-      where: { id: requestId },
+      where: { id: orderId },
       include: [
         {
-          model: db.requestImage,
-          attributes: ['id', 'requestImageURL']
+          model: db.orderImage,
+          attributes: ['id', 'orderImageURL']
         },
         {
           model: db.user,
@@ -79,14 +79,14 @@ const readOneRequest = async requestId => {
     .catch(err => console.error(err));
 };
 
-const readMyRequests = async userId => {
-  return db.request
+const readMyOrders = async userId => {
+  return db.order
     .findAll({
       where: { hostId: userId },
       include: [
         {
-          model: db.requestImage,
-          attributes: ['id', 'requestImageURL']
+          model: db.orderImage,
+          attributes: ['id', 'orderImageURL']
         },
         // {
         //   model: db.user,
@@ -105,8 +105,8 @@ const readMyRequests = async userId => {
                 {
                   model: db.mannerRate,
                   foreignKey: 'rateeId',
-                  attributes: ['mannerRate']
-                  // attributes: ['mannerRate', [db.sequelize.fn('AVG', db.sequelize.col('mannerRate')), 'rateAvg']]
+                  // attributes: ['mannerRate']
+                  attributes: [[db.sequelize.fn('AVG', db.sequelize.col('mannerRate')), 'rateAvg']]
                 }
               ]
             }
@@ -116,14 +116,17 @@ const readMyRequests = async userId => {
           model: db.user,
           as: 'deliver',
           attributes: ['name', 'sex', 'age', 'university', 'major', 'introduction', 'image']
+          /*   include: [
+            {}
+          ] */
         }
       ]
     })
     .catch(err => console.error(err));
 };
 module.exports = {
-  createRequest,
-  readAllRequests,
-  readOneRequest,
-  readMyRequests
+  createOrder,
+  readAllOrders,
+  readOneOrder,
+  readMyOrders
 };

@@ -8,7 +8,7 @@ const path = require('path');
 
 const registerRouter = require('./routes/registerRoute');
 const userRouter = require('./routes/userRoute');
-const requestRouter = require('./routes/requestRoute');
+const orderRouter = require('./routes/orderRoute');
 
 const app = express();
 
@@ -35,7 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use('/', registerRouter);
-app.use('/request', requestRouter);
+app.use('/order', orderRouter);
 app.use('/user', userRouter);
 // app.use('/users', express.static('uploads'));
 

@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('request', [
+    return queryInterface.bulkInsert('order', [
       {
         id: 1,
         views: 1,
@@ -51,7 +51,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('request', null, {});
+    return queryInterface.bulkDelete('order', null, {});
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.
