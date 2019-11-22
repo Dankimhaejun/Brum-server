@@ -15,7 +15,7 @@ module.exports = {
         price: '5000원',
         isPrice: true,
         deliverId: 2,
-        deliverStatus: 0,
+        orderStatus: 0,
         actualArrivalTime: null,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
@@ -32,7 +32,7 @@ module.exports = {
         price: null,
         isPrice: false,
         deliverId: null,
-        deliverStatus: 0,
+        orderStatus: 0,
         actualArrivalTime: null,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'
@@ -49,7 +49,7 @@ module.exports = {
         price: null,
         isPrice: false,
         deliverId: null,
-        deliverStatus: 0,
+        orderStatus: 0,
         actualArrivalTime: null,
         createdAt: '2019-12-07 00:00:00',
         updatedAt: '2019-12-07 00:00:00'

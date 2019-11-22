@@ -46,7 +46,7 @@ module.exports = function(sequelize, Datatypes) {
       deliverId: {
         type: Datatypes.INTEGER
       },
-      deliverStatus: {
+      orderStatus: {
         type: Datatypes.INTEGER,
         defaultValue: 0
       },

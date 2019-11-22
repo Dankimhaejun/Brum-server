@@ -6,9 +6,9 @@ import { checkToken } from '../middlewares/jwt';
 import { uploadUserImage } from '../middlewares/s3';
 /* GET users listing. */
 
-router.post('/image', uploadUserImage.single('file'), postUserImage);
-
 router.use('/', checkToken);
+
+router.post('/image', uploadUserImage.single('file'), postUserImage);
 
 router.get('/mypage', getMyInfo);
 
