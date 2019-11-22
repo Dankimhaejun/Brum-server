@@ -26,6 +26,34 @@ const readApplicants = async orderId => {
     .catch(err => console.error(err));
 };
 
+const createOrderApply = async (orderId, userId, bidPrice, applyComment) => {
+  return await db.applicant
+    .create({
+      orderId,
+      userId,
+      bidPrice,
+      applyComment
+    })
+    .catch(err => console.error(err));
+};
+
+const readUserApply = async (orderId, userId) => {
+  return await db.applicant.findOne({ where: { orderId, userId } }).catch(err => console.error(err));
+};
+
+const updateOrderApply = async (orderId, userId, bidPrice, applyComment) => {
+  return await db.applicant
+    .update({ bidPrice, applyComment }, { where: { orderId, userId } })
+    .catch(err => console.error(err));
+};
+
+const deleteMyOrderApply = async (orderId, userId) => {
+  return await db.applicant.destroy({ where: { orderId, userId } }).catch(err => console.error(err));
+};
 module.exports = {
-  readApplicants
+  createOrderApply,
+  readApplicants,
+  readUserApply,
+  updateOrderApply,
+  deleteMyOrderApply
 };
