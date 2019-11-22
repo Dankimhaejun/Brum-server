@@ -24,8 +24,8 @@ const getMyOneOrder = async (req, res, next) => {
   try {
     const userId = req.decoded.id;
     const orderId = req.params.orderId;
-    const getMyOneOrder = await readMyOneOrder(userId, orderId);
     const getMyInfo = await readUserInfo(userId);
+    const getMyOneOrder = await readMyOneOrder(userId, orderId);
     res.json(
       vroomRes(true, true, 'myInfo는 유저의 정보, order는 주문 정보를 제공합니다.', {
         myInfo: getMyInfo,

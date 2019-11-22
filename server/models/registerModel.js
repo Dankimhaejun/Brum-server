@@ -13,11 +13,11 @@ const createUser = async (phone, password, name, sex, agreementAd) => {
   const hashedPassword = hashPassword(password);
   return await db.user
     .create({
-      phone: phone,
+      phone,
       password: hashedPassword,
-      name: name,
-      sex: sex,
-      agreementAd: agreementAd
+      name,
+      sex,
+      agreementAd
     })
     .catch(err => console.error(err));
 };

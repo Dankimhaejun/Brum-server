@@ -7,7 +7,7 @@ module.exports = {
         orderId: 1,
         views: 0,
         hostId: 1,
-        title: '한양대 공학관 -> 우리집으로',
+        title: '한양대 공학관 -> 우리집으로 무거운 물건좀 옮겨주세요',
         departures: '한양대 공학관',
         arrivals: '우리집',
         desiredArrivalTime: null,

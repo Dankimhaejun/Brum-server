@@ -59,11 +59,11 @@ const readAllOrders = async () => {
 };
 
 const readOneOrder = async orderId => {
-  const views = await db.order.findOne({ where: { orderId: orderId } }).then(result => result.dataValues.views);
-  await db.order.update({ views: views + 1 }, { where: { orderId: orderId }, silent: true });
+  const views = await db.order.findOne({ where: { orderId } }).then(result => result.dataValues.views);
+  await db.order.update({ views: views + 1 }, { where: { orderId }, silent: true });
   return await db.order
     .findOne({
-      where: { orderId: orderId },
+      where: { orderId },
       include: [
         {
           model: db.orderImage,
@@ -73,6 +73,10 @@ const readOneOrder = async orderId => {
           model: db.user,
           as: 'hostInfo',
           attributes: ['name', 'sex', 'age', 'university', 'major', 'introduction', 'image']
+        },
+        {
+          model: db.applicant,
+          attributes: ['userId', 'bidPrice', 'applyComment', 'createdAt']
         }
       ]
     })
