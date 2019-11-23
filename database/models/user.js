@@ -18,7 +18,7 @@ module.exports = function(sequelize, Datatypes) {
         type: Datatypes.STRING,
         allowNull: false
       },
-      name: {
+      nickname: {
         type: Datatypes.STRING,
         allowNull: false
       },
@@ -26,10 +26,13 @@ module.exports = function(sequelize, Datatypes) {
         type: Datatypes.STRING,
         allowNull: false
       },
+      name: {
+        type: Datatypes.STRING
+      },
       age: {
         type: Datatypes.STRING
       },
-      university: {
+      campus: {
         type: Datatypes.STRING
       },
       major: {

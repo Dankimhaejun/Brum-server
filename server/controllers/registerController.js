@@ -13,8 +13,8 @@ const main = async (req, res, next) => {
 
 const register = async (req, res, next) => {
   try {
-    const { phone, password, name, sex, agreementAd } = req.body;
-    const isRegister = await createUser(phone, password, name, sex, agreementAd);
+    const { phone, password, nickname, sex, agreementAd } = req.body;
+    const isRegister = await createUser(phone, password, nickname, sex, agreementAd);
     if (isRegister.dataValues) {
       const userId = isRegister.dataValues.userId;
       const userPhone = isRegister.dataValues.phone;

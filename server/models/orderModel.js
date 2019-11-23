@@ -28,7 +28,7 @@ const readAllOrders = async () => {
         {
           model: db.user,
           as: 'hostInfo',
-          attributes: ['name', 'sex', 'age', 'university', 'major', 'introduction', 'image']
+          attributes: ['name', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
         },
         {
           model: db.applicant,
@@ -53,7 +53,7 @@ const readOneOrder = async orderId => {
         {
           model: db.user,
           as: 'hostInfo',
-          attributes: ['name', 'sex', 'age', 'university', 'major', 'introduction', 'image']
+          attributes: ['name', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
         },
         {
           model: db.applicant,
@@ -98,7 +98,7 @@ const readMyOrders = async userId => {
         {
           model: db.user,
           as: 'deliverInfo',
-          attributes: ['name', 'sex', 'age', 'university', 'major', 'introduction', 'image']
+          attributes: ['name', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
           /*   include: [
             {}
           ] */
@@ -120,10 +120,7 @@ const readMyOneOrder = async (userId, orderId) => {
         {
           model: db.user,
           as: 'deliverInfo',
-          attributes: ['name', 'sex', 'age', 'university', 'major', 'introduction', 'image']
-          /*   include: [
-            {}
-          ] */
+          attributes: ['name', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
         }
       ]
     })
