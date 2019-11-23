@@ -7,9 +7,14 @@ const getOrders = async (req, res, next) => {
   try {
     const getAllOrders = await readAllOrders();
     res.json(
-      vroomRes(true, true, '전체 주문 내역을 배열형태로 제공합니다.', {
-        orders: getAllOrders
-      })
+      vroomRes(
+        true,
+        true,
+        '전체 주문 내역을 배열형태로 제공합니다. hostInfo는 주문한 사람의 정보를 나타내고, applicants안에 있는 배열은 현재 지원자의 수를 나타냅니다. (카운트 함수를 사용하니 평균 구할때와 같은 오류가 발생하여 배열로 보내드리니, length로 지원자 현황 파악해주시면 감사하겠습니다!)',
+        {
+          orders: getAllOrders
+        }
+      )
     );
   } catch (e) {
     console.error(e);

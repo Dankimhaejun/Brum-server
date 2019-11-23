@@ -29,30 +29,11 @@ const readAllOrders = async () => {
           model: db.user,
           as: 'hostInfo',
           attributes: ['name', 'sex', 'age', 'university', 'major', 'introduction', 'image']
+        },
+        {
+          model: db.applicant,
+          attributes: ['applicantId']
         }
-        //TODO: 상세한 정보 필요시 참고해서 추가할 것!!!!!!!
-        // {
-        //   model: db.applicant,
-        //   attributes: ['bidPrice', 'createdAt'],
-        //   include: [
-        //     {
-        //       model: db.user,
-        //       as: 'applicant',
-        //       attributes: ['id', 'phone', 'name', 'sex', 'age', 'major', 'introduction', 'image'],
-        //       include: [
-        //         {
-        //           model: db.mannerRate,
-        //           attributes: [[db.sequelize.fn('AVG', db.sequelize.col('mannerRate')), 'rateAvg']]
-        //         }
-        //       ]
-        //     }
-        //   ]
-        // },
-        // {
-        //   model: db.user,
-        //   as: 'deliver',
-        //   attributes: ['name', 'sex', 'age', 'university', 'major', 'introduction', 'image']
-        // }
       ]
     })
     .catch(err => console.error(err));
