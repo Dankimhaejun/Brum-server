@@ -4,7 +4,7 @@ const readUserInfo = async userId => {
   return await db.user
     .findOne({
       where: { userId: userId },
-      attributes: ['userId', 'phone', 'name', 'sex', 'age', 'university', 'major', 'introduction', 'image'],
+      attributes: ['userId', 'phone', 'name', 'sex', 'age', 'campus', 'major', 'introduction', 'image'],
       include: [
         {
           model: db.mannerScore,
