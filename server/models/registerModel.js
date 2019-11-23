@@ -9,13 +9,13 @@ const checkPhone = async phone => {
     .catch(err => console.error(err));
 };
 
-const createUser = async (phone, password, name, sex, agreementAd) => {
+const createUser = async (phone, password, nickname, sex, agreementAd) => {
   const hashedPassword = hashPassword(password);
   return await db.user
     .create({
       phone,
       password: hashedPassword,
-      name,
+      nickname,
       sex,
       agreementAd
     })
