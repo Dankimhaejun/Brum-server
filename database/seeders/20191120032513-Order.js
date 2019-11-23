@@ -12,13 +12,13 @@ module.exports = {
         arrivals: '우리집',
         desiredArrivalTime: null,
         details: '집으로 보내주세요!!',
-        price: '5000원',
+        price: '10000',
         isPrice: true,
         deliverId: 2,
         orderStatus: 0,
         actualArrivalTime: null,
-        createdAt: '2019-12-07 00:00:00',
-        updatedAt: '2019-12-07 00:00:00'
+        createdAt: '2019-11-23 00:00:00',
+        updatedAt: '2019-11-23 00:00:00'
       },
       {
         orderId: 2,
@@ -34,8 +34,8 @@ module.exports = {
         deliverId: null,
         orderStatus: 0,
         actualArrivalTime: null,
-        createdAt: '2019-12-07 00:00:00',
-        updatedAt: '2019-12-07 00:00:00'
+        createdAt: '2019-11-23 00:00:00',
+        updatedAt: '2019-11-23 00:00:00'
       },
       {
         orderId: 3,
@@ -51,8 +51,8 @@ module.exports = {
         deliverId: null,
         orderStatus: 0,
         actualArrivalTime: null,
-        createdAt: '2019-12-07 00:00:00',
-        updatedAt: '2019-12-07 00:00:00'
+        createdAt: '2019-11-23 00:00:00',
+        updatedAt: '2019-11-23 00:00:00'
       }
     ]);
     /*

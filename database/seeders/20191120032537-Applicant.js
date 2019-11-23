@@ -9,8 +9,8 @@ module.exports = {
         userId: 1,
         bidPrice: '5000',
         applyComment: '누구보다 빠르게 남들보다 다르게',
-        createdAt: '2019-12-07 00:00:00',
-        updatedAt: '2019-12-07 00:00:00'
+        createdAt: '2019-11-23 00:00:00',
+        updatedAt: '2019-11-23 00:00:00'
       },
       {
         applicantId: 2,
@@ -18,8 +18,8 @@ module.exports = {
         userId: 3,
         bidPrice: '3000',
         applyComment: '10분안에 만날 각',
-        createdAt: '2019-12-07 00:00:00',
-        updatedAt: '2019-12-07 00:00:00'
+        createdAt: '2019-11-23 00:00:00',
+        updatedAt: '2019-11-23 00:00:00'
       },
       {
         applicantId: 3,
@@ -27,16 +27,16 @@ module.exports = {
         userId: 4,
         bidPrice: '10000',
         applyComment: '비싼만큼 확실하게!!!!!!!!!!!!',
-        createdAt: '2019-12-07 00:00:00',
-        updatedAt: '2019-12-07 00:00:00'
+        createdAt: '2019-11-23 00:00:00',
+        updatedAt: '2019-11-23 00:00:00'
       },
       {
         applicantId: 4,
         orderId: 1,
         userId: 2,
         bidPrice: null,
-        createdAt: '2019-12-07 00:00:00',
-        updatedAt: '2019-12-07 00:00:00'
+        createdAt: '2019-11-23 00:00:00',
+        updatedAt: '2019-11-23 00:00:00'
       },
       {
         applicantId: 5,
@@ -44,8 +44,8 @@ module.exports = {
         userId: 2,
         bidPrice: '5000',
         applyComment: '누구보다 빠르게 남들보다 다르게',
-        createdAt: '2019-12-07 00:00:00',
-        updatedAt: '2019-12-07 00:00:00'
+        createdAt: '2019-11-23 00:00:00',
+        updatedAt: '2019-11-23 00:00:00'
       },
       {
         applicantId: 6,
@@ -53,8 +53,8 @@ module.exports = {
         userId: 3,
         bidPrice: '3000',
         applyComment: '10분안에 만날 각',
-        createdAt: '2019-12-07 00:00:00',
-        updatedAt: '2019-12-07 00:00:00'
+        createdAt: '2019-11-23 00:00:00',
+        updatedAt: '2019-11-23 00:00:00'
       },
       {
         applicantId: 7,
@@ -62,8 +62,8 @@ module.exports = {
         userId: 4,
         bidPrice: '10000',
         applyComment: '비싼만큼 확실하게!!!!!!!!!!!!',
-        createdAt: '2019-12-07 00:00:00',
-        updatedAt: '2019-12-07 00:00:00'
+        createdAt: '2019-11-23 00:00:00',
+        updatedAt: '2019-11-23 00:00:00'
       }
     ]);
   },
