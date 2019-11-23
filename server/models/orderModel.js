@@ -130,6 +130,14 @@ const readMyOneOrder = async (userId, orderId) => {
     .catch(err => console.error(err));
 };
 
+const updateMyOrder = async body => {
+  const { orderId, hostId, title, departures, arrivals, desiredArrivalTime, details, price, isPrice } = body;
+  return await db.order.update(
+    { title, departures, arrivals, desiredArrivalTime, details, price, isPrice },
+    { where: { orderId, hostId } }
+  );
+};
+
 const updateMyOrderDeliver = async (orderId, deliverId) => {
   await db.applicant.update({ applyStatus: 'chosen' }, { where: { orderId, userId: deliverId } });
   return await db.order
@@ -147,6 +155,7 @@ module.exports = {
   readOneOrder,
   readMyOrders,
   readMyOneOrder,
+  updateMyOrder,
   updateMyOrderDeliver,
   deleteMyOrder
 };
