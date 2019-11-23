@@ -16,8 +16,8 @@ module.exports = {
         image: null,
         agreementAd: false,
         isAdmin: true,
-        createdAt: '2019-12-07 00:00:00',
-        updatedAt: '2019-12-07 00:00:00'
+        createdAt: '2019-11-23 00:00:00',
+        updatedAt: '2019-11-23 00:00:00'
       },
       {
         userId: 2,
@@ -32,8 +32,8 @@ module.exports = {
         image: null,
         agreementAd: false,
         isAdmin: true,
-        createdAt: '2019-12-07 00:00:00',
-        updatedAt: '2019-12-07 00:00:00'
+        createdAt: '2019-11-23 00:00:00',
+        updatedAt: '2019-11-23 00:00:00'
       },
       {
         userId: 3,
@@ -48,8 +48,8 @@ module.exports = {
         image: null,
         agreementAd: false,
         isAdmin: true,
-        createdAt: '2019-12-07 00:00:00',
-        updatedAt: '2019-12-07 00:00:00'
+        createdAt: '2019-11-23 00:00:00',
+        updatedAt: '2019-11-23 00:00:00'
       },
       {
         userId: 4,
@@ -64,8 +64,8 @@ module.exports = {
         image: null,
         agreementAd: false,
         isAdmin: true,
-        createdAt: '2019-12-07 00:00:00',
-        updatedAt: '2019-12-07 00:00:00'
+        createdAt: '2019-11-23 00:00:00',
+        updatedAt: '2019-11-23 00:00:00'
       }
     ]);
   },
