@@ -28,7 +28,7 @@ const readAllOrders = async () => {
         {
           model: db.user,
           as: 'hostInfo',
-          attributes: ['name', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
+          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
         },
         {
           model: db.applicant,
@@ -53,7 +53,7 @@ const readOneOrder = async orderId => {
         {
           model: db.user,
           as: 'hostInfo',
-          attributes: ['name', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
+          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
         },
         {
           model: db.applicant,
@@ -80,7 +80,7 @@ const readMyOrders = async userId => {
             {
               model: db.user,
               as: 'applicantInfo',
-              attributes: ['userId', 'phone', 'name', 'sex', 'age', 'major', 'introduction', 'image'],
+              attributes: ['userId', 'phone', 'nickname', 'sex', 'age', 'major', 'introduction', 'image'],
               include: [
                 {
                   model: db.mannerScore,
@@ -98,7 +98,7 @@ const readMyOrders = async userId => {
         {
           model: db.user,
           as: 'deliverInfo',
-          attributes: ['name', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
+          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
           /*   include: [
             {}
           ] */
@@ -117,10 +117,13 @@ const readMyOneOrder = async (userId, orderId) => {
           model: db.orderImage,
           attributes: ['orderImageId', 'orderImageURL']
         },
+        // {
+        //   model: db.applicant
+        // },
         {
           model: db.user,
           as: 'deliverInfo',
-          attributes: ['name', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
+          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
         }
       ]
     })
@@ -128,16 +131,22 @@ const readMyOneOrder = async (userId, orderId) => {
 };
 
 const updateMyOrderDeliver = async (orderId, deliverId) => {
-  await db.applicant.update({ applyStatus: 'chosen' }, { where: { orderId: orderId, userId: deliverId } });
+  await db.applicant.update({ applyStatus: 'chosen' }, { where: { orderId, userId: deliverId } });
   return await db.order
-    .update({ deliverId: deliverId, deliverStatus: 1 }, { where: { orderId: orderId }, silent: true })
+    .update({ deliverId, deliverStatus: 1 }, { where: { orderId }, silent: true })
     .catch(err => console.error(err));
 };
+
+const deleteMyOrder = async (userId, orderId) => {
+  return db.order.destroy({ where: { orderId, hostId: userId } }).catch(err => console.error(err));
+};
+
 module.exports = {
   createOrder,
   readAllOrders,
   readOneOrder,
   readMyOrders,
   readMyOneOrder,
-  updateMyOrderDeliver
+  updateMyOrderDeliver,
+  deleteMyOrder
 };

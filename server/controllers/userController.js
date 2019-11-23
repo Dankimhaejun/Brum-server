@@ -23,7 +23,11 @@ const updateUserImage = async (req, res, next) => {
     const inputUserImage = await updateImage(userId, image);
     // 이미지가 삽입되면 [1] , 이미지 삽입이 실패하면 [0]이 뜨기 대문에 [1]로 비교
     if (inputUserImage[0] === 1) {
-      res.json(vroomRes(true, true, '업로드가 성공했습니다.', null));
+      res.json(
+        vroomRes(true, true, '업로드가 성공했습니다.', {
+          imageUrl: req.file.location
+        })
+      );
     } else {
       res.json(vroomRes(false, true, '업로드가 실패했습니다.', null));
     }

@@ -1,6 +1,6 @@
 import { vroomRes } from '../middlewares/vroomRes';
 import { readUserInfo } from '../models/userModel';
-import { readMyOrders, readMyOneOrder, updateMyOrderDeliver } from '../models/orderModel';
+import { readMyOrders, readMyOneOrder, updateMyOrderDeliver, deleteMyOrder } from '../models/orderModel';
 import { readApplicants } from '../models/applicantModel';
 
 const getMyOrders = async (req, res, next) => {
@@ -38,6 +38,18 @@ const getMyOneOrder = async (req, res, next) => {
   }
 };
 
+const deleteMyOneOrder = async (req, res, next) => {
+  try {
+    const userId = req.decoded.id;
+    const orderId = req.params.orderId;
+    const deleteOrder = await deleteMyOrder(userId, orderId);
+    console.log('deleteOrder', deleteOrder);
+    res.json(vroomRes(true, true, '내 주문이 삭제되었습니다', deleteOrder));
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+};
 const getMyOrderApplicant = async (req, res, next) => {
   try {
     const orderId = req.params.orderId;
@@ -77,6 +89,7 @@ const putMyOrderApplicant = async (req, res, next) => {
 module.exports = {
   getMyOrders,
   getMyOneOrder,
+  deleteMyOneOrder,
   getMyOrderApplicant,
   putMyOrderApplicant
 };

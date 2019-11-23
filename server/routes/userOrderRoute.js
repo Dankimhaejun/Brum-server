@@ -5,7 +5,8 @@ import {
   getMyOrders,
   getMyOneOrder,
   getMyOrderApplicant,
-  putMyOrderApplicant
+  putMyOrderApplicant,
+  deleteMyOneOrder
 } from '../controllers/userOrderController';
 
 import { checkToken } from '../middlewares/jwt';
@@ -19,5 +20,7 @@ router.get('/:orderId', getMyOneOrder);
 router.get('/:orderId/applicant', getMyOrderApplicant);
 
 router.put('/:orderId/applicant', putMyOrderApplicant);
+
+router.delete('/:orderId', deleteMyOneOrder);
 
 module.exports = router;

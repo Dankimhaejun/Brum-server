@@ -67,14 +67,14 @@ const changePassword = async (req, res, next) => {
     const { phone, password } = req.body;
     const isUser = await checkPhone(phone);
     if (!isUser) {
-      return res.json(vroomRes(false, null, '등록된 유저가 아닙니다. 다시 확인해주세요.', null));
+      return res.json(vroomRes(false, false, '등록된 유저가 아닙니다. 다시 확인해주세요.', null));
     }
     const resultChangePassword = await updateUserPassword(phone, password);
     // 업데이트 성공시 [1]이 뜨기 때문에 [1]로 성공여부 확인
     if (resultChangePassword[0] === 1) {
-      res.json(vroomRes(true, true, '비밀번호가 변경되었습니다, 다시 로그인 해주세요.', null));
+      res.json(vroomRes(true, false, '비밀번호가 변경되었습니다, 다시 로그인 해주세요.', null));
     } else {
-      res.json(vroomRes(false, true, '비밀번호 변경 실패했습니다, 다시 시도해주세요.', null));
+      res.json(vroomRes(false, false, '비밀번호 변경 실패했습니다, 다시 시도해주세요.', null));
     }
     res.send();
   } catch (e) {

@@ -8,7 +8,7 @@ const readApplicants = async orderId => {
         {
           model: db.user,
           as: 'applicantInfo',
-          attributes: ['userId', 'phone', 'name', 'sex', 'age', 'major', 'introduction', 'image'],
+          attributes: ['userId', 'phone', 'nickname', 'sex', 'age', 'major', 'introduction', 'image'],
           include: [
             {
               model: db.mannerScore,
@@ -42,6 +42,7 @@ const readUserApply = async (orderId, userId) => {
 };
 
 const updateOrderApply = async (orderId, userId, bidPrice, applyComment) => {
+  console.log('bidPrice, applyComment', bidPrice, applyComment);
   return await db.applicant
     .update({ bidPrice, applyComment }, { where: { orderId, userId } })
     .catch(err => console.error(err));
