@@ -46,7 +46,7 @@ const putMyOneOrder = async (req, res, next) => {
     body.hostId = hostId;
     body.orderId = orderId;
     const updatedOrder = await updateMyOrder(body);
-    return res.json(vroomRes(true, true, '주문이 업데이트 되었습니다. 업데이트 내용은 아래와 같습니다', { body }));
+    res.json(vroomRes(true, true, '주문이 업데이트 되었습니다. 업데이트 내용은 아래와 같습니다', { body }));
   } catch (e) {
     console.error(e);
     next(e);
