@@ -1,13 +1,14 @@
 const db = require('../../database/models');
 
 const createOrder = async body => {
-  const { title, hostId, departures, arrivals, desiredArrivalTime, details, price, isPrice } = body;
+  const { title, hostId, departures, arrivals, category, desiredArrivalTime, details, price, isPrice } = body;
   return db.order
     .create({
       title,
       hostId,
       departures,
       arrivals,
+      category,
       desiredArrivalTime,
       details,
       price,
@@ -53,7 +54,13 @@ const readOneOrder = async orderId => {
         {
           model: db.user,
           as: 'hostInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
+          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image'],
+          include: [
+            {
+              model: db.orderImage,
+              attributes: ['orderImageId', 'orderImageURL']
+            }
+          ]
         },
         {
           model: db.applicant,
