@@ -54,7 +54,14 @@ const readOneOrder = async orderId => {
         {
           model: db.user,
           as: 'hostInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
+          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image'],
+          include: [
+            {
+              model: db.mannerScore,
+              as: 'getScore',
+              attributes: [[db.sequelize.fn('avg', db.sequelize.col('score')), 'rateAvg']]
+            }
+          ]
         },
         {
           model: db.applicant,
