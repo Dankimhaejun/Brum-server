@@ -1,7 +1,7 @@
 import { vroomRes } from '../middlewares/vroomRes';
 import { createOrder, readAllOrders, readAllOrdersByCampus, readOneOrder } from '../models/orderModel';
 import { createOrderImages } from '../models/orderImageModel';
-import { createOrderApply, readUserApply, updateOrderApply, deleteMyOrderApply } from '../models/applicantModel';
+import { createOrderApply, readUserApplyOrNot, updateOrderApply, deleteMyOrderApply } from '../models/applicantModel';
 
 const getOrders = async (req, res, next) => {
   try {
@@ -96,7 +96,7 @@ const postOrderApply = async (req, res, next) => {
     const userId = req.decoded.id;
     const orderId = req.params.orderId;
     const { bidPrice, applyComment } = req.body;
-    const checkApply = await readUserApply(orderId, userId);
+    const checkApply = await readUserApplyOrNot(orderId, userId);
     if (checkApply === null) {
       const postApply = await createOrderApply(orderId, userId, bidPrice, applyComment);
       res.json(

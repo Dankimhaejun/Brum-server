@@ -6,7 +6,7 @@ module.exports = {
       {
         orderId: 1,
         views: 0,
-        hostId: 1,
+        hostId: 2,
         campus: 'hanyang',
         title: '한양대 공학관 -> 우리집으로 무거운 물건좀 옮겨주세요',
         departures: '한양대 공학관',
@@ -16,7 +16,7 @@ module.exports = {
         details: '집으로 보내주세요!!',
         price: '10000',
         isPrice: true,
-        deliverId: 2,
+        deliverId: 3,
         orderStatus: 0,
         actualArrivalTime: null,
         createdAt: '2019-11-23 00:00:00',
@@ -25,7 +25,7 @@ module.exports = {
       {
         orderId: 2,
         views: 0,
-        hostId: 2,
+        hostId: 3,
         campus: 'hanyang',
         title: '한양대 인문학과 2층 화장실 휴지좀',
         departures: null,
@@ -44,7 +44,7 @@ module.exports = {
       {
         orderId: 3,
         views: 0,
-        hostId: 1,
+        hostId: 2,
         campus: 'hanyang',
         title: '한양대 나나서점에서 책 사주실분',
         departures: '나나서점',
@@ -63,7 +63,7 @@ module.exports = {
       {
         orderId: 4,
         views: 0,
-        hostId: 4,
+        hostId: 5,
         campus: 'hanyang',
         title: '한양대 공학관 -> 독일로 옮겨주세요',
         departures: '한양대 공학관',

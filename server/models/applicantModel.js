@@ -8,7 +8,7 @@ const readApplicants = async orderId => {
         {
           model: db.user,
           as: 'applicantInfo',
-          attributes: ['userId', 'phone', 'nickname', 'sex', 'age', 'major', 'introduction', 'image'],
+          attributes: ['userId', 'phone', 'nickname', 'campus', 'sex', 'age', 'major', 'introduction', 'image'],
           include: [
             {
               model: db.mannerScore,
@@ -37,7 +37,7 @@ const createOrderApply = async (orderId, userId, bidPrice, applyComment) => {
     .catch(err => console.error(err));
 };
 
-const readUserApply = async (orderId, userId) => {
+const readUserApplyOrNot = async (orderId, userId) => {
   return await db.applicant.findOne({ where: { orderId, userId } }).catch(err => console.error(err));
 };
 
@@ -54,7 +54,7 @@ const deleteMyOrderApply = async (orderId, userId) => {
 module.exports = {
   createOrderApply,
   readApplicants,
-  readUserApply,
+  readUserApplyOrNot,
   updateOrderApply,
   deleteMyOrderApply
 };

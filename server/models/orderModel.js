@@ -43,27 +43,25 @@ const readAllOrders = async () => {
 
 const readAllOrdersByCampus = async campus => {
   return await db.order
-    .findAll(
-      { where: { campus } },
-      {
-        order: [['orderId', 'ASC']],
-        include: [
-          {
-            model: db.orderImage,
-            attributes: ['orderImageId', 'orderImageURL']
-          },
-          {
-            model: db.user,
-            as: 'hostInfo',
-            attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
-          },
-          {
-            model: db.applicant,
-            attributes: ['applicantId']
-          }
-        ]
-      }
-    )
+    .findAll({
+      where: { campus },
+      order: [['orderId', 'ASC']],
+      include: [
+        {
+          model: db.orderImage,
+          attributes: ['orderImageId', 'orderImageURL']
+        },
+        {
+          model: db.user,
+          as: 'hostInfo',
+          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
+        },
+        {
+          model: db.applicant,
+          attributes: ['applicantId']
+        }
+      ]
+    })
     .catch(err => console.error(err));
 };
 

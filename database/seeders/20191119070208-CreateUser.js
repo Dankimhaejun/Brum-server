@@ -5,6 +5,22 @@ module.exports = {
     return queryInterface.bulkInsert('user', [
       {
         userId: 1,
+        phone: '00000000000',
+        password: '116ad3f158dc9625097df51fc5b607a1d70993162a8f18d3bb3c9ef94d325002',
+        nickname: 'Admin',
+        sex: 'Admin',
+        age: 'Admin',
+        campus: 'Admin',
+        major: 'Admin',
+        introduction: 'Admin',
+        image: 'https://vroom-database.s3.ap-northeast-2.amazonaws.com/userImage/default',
+        agreementAd: false,
+        isAdmin: true,
+        createdAt: '2019-11-23 00:00:00',
+        updatedAt: '2019-11-23 00:00:00'
+      },
+      {
+        userId: 2,
         phone: '01094402182',
         password: '3584d803df03c185ce793a7971c28e4b2527e06801de9acb01bd504834992bd9',
         nickname: '김조은',
@@ -20,7 +36,7 @@ module.exports = {
         updatedAt: '2019-11-23 00:00:00'
       },
       {
-        userId: 2,
+        userId: 3,
         phone: '01042926693',
         password: '116ad3f158dc9625097df51fc5b607a1d70993162a8f18d3bb3c9ef94d325002',
         nickname: '김해준',
@@ -36,7 +52,7 @@ module.exports = {
         updatedAt: '2019-11-23 00:00:00'
       },
       {
-        userId: 3,
+        userId: 4,
         phone: '01047070144',
         password: '116ad3f158dc9625097df51fc5b607a1d70993162a8f18d3bb3c9ef94d325002',
         nickname: '이영민',
@@ -52,7 +68,7 @@ module.exports = {
         updatedAt: '2019-11-23 00:00:00'
       },
       {
-        userId: 4,
+        userId: 5,
         phone: '01012341234',
         password: '116ad3f158dc9625097df51fc5b607a1d70993162a8f18d3bb3c9ef94d325002',
         nickname: '정재숙',
@@ -68,7 +84,7 @@ module.exports = {
         updatedAt: '2019-11-23 00:00:00'
       },
       {
-        userId: 5,
+        userId: 6,
         phone: '01012345678',
         password: '116ad3f158dc9625097df51fc5b607a1d70993162a8f18d3bb3c9ef94d325002',
         nickname: '서울대생',
