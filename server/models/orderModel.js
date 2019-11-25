@@ -54,13 +54,7 @@ const readOneOrder = async orderId => {
         {
           model: db.user,
           as: 'hostInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image'],
-          include: [
-            {
-              model: db.orderImage,
-              attributes: ['orderImageId', 'orderImageURL']
-            }
-          ]
+          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
         },
         {
           model: db.applicant,
