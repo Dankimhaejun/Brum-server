@@ -17,7 +17,7 @@ import { uploadOrderImages } from '../middlewares/s3';
 // getOrders는 토큰 확인 필요없음
 router.get('/', getOrders);
 
-router.get('/:campus', getAllOrdersByCampus);
+router.get('/campus/:campus', getAllOrdersByCampus);
 
 router.use('/', checkToken);
 
