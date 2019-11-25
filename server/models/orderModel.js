@@ -1,9 +1,10 @@
 const db = require('../../database/models');
 
 const createOrder = async body => {
-  const { title, hostId, departures, arrivals, category, desiredArrivalTime, details, price, isPrice } = body;
+  const { campus, title, hostId, departures, arrivals, category, desiredArrivalTime, details, price, isPrice } = body;
   return db.order
     .create({
+      campus,
       title,
       hostId,
       departures,
@@ -37,6 +38,32 @@ const readAllOrders = async () => {
         }
       ]
     })
+    .catch(err => console.error(err));
+};
+
+const readAllOrdersByCampus = async campus => {
+  return await db.order
+    .findAll(
+      { where: { campus } },
+      {
+        order: [['orderId', 'ASC']],
+        include: [
+          {
+            model: db.orderImage,
+            attributes: ['orderImageId', 'orderImageURL']
+          },
+          {
+            model: db.user,
+            as: 'hostInfo',
+            attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
+          },
+          {
+            model: db.applicant,
+            attributes: ['applicantId']
+          }
+        ]
+      }
+    )
     .catch(err => console.error(err));
 };
 
@@ -160,6 +187,7 @@ const deleteMyOrder = async (userId, orderId) => {
 module.exports = {
   createOrder,
   readAllOrders,
+  readAllOrdersByCampus,
   readOneOrder,
   readMyOrders,
   readMyOneOrder,

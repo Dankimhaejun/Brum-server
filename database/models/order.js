@@ -18,6 +18,10 @@ module.exports = function(sequelize, Datatypes) {
         type: Datatypes.INTEGER,
         allowNull: false
       },
+      campus: {
+        type: Datatypes.STRING,
+        allowNull: false
+      },
       title: {
         type: Datatypes.STRING,
         allowNull: false

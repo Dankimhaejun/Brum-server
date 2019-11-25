@@ -2,9 +2,9 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 import { vroomRes } from './vroomRes';
 
-const createToken = (id, phone) =>
+const createToken = (id, campus) =>
   new Promise((resolve, reject) => {
-    jwt.sign({ id: id, phone: phone }, process.env.JWT_SECRET, { expiresIn: '60day' }, (err, token) => {
+    jwt.sign({ id, campus }, process.env.JWT_SECRET, { expiresIn: '60day' }, (err, token) => {
       if (err) {
         console.log(err);
         reject(err);

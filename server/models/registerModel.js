@@ -9,7 +9,7 @@ const checkPhone = async phone => {
     .catch(err => console.error(err));
 };
 
-const createUser = async (phone, password, nickname, sex, agreementAd) => {
+const createUser = async (phone, password, nickname, sex, agreementAd, campus, age) => {
   const hashedPassword = hashPassword(password);
   return await db.user
     .create({
@@ -17,7 +17,10 @@ const createUser = async (phone, password, nickname, sex, agreementAd) => {
       password: hashedPassword,
       nickname,
       sex,
-      agreementAd
+      agreementAd,
+      campus,
+      age,
+      image: 'https://vroom-database.s3.ap-northeast-2.amazonaws.com/userImage/default'
     })
     .catch(err => console.error(err));
 };

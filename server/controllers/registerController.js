@@ -13,12 +13,13 @@ const main = async (req, res, next) => {
 
 const register = async (req, res, next) => {
   try {
-    const { phone, password, nickname, sex, agreementAd } = req.body;
-    const isRegister = await createUser(phone, password, nickname, sex, agreementAd);
+    const { phone, password, nickname, sex, agreementAd, campus, age } = req.body;
+    console.log('req.body', req.body);
+    const isRegister = await createUser(phone, password, nickname, sex, agreementAd, campus, age);
     if (isRegister.dataValues) {
       const userId = isRegister.dataValues.userId;
-      const userPhone = isRegister.dataValues.phone;
-      const token = await createToken(userId, userPhone);
+      const campus = isRegister.dataValues.campus;
+      const token = await createToken(userId, campus);
       res.json(
         vroomRes(true, token, '등록이 완료되었으며, token에 토큰이 담겨있습니다. asyncStorage로 옮겨주세요', null)
       );
@@ -53,8 +54,8 @@ const login = async (req, res, next) => {
       return;
     }
     const userId = isLogin.dataValues.userId;
-    const userPhone = isLogin.dataValues.phone;
-    const token = await createToken(userId, userPhone);
+    const campus = isLogin.dataValues.campus;
+    const token = await createToken(userId, campus);
     res.json(vroomRes(true, token, '로그인이 되었습니다. token에 토큰이 발급되었으니 storage로 옮겨주세요', null));
   } catch (e) {
     console.error(e);

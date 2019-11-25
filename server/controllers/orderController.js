@@ -1,5 +1,5 @@
 import { vroomRes } from '../middlewares/vroomRes';
-import { createOrder, readAllOrders, readOneOrder } from '../models/orderModel';
+import { createOrder, readAllOrders, readAllOrdersByCampus, readOneOrder } from '../models/orderModel';
 import { createOrderImages } from '../models/orderImageModel';
 import { createOrderApply, readUserApply, updateOrderApply, deleteMyOrderApply } from '../models/applicantModel';
 
@@ -18,7 +18,27 @@ const getOrders = async (req, res, next) => {
     );
   } catch (e) {
     console.error(e);
-    next(e);
+    await next(e);
+  }
+};
+
+const getAllOrdersByCampus = async (req, res, next) => {
+  try {
+    const campus = req.params.campus;
+    const getOrdersByCampus = await readAllOrdersByCampus(campus);
+    res.json(
+      vroomRes(
+        true,
+        true,
+        '캠퍼스와 일치한 전체 주문 내역을 배열형태로 제공합니다. hostInfo는 주문한 사람의 정보를 나타내고, applicants안에 있는 배열은 현재 지원자의 수를 나타냅니다. (카운트 함수를 사용하니 평균 구할때와 같은 오류가 발생하여 배열로 보내드리니, length로 지원자 현황 파악해주시면 감사하겠습니다!)',
+        {
+          orders: getOrdersByCampus
+        }
+      )
+    );
+  } catch (e) {
+    console.error(e);
+    await next(e);
   }
 };
 
@@ -37,16 +57,19 @@ const getIdOrder = async (req, res, next) => {
     );
   } catch (e) {
     console.error(e);
-    next(e);
+    await next(e);
   }
 };
 
 const postOrder = async (req, res, next) => {
   try {
     const hostId = req.decoded.id;
+    const campus = req.decoded.campus;
     const body = req.body;
     const filesArray = req.files;
+    console.log('body', body), console.log('req.files', req.files);
     body.hostId = hostId;
+    body.campus = campus;
     const newOrder = await createOrder(body);
     const orderId = newOrder.dataValues.orderId;
     if (filesArray.length) {
@@ -64,7 +87,7 @@ const postOrder = async (req, res, next) => {
     );
   } catch (e) {
     console.error(e);
-    next(e);
+    await next(e);
   }
 };
 
@@ -89,7 +112,7 @@ const postOrderApply = async (req, res, next) => {
     }
   } catch (e) {
     console.error(e);
-    next(e);
+    await next(e);
   }
 };
 
@@ -110,7 +133,7 @@ const putOrderApply = async (req, res, next) => {
     );
   } catch (e) {
     console.error(e);
-    next(e);
+    await next(e);
   }
 };
 
@@ -130,13 +153,14 @@ const deleteOrderApply = async (req, res, next) => {
     );
   } catch (e) {
     console.error(e);
-    next(e);
+    await next(e);
   }
 };
 
 module.exports = {
   getOrders,
   getIdOrder,
+  getAllOrdersByCampus,
   postOrder,
   postOrderApply,
   putOrderApply,
