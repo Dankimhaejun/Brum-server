@@ -172,6 +172,8 @@ const updateMyOrder = async body => {
 };
 
 const updateMyOrderDeliver = async (orderId, deliverId) => {
+  console.log('deliverId', deliverId);
+  console.log('orderId', orderId);
   await db.applicant.update({ applyStatus: 'chosen' }, { where: { orderId, userId: deliverId } });
   return await db.order
     .update({ deliverId, deliverStatus: 1 }, { where: { orderId }, silent: true })
