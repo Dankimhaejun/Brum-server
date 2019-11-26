@@ -1,7 +1,7 @@
 const db = require('../../database/models');
 
 const createChatDeleteStatusAsFalse = async (orderId, userId) => {
-  db.chatDeleted.create({
+  await db.chatDeleted.create({
     orderId,
     userId
   });

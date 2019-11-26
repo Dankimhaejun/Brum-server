@@ -20,11 +20,11 @@ const readUserInfo = async userId => {
 };
 
 const updateImage = async (userId, image) => {
-  return db.user.update({ image }, { where: { userId } }).catch(err => console.error(err));
+  return await db.user.update({ image }, { where: { userId } }).catch(err => console.error(err));
 };
 
 const updateCampus = async (userId, campus, major) => {
-  return db.user.update({ campus, major }, { where: { userId } }).catch(err => console.error(err));
+  return await db.user.update({ campus, major }, { where: { userId } }).catch(err => console.error(err));
 };
 module.exports = {
   readUserInfo,

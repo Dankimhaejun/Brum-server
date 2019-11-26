@@ -2,7 +2,7 @@ const db = require('../../database/models');
 
 const createOrder = async body => {
   const { campus, title, hostId, departures, arrivals, category, desiredArrivalTime, details, price, isPrice } = body;
-  return db.order
+  return await db.order
     .create({
       campus,
       title,
@@ -98,7 +98,7 @@ const readOneOrder = async orderId => {
 };
 
 const readMyOrders = async userId => {
-  return db.order
+  return await db.order
     .findAll({
       where: { hostId: userId },
       include: [
@@ -142,7 +142,7 @@ const readMyOrders = async userId => {
 };
 
 const readMyOneOrder = async (userId, orderId) => {
-  return db.order
+  return await db.order
     .findOne({
       where: { hostId: userId, orderId: orderId },
       include: [
@@ -179,7 +179,7 @@ const updateMyOrderDeliver = async (orderId, deliverId) => {
 };
 
 const deleteMyOrder = async (userId, orderId) => {
-  return db.order.destroy({ where: { orderId, hostId: userId } }).catch(err => console.error(err));
+  return await db.order.destroy({ where: { orderId, hostId: userId } }).catch(err => console.error(err));
 };
 
 module.exports = {
