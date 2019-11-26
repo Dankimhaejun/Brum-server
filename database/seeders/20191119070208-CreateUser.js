@@ -42,7 +42,7 @@ module.exports = {
         nickname: '김해준',
         sex: 'Male',
         age: '1989',
-        campus: 'snu',
+        campus: 'hanyang',
         major: 'vroom backend',
         introduction: '안녕하세요',
         image: 'https://vroom-database.s3.ap-northeast-2.amazonaws.com/userImage/default',

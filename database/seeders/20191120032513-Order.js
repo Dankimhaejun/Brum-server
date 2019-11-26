@@ -19,8 +19,8 @@ module.exports = {
         deliverId: 3,
         orderStatus: 0,
         actualArrivalTime: null,
-        createdAt: '2019-11-23 00:00:00',
-        updatedAt: '2019-11-23 00:00:00'
+        createdAt: '2019-11-26 09:00:00',
+        updatedAt: '2019-11-26 09:00:00'
       },
       {
         orderId: 2,
@@ -35,11 +35,11 @@ module.exports = {
         details: '바로 오세요 지금 바로!!!!!',
         price: null,
         isPrice: false,
-        deliverId: null,
+        deliverId: 4,
         orderStatus: 0,
         actualArrivalTime: null,
-        createdAt: '2019-11-23 00:00:00',
-        updatedAt: '2019-11-23 00:00:00'
+        createdAt: '2019-11-26 09:00:00',
+        updatedAt: '2019-11-26 09:00:00'
       },
       {
         orderId: 3,
@@ -57,8 +57,8 @@ module.exports = {
         deliverId: null,
         orderStatus: 0,
         actualArrivalTime: null,
-        createdAt: '2019-11-23 00:00:00',
-        updatedAt: '2019-11-23 00:00:00'
+        createdAt: '2019-11-26 09:20:00',
+        updatedAt: '2019-11-26 09:20:00'
       },
       {
         orderId: 4,
@@ -73,11 +73,30 @@ module.exports = {
         details: '독일로 보내주세요!!',
         price: '10000',
         isPrice: true,
+        deliverId: 3,
+        orderStatus: 0,
+        actualArrivalTime: null,
+        createdAt: '2019-11-26 00:00:00',
+        updatedAt: '2019-11-26 00:00:00'
+      },
+      {
+        orderId: 5,
+        views: 0,
+        hostId: 6,
+        campus: 'snu',
+        title: '서울대 -> 한양대 공학관 옮겨주세요',
+        departures: '서울대',
+        arrivals: '한양대 공학관',
+        category: '기타',
+        desiredArrivalTime: '2019-12-24 00:00:00',
+        details: '한양대공학관으로 보내주세요!!',
+        price: '9000',
+        isPrice: true,
         deliverId: null,
         orderStatus: 0,
         actualArrivalTime: null,
-        createdAt: '2019-11-23 00:00:00',
-        updatedAt: '2019-11-23 00:00:00'
+        createdAt: '2019-11-26 00:00:00',
+        updatedAt: '2019-11-26 00:00:00'
       }
     ]);
     /*

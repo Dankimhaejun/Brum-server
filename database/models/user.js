@@ -65,7 +65,6 @@ module.exports = function(sequelize, Datatypes) {
     user.hasMany(db.mannerScore, { as: 'evaluator', foreignKey: 'evaluatorId' });
     user.hasMany(db.mannerScore, { as: 'getScore', foreignKey: 'receiverId' });
     user.hasMany(db.chat, { foreignKey: 'userId' });
-    user.hasMany(db.chatDeleted, { foreignKey: 'userId' });
   };
   return user;
 };

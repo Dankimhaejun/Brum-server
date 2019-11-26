@@ -1,7 +1,7 @@
 const db = require('../../database/models');
 
 const readApplicants = async orderId => {
-  return db.applicant
+  return await db.applicant
     .findAll({
       where: { orderId: orderId },
       include: [

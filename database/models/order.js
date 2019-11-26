@@ -73,7 +73,6 @@ module.exports = function(sequelize, Datatypes) {
     order.belongsTo(db.user, { as: 'hostInfo', foreignKey: 'hostId' });
     order.belongsTo(db.user, { as: 'deliverInfo', foreignKey: 'deliverId' });
     order.hasMany(db.chat, { foreignKey: 'orderId' });
-    order.hasMany(db.chatDeleted, { foreignKey: 'orderId' });
   };
   return order;
 };

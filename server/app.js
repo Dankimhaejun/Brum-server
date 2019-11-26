@@ -12,6 +12,7 @@ const registerRouter = require('./routes/registerRoute');
 const userRouter = require('./routes/userRoute');
 const orderRouter = require('./routes/orderRoute');
 const userOrderRouter = require('./routes/userOrderRoute');
+const userChatRouter = require('./routes/userChatRoute');
 
 const app = express();
 
@@ -45,6 +46,7 @@ app.use('/', registerRouter);
 app.use('/order', orderRouter);
 app.use('/user', userRouter);
 app.use('/user/order', userOrderRouter);
+app.use('/user/chat', userChatRouter);
 
 app.use('/user', express.static('public'));
 
