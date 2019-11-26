@@ -85,7 +85,7 @@ const getMyOrderApplicant = async (req, res, next) => {
 const putMyOrderApplicant = async (req, res, next) => {
   try {
     const orderId = req.params.orderId;
-    const deliverId = Number(req.body.deliverId);
+    const deliverId = req.body.deliverId;
     const putApplicant = await updateMyOrderDeliver(orderId, deliverId); // 배달자 지정해줌
     const createChat = await createChatAsAdmin(orderId); // 채팅방 생성해주는 모델
 

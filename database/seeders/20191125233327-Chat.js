@@ -61,7 +61,7 @@ module.exports = {
       },
       {
         chatId: 8,
-        orderId: 4,
+        orderId: 1,
         userId: 5,
         chatDetail: '나오지마라',
         createdAt: '2019-11-23 00:07:00',
@@ -89,14 +89,6 @@ module.exports = {
         userId: 5,
         chatDetail: '안나와야대',
         createdAt: '2019-11-23 00:10:00',
-        updatedAt: '2019-11-23 00:00:00'
-      },
-      {
-        chatId: 12,
-        orderId: 4,
-        userId: 5,
-        chatDetail: '응응',
-        createdAt: '2019-11-23 00:11:00',
         updatedAt: '2019-11-23 00:00:00'
       }
     ]);

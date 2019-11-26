@@ -11,7 +11,7 @@ import {
   deleteOrderApply,
   getAllOrdersByCampus
 } from '../controllers/orderController';
-import { uploadOrderImages } from '../middlewares/s3';
+import { uploadOrderThumbnail, uploadOrderImages } from '../middlewares/s3';
 /* GET home page. */
 
 // getOrders는 토큰 확인 필요없음
@@ -23,7 +23,7 @@ router.use('/', checkToken);
 
 router.get('/:orderId', getIdOrder);
 
-router.post('/', uploadOrderImages.array('file'), postOrder);
+router.post('/', uploadOrderThumbnail.single('thumbnail'), uploadOrderImages.array('file'), postOrder);
 
 router.post('/:orderId/apply', postOrderApply);
 
