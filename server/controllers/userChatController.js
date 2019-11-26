@@ -1,5 +1,5 @@
 import { vroomRes } from '../middlewares/vroomRes';
-import { readUserAllChatsByUserId } from '../models/chatModel';
+import { readUserAllChatsByUserId, readOneChatDetailByOrderId } from '../models/chatModel';
 
 const getAllChatsByUserId = async (req, res, next) => {
   try {
@@ -12,6 +12,25 @@ const getAllChatsByUserId = async (req, res, next) => {
   }
 };
 
+const getChatDetailByOrderId = async (req, res, next) => {
+  try {
+    const userId = req.decoded.id;
+    const orderId = req.params.orderId;
+    const getChatInfoByOrderId = await readOneChatDetailByOrderId(orderId);
+    res.json(
+      vroomRes(
+        true,
+        true,
+        '특정 orderId의 채팅정보를 제공합니다. 객체에 제공되는 userId는 현재 접속해있는 유저의 id입니다. 채팅에서 userId를 확인하여 나와 상대방을 구분해주세요',
+        { userId, chatDetail: getChatInfoByOrderId }
+      )
+    );
+  } catch (e) {
+    next(e);
+  }
+};
+
 module.exports = {
-  getAllChatsByUserId
+  getAllChatsByUserId,
+  getChatDetailByOrderId
 };
