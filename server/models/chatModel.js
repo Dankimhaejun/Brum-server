@@ -27,7 +27,7 @@ const readUserAllChatsByUserId = async userId => {
           as: 'deliverInfo',
           attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
         },
-        { model: db.chat, attributes: ['chatId'] }
+        { model: db.chat /* attributes: ['chatId'] */ }
       ]
     })
     .catch(err => console.error(err));

@@ -84,13 +84,13 @@ const readOneOrder = async orderId => {
             {
               model: db.mannerScore,
               as: 'getScore',
-              attributes: [[db.sequelize.fn('avg', db.sequelize.col('score')), 'rateAvg']]
+              attributes: ['score']
             }
           ]
         },
         {
           model: db.applicant,
-          attributes: ['userId', 'bidPrice', 'applyComment', 'createdAt']
+          attributes: ['userId']
         }
       ]
     })
