@@ -32,7 +32,28 @@ const readUserAllChatsByUserId = async userId => {
     })
     .catch(err => console.error(err));
 };
+
+const readOneChatDetailByOrderId = async orderId => {
+  return await db.order.findOne({
+    where: { orderId },
+    include: [
+      {
+        model: db.user,
+        as: 'hostInfo',
+        attributes: ['userId', 'nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
+      },
+      {
+        model: db.user,
+        as: 'deliverInfo',
+        attributes: ['userId', 'nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
+      },
+      { model: db.chat }
+    ]
+  });
+};
+
 module.exports = {
   createChatAsAdmin,
-  readUserAllChatsByUserId
+  readUserAllChatsByUserId,
+  readOneChatDetailByOrderId
 };
