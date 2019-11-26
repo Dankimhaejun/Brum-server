@@ -93,7 +93,7 @@ const putMyOrderApplicant = async (req, res, next) => {
 
     console.log('putApplicant', putApplicant);
     const deliverInfo = await readUserInfo(deliverId);
-    res.json(
+    return res.json(
       vroomRes(
         true,
         true,

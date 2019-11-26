@@ -59,8 +59,8 @@ module.exports = {
       {
         applicantId: 7,
         orderId: 3,
-        userId: 5,
-        bidPrice: '10000',
+        userId: 6,
+        bidPrice: '20000',
         applyComment: '비싼만큼 확실하게!!!!!!!!!!!!',
         createdAt: '2019-11-23 00:00:00',
         updatedAt: '2019-11-23 00:00:00'
