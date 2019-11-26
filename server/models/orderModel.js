@@ -1,15 +1,36 @@
 const db = require('../../database/models');
 
 const createOrder = async body => {
-  const { campus, title, hostId, departures, arrivals, category, desiredArrivalTime, details, price, isPrice } = body;
+  const {
+    campus,
+    title,
+    hostId,
+    departures,
+    depLat,
+    depLng,
+    arrivals,
+    arrLat,
+    arrLng,
+    category,
+    thumbnailURL,
+    desiredArrivalTime,
+    details,
+    price,
+    isPrice
+  } = body;
   return await db.order
     .create({
       campus,
       title,
       hostId,
       departures,
+      depLat,
+      depLng,
       arrivals,
+      arrLat,
+      arrLng,
       category,
+      thumbnailURL,
       desiredArrivalTime,
       details,
       price,
@@ -176,7 +197,7 @@ const updateMyOrderDeliver = async (orderId, deliverId) => {
   console.log('orderId', orderId);
   await db.applicant.update({ applyStatus: 'chosen' }, { where: { orderId, userId: deliverId } });
   return await db.order
-    .update({ deliverId, deliverStatus: 1 }, { where: { orderId }, silent: true })
+    .update({ deliverId, orderStatus: 1 }, { where: { orderId }, silent: true })
     .catch(err => console.error(err));
 };
 

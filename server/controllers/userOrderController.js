@@ -85,13 +85,10 @@ const getMyOrderApplicant = async (req, res, next) => {
 const putMyOrderApplicant = async (req, res, next) => {
   try {
     const orderId = req.params.orderId;
-    const deliverId = req.body.deliverId;
-    console.log('orderId', orderId);
-    console.log('deliverId', deliverId);
+    let deliverId = req.body.deliverId;
+    deliverId = String(deliverId);
     const putApplicant = await updateMyOrderDeliver(orderId, deliverId); // 배달자 지정해줌
     const createChat = await createChatAsAdmin(orderId); // 채팅방 생성해주는 모델
-
-    console.log('putApplicant', putApplicant);
     const deliverInfo = await readUserInfo(deliverId);
     return res.json(
       vroomRes(
