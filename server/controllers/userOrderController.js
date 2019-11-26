@@ -3,7 +3,6 @@ import { readUserInfo } from '../models/userModel';
 import { readMyOrders, readMyOneOrder, updateMyOrderDeliver, updateMyOrder, deleteMyOrder } from '../models/orderModel';
 import { readApplicants } from '../models/applicantModel';
 import { createChatAsAdmin } from '../models/chatModel';
-import { createChatDeleteStatusAsFalse } from '../models/chatDeletedModel';
 
 const getMyOrders = async (req, res, next) => {
   try {
@@ -85,14 +84,10 @@ const getMyOrderApplicant = async (req, res, next) => {
 
 const putMyOrderApplicant = async (req, res, next) => {
   try {
-    const userId = req.decoded.id;
     const orderId = req.params.orderId;
     const deliverId = Number(req.body.deliverId);
     const putApplicant = await updateMyOrderDeliver(orderId, deliverId); // 배달자 지정해줌
     const createChat = await createChatAsAdmin(orderId); // 채팅방 생성해주는 모델
-    const createChatDeletedStatusAsHost = await createChatDeleteStatusAsFalse(orderId, userId);
-    const createChatDeletedStatusAsDeliver = await createChatDeleteStatusAsFalse(orderId, deliverId);
-    // 유저의 채팅방 삭제여부를 관리해주는 2개의 함수
 
     console.log('putApplicant', putApplicant);
     const deliverInfo = await readUserInfo(deliverId);

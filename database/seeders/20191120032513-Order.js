@@ -73,7 +73,7 @@ module.exports = {
         details: '독일로 보내주세요!!',
         price: '10000',
         isPrice: true,
-        deliverId: 3,
+        deliverId: null,
         orderStatus: 0,
         actualArrivalTime: null,
         createdAt: '2019-11-26 00:00:00',

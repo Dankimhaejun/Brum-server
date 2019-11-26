@@ -29,11 +29,27 @@ module.exports = function(sequelize, Datatypes) {
       departures: {
         type: Datatypes.STRING
       },
+      depLat: {
+        type: Datatypes.STRING
+      },
+      depLng: {
+        type: Datatypes.STRING
+      },
       arrivals: {
         type: Datatypes.STRING,
         allowNull: false
       },
+      arrLat: {
+        type: Datatypes.STRING
+      },
+      arrLng: {
+        type: Datatypes.STRING
+      },
       category: {
+        type: Datatypes.STRING,
+        allowNull: false
+      },
+      thumbnailURL: {
         type: Datatypes.STRING,
         allowNull: false
       },

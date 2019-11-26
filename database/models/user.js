@@ -44,6 +44,10 @@ module.exports = function(sequelize, Datatypes) {
       image: {
         type: Datatypes.STRING
       },
+      university: {
+        type: Datatypes.STRING,
+        defaultValue: null
+      },
       agreementAd: {
         type: Datatypes.BOOLEAN,
         defaultValue: false

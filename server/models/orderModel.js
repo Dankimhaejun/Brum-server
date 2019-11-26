@@ -30,7 +30,7 @@ const readAllOrders = async () => {
         {
           model: db.user,
           as: 'hostInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
+          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image']
         },
         {
           model: db.applicant,
@@ -54,7 +54,7 @@ const readAllOrdersByCampus = async campus => {
         {
           model: db.user,
           as: 'hostInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
+          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image']
         },
         {
           model: db.applicant,
@@ -79,7 +79,7 @@ const readOneOrder = async orderId => {
         {
           model: db.user,
           as: 'hostInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image'],
+          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image'],
           include: [
             {
               model: db.mannerScore,
@@ -113,7 +113,7 @@ const readMyOrders = async userId => {
             {
               model: db.user,
               as: 'applicantInfo',
-              attributes: ['userId', 'phone', 'nickname', 'sex', 'age', 'major', 'introduction', 'image'],
+              attributes: ['userId', 'phone', 'nickname', 'sex', 'age', 'major', 'introduction', 'university', 'image'],
               include: [
                 {
                   model: db.mannerScore,
@@ -131,7 +131,7 @@ const readMyOrders = async userId => {
         {
           model: db.user,
           as: 'deliverInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
+          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image']
           /*   include: [
             {}
           ] */
@@ -156,7 +156,7 @@ const readMyOneOrder = async (userId, orderId) => {
         {
           model: db.user,
           as: 'deliverInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
+          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image']
         }
       ]
     })

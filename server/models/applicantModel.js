@@ -8,7 +8,18 @@ const readApplicants = async orderId => {
         {
           model: db.user,
           as: 'applicantInfo',
-          attributes: ['userId', 'phone', 'nickname', 'campus', 'sex', 'age', 'major', 'introduction', 'image'],
+          attributes: [
+            'userId',
+            'phone',
+            'nickname',
+            'campus',
+            'sex',
+            'age',
+            'major',
+            'university',
+            'introduction',
+            'image'
+          ],
           include: [
             {
               model: db.mannerScore,
