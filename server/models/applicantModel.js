@@ -62,7 +62,7 @@ const deleteMyOrderApply = async (orderId, userId) => {
 };
 
 const deleteApplicants = async orderId => {
-  return await db.applicant.destroy({ where: orderId }).catch(err => err);
+  return await db.applicant.destroy({ where: { orderId } }).catch(err => err);
 };
 
 module.exports = {
