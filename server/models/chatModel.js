@@ -8,7 +8,7 @@ const createChatAsAdmin = async orderId => {
       userId: 1,
       chatDetail: '채팅방이 생성되었습니다.'
     })
-    .catch(err => err);
+    .catch(err => console.error(err));
 };
 
 const readUserAllChatsByUserId = async userId => {
@@ -30,7 +30,7 @@ const readUserAllChatsByUserId = async userId => {
         { model: db.chat /* attributes: ['chatId'] */ }
       ]
     })
-    .catch(err => err);
+    .catch(err => console.error(err));
 };
 
 const readOneChatDetailByOrderId = async orderId => {
@@ -51,7 +51,7 @@ const readOneChatDetailByOrderId = async orderId => {
         { model: db.chat }
       ]
     })
-    .catch(err => err);
+    .catch(err => console.error(err));
 };
 
 module.exports = {

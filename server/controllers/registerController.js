@@ -1,7 +1,7 @@
 import { handleLogin, checkPhone, createUser, updateUserPassword } from '../models/registerModel';
 import { vroomRes } from '../middlewares/vroomRes';
 import { createToken } from '../middlewares/jwt';
-import { chatKit } from '../middlewares/chatKit';
+import { firebaseSDK } from '../middlewares/firebase';
 
 const main = async (req, res, next) => {
   try {
@@ -15,22 +15,36 @@ const main = async (req, res, next) => {
 const register = async (req, res, next) => {
   try {
     const { phone, password, nickname, sex, agreementAd, campus, age } = req.body;
-    console.log('req.body', req.body);
     const isRegister = await createUser(phone, password, nickname, sex, agreementAd, campus, age);
     if (isRegister.dataValues) {
       const userId = isRegister.dataValues.userId;
       const campus = isRegister.dataValues.campus;
       const token = await createToken(userId, campus);
-      const createChatKitUser = await chatKit
+      //////////////////
+      const firebaseRegister = await firebaseSDK
+        .auth()
         .createUser({
-          name: nickname,
-          id: phone
+          uid: userId + '', // uid는 회원의 숫자로 이용
+          email: phone + '@vroom.com', //email 도 회원 숫자로 이용하지롱
+          emailVerified: false, // 어차피 fake email 이에요
+          phoneNumber: '+82' + phone.slice(1), // 국가번호 있어야된대..
+          password: password,
+          displayName: nickname,
+          disabled: false
         })
-        .catch(err => console.error(err));
-      console.log('createChatKitUser', createChatKitUser);
+        .then(function(userRecord) {
+          // See the UserRecord reference doc for the contents of userRecord.
+          console.log('Successfully created new user:', userRecord.uid);
+          return userRecord;
+        })
+        .catch(function(error) {
+          console.log('Error creating new user:', error);
+          return error;
+        });
+      //////////////////////////////
       res.json(
         vroomRes(true, token, '등록이 완료되었으며, token에 토큰이 담겨있습니다. asyncStorage로 옮겨주세요', {
-          createChatKitUser
+          firebaseRegister
         })
       );
     }
@@ -66,7 +80,24 @@ const login = async (req, res, next) => {
     const userId = isLogin.dataValues.userId;
     const campus = isLogin.dataValues.campus;
     const token = await createToken(userId, campus);
-    res.json(vroomRes(true, token, '로그인이 되었습니다. token에 토큰이 발급되었으니 storage로 옮겨주세요', null));
+    //////////////////
+
+    // const firebaseLogin = await firebaseSDK
+    //   .auth()
+    //   .signInWithEmailAndPassword(userId + '@example.com', password)
+    //   .then(function(firebaseUser) {
+    //     return firebaseUser;
+    //   })
+    //   .catch(function(error) {
+    //     return error;
+    //   });
+
+    const firebaseLogin = await firebaseSDK.auth().getUser(userId + '');
+
+    //////////////////
+    res.json(
+      vroomRes(true, token, '로그인이 되었습니다. token에 토큰이 발급되었으니 storage로 옮겨주세요', { firebaseLogin })
+    );
   } catch (e) {
     console.error(e);
     next(e);

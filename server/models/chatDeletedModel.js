@@ -6,7 +6,7 @@ const createChatDeleteStatusAsFalse = async (orderId, userId) => {
       orderId,
       userId
     })
-    .catch(err => err);
+    .catch(err => console.error(err));
 };
 
 module.exports = {
