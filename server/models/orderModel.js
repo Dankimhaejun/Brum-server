@@ -36,7 +36,7 @@ const createOrder = async body => {
       price,
       isPrice
     })
-    .catch(err => err);
+    .catch(err => console.error(err));
 };
 
 const readAllOrders = async () => {
@@ -59,7 +59,7 @@ const readAllOrders = async () => {
         }
       ]
     })
-    .catch(err => err);
+    .catch(err => console.error(err));
 };
 
 const readAllOrdersByCampus = async campus => {
@@ -83,7 +83,7 @@ const readAllOrdersByCampus = async campus => {
         }
       ]
     })
-    .catch(err => err);
+    .catch(err => console.error(err));
 };
 
 const readOneOrder = async orderId => {
@@ -112,10 +112,11 @@ const readOneOrder = async orderId => {
         {
           model: db.applicant,
           attributes: ['userId']
-        }
+        },
+        { model: db.userLikeOrder, attributes: ['userId'] }
       ]
     })
-    .catch(err => err);
+    .catch(err => console.error(err));
 };
 
 const readMyOrders = async userId => {
@@ -140,10 +141,6 @@ const readMyOrders = async userId => {
                   model: db.mannerScore,
                   as: 'getScore',
                   attributes: ['score']
-                  // attributes: [[db.sequelize.fn('sum', db.sequelize.col('score')), 'rateAvg']],
-                  // attributes: ['score', [db.sequelize.fn('sum', db.sequelize.col('score')), 'scoreAvg']],
-                  // group: ['receiverId'],
-                  // order: [[db.sequelize.fn('AVG', db.sequelize.col('score')), 'DESC']]
                 }
               ]
             }
@@ -153,13 +150,10 @@ const readMyOrders = async userId => {
           model: db.user,
           as: 'deliverInfo',
           attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image']
-          /*   include: [
-            {}
-          ] */
         }
       ]
     })
-    .catch(err => err);
+    .catch(err => console.error(err));
 };
 
 const readMyOneOrder = async (userId, orderId) => {
@@ -181,7 +175,7 @@ const readMyOneOrder = async (userId, orderId) => {
         }
       ]
     })
-    .catch(err => err);
+    .catch(err => console.error(err));
 };
 
 const updateMyOrder = async body => {
@@ -196,11 +190,13 @@ const updateMyOrderDeliver = async (orderId, deliverId) => {
   console.log('deliverId', deliverId);
   console.log('orderId', orderId);
   await db.applicant.update({ applyStatus: 'chosen' }, { where: { orderId, userId: deliverId } });
-  return await db.order.update({ deliverId, orderStatus: 1 }, { where: { orderId }, silent: true }).catch(err => err);
+  return await db.order
+    .update({ deliverId, orderStatus: 1 }, { where: { orderId }, silent: true })
+    .catch(err => console.error(err));
 };
 
 const deleteMyOrder = async (userId, orderId) => {
-  return await db.order.destroy({ where: { orderId, hostId: userId } }).catch(err => err);
+  return await db.order.destroy({ where: { orderId, hostId: userId } }).catch(err => console.error(err));
 };
 
 module.exports = {

@@ -13,6 +13,7 @@ const userRouter = require('./routes/userRoute');
 const orderRouter = require('./routes/orderRoute');
 const userOrderRouter = require('./routes/userOrderRoute');
 const userChatRouter = require('./routes/userChatRoute');
+const userLikeOrderRouter = require('./routes/userLikeOrderRoute.js');
 
 const app = express();
 
@@ -39,8 +40,9 @@ app.use('/order', orderRouter);
 app.use('/user', userRouter);
 app.use('/user/order', userOrderRouter);
 app.use('/user/chat', userChatRouter);
+app.use('/user/like/order', userLikeOrderRouter);
 
-app.use('/user', express.static('public'));
+// app.use('/user', express.static('public'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
