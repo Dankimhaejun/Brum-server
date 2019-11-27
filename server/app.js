@@ -22,14 +22,6 @@ app.set('etag', false);
 const options = { etag: false };
 app.use(express.static('public', options));
 
-// app.all('/*', function(req, res, next) {
-//   res.header('Access-Control-Allow-Origin', req.headers.origin);
-//   res.header('Access-Control-Allow-Methods', 'POST, PUT, GET, DELETE');
-//   res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, x-access-token');
-//   res.header('Access-Control-Allow-Credentials', true);
-//   next();
-// });
-
 // Middlewares
 app.use(cors());
 app.use(cookieParser());

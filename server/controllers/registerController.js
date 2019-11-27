@@ -1,6 +1,7 @@
 import { handleLogin, checkPhone, createUser, updateUserPassword } from '../models/registerModel';
 import { vroomRes } from '../middlewares/vroomRes';
 import { createToken } from '../middlewares/jwt';
+import { chatKit } from '../middlewares/chatKit';
 
 const main = async (req, res, next) => {
   try {
@@ -20,8 +21,17 @@ const register = async (req, res, next) => {
       const userId = isRegister.dataValues.userId;
       const campus = isRegister.dataValues.campus;
       const token = await createToken(userId, campus);
+      const createChatKitUser = await chatKit
+        .createUser({
+          name: nickname,
+          id: phone
+        })
+        .catch(err => console.error(err));
+      console.log('createChatKitUser', createChatKitUser);
       res.json(
-        vroomRes(true, token, '등록이 완료되었으며, token에 토큰이 담겨있습니다. asyncStorage로 옮겨주세요', null)
+        vroomRes(true, token, '등록이 완료되었으며, token에 토큰이 담겨있습니다. asyncStorage로 옮겨주세요', {
+          createChatKitUser
+        })
       );
     }
   } catch (e) {

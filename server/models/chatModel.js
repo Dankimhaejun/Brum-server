@@ -8,7 +8,7 @@ const createChatAsAdmin = async orderId => {
       userId: 1,
       chatDetail: '채팅방이 생성되었습니다.'
     })
-    .catch(err => console.error(err));
+    .catch(err => err);
 };
 
 const readUserAllChatsByUserId = async userId => {
@@ -27,29 +27,31 @@ const readUserAllChatsByUserId = async userId => {
           as: 'deliverInfo',
           attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
         },
-        { model: db.chat, /* attributes: ['chatId'] */ }
+        { model: db.chat /* attributes: ['chatId'] */ }
       ]
     })
-    .catch(err => console.error(err));
+    .catch(err => err);
 };
 
 const readOneChatDetailByOrderId = async orderId => {
-  return await db.order.findOne({
-    where: { orderId },
-    include: [
-      {
-        model: db.user,
-        as: 'hostInfo',
-        attributes: ['userId', 'nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
-      },
-      {
-        model: db.user,
-        as: 'deliverInfo',
-        attributes: ['userId', 'nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
-      },
-      { model: db.chat }
-    ]
-  });
+  return await db.order
+    .findOne({
+      where: { orderId },
+      include: [
+        {
+          model: db.user,
+          as: 'hostInfo',
+          attributes: ['userId', 'nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
+        },
+        {
+          model: db.user,
+          as: 'deliverInfo',
+          attributes: ['userId', 'nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
+        },
+        { model: db.chat }
+      ]
+    })
+    .catch(err => err);
 };
 
 module.exports = {

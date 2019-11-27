@@ -36,7 +36,7 @@ const createOrder = async body => {
       price,
       isPrice
     })
-    .catch(err => console.error(err));
+    .catch(err => err);
 };
 
 const readAllOrders = async () => {
@@ -59,7 +59,7 @@ const readAllOrders = async () => {
         }
       ]
     })
-    .catch(err => console.error(err));
+    .catch(err => err);
 };
 
 const readAllOrdersByCampus = async campus => {
@@ -83,7 +83,7 @@ const readAllOrdersByCampus = async campus => {
         }
       ]
     })
-    .catch(err => console.error(err));
+    .catch(err => err);
 };
 
 const readOneOrder = async orderId => {
@@ -115,7 +115,7 @@ const readOneOrder = async orderId => {
         }
       ]
     })
-    .catch(err => console.error(err));
+    .catch(err => err);
 };
 
 const readMyOrders = async userId => {
@@ -159,7 +159,7 @@ const readMyOrders = async userId => {
         }
       ]
     })
-    .catch(err => console.error(err));
+    .catch(err => err);
 };
 
 const readMyOneOrder = async (userId, orderId) => {
@@ -181,7 +181,7 @@ const readMyOneOrder = async (userId, orderId) => {
         }
       ]
     })
-    .catch(err => console.error(err));
+    .catch(err => err);
 };
 
 const updateMyOrder = async body => {
@@ -196,13 +196,11 @@ const updateMyOrderDeliver = async (orderId, deliverId) => {
   console.log('deliverId', deliverId);
   console.log('orderId', orderId);
   await db.applicant.update({ applyStatus: 'chosen' }, { where: { orderId, userId: deliverId } });
-  return await db.order
-    .update({ deliverId, orderStatus: 1 }, { where: { orderId }, silent: true })
-    .catch(err => console.error(err));
+  return await db.order.update({ deliverId, orderStatus: 1 }, { where: { orderId }, silent: true }).catch(err => err);
 };
 
 const deleteMyOrder = async (userId, orderId) => {
-  return await db.order.destroy({ where: { orderId, hostId: userId } }).catch(err => console.error(err));
+  return await db.order.destroy({ where: { orderId, hostId: userId } }).catch(err => err);
 };
 
 module.exports = {

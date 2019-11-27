@@ -53,7 +53,7 @@ module.exports = {
       },
       {
         chatId: 7,
-        orderId: 3,
+        orderId: 2,
         userId: 4,
         chatDetail: '하이',
         createdAt: '2019-11-23 00:06:00',
@@ -85,7 +85,7 @@ module.exports = {
       },
       {
         chatId: 11,
-        orderId: 3,
+        orderId: 2,
         userId: 5,
         chatDetail: '안나와야대',
         createdAt: '2019-11-23 00:10:00',

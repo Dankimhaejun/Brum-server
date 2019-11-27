@@ -6,7 +6,7 @@ const checkPhone = async phone => {
     .findOne({
       where: { phone: phone }
     })
-    .catch(err => console.error(err));
+    .catch(err => err);
 };
 
 const createUser = async (phone, password, nickname, sex, agreementAd, campus, age) => {
@@ -22,7 +22,7 @@ const createUser = async (phone, password, nickname, sex, agreementAd, campus, a
       age,
       image: 'https://vroom-database.s3.ap-northeast-2.amazonaws.com/userImage/default'
     })
-    .catch(err => console.error(err));
+    .catch(err => err);
 };
 
 const handleLogin = async (phone, password) => {
@@ -31,14 +31,12 @@ const handleLogin = async (phone, password) => {
     .findOne({
       where: { phone: phone, password: hashedPassword }
     })
-    .catch(err => console.error(err));
+    .catch(err => err);
 };
 
 const updateUserPassword = async (phone, password) => {
   const hashedPassword = await hashPassword(password);
-  return await db.user
-    .update({ password: hashedPassword }, { where: { phone: phone } })
-    .catch(err => console.error(err));
+  return await db.user.update({ password: hashedPassword }, { where: { phone: phone } }).catch(err => err);
 };
 module.exports = {
   handleLogin,

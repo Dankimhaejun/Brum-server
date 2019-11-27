@@ -7,10 +7,15 @@ const createOrderImages = async (filesArray, orderId) => {
         orderId: orderId,
         orderImageURL: filesArray[i].location
       })
-      .catch(err => console.error(err));
+      .catch(err => err);
   }
   return;
 };
+
+const deleteOrderImages = async orderId => {
+  return await db.orderImage.destroy({ where: orderId }).catch(err => err);
+};
 module.exports = {
-  createOrderImages
+  createOrderImages,
+  deleteOrderImages
 };
