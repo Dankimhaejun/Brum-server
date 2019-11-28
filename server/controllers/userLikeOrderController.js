@@ -15,7 +15,9 @@ const getAllOrdersUserLike = async (req, res, next) => {
 
 const postUserLikeOrder = async (req, res, next) => {
   const userId = req.decoded.id;
-  const orderId = req.params.orderId;
+  const orderId = Number(req.params.orderId);
+  console.log('userId', userId);
+  console.log('orderId', orderId);
   const createUserLike = await createUserLikeOrder(userId, orderId);
   res.json(vroomRes(true, true, '유저가 관심을 보였습니다 내가 관심 보인 주문의 성공데이터입니다.', createUserLike));
 };
