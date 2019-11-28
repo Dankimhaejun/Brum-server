@@ -15,7 +15,7 @@ const readUserAllChatsByUserId = async userId => {
   console.log('userId', userId);
   return await db.order
     .findAll({
-      where: { [Op.or]: { hostId: userId, deliverId: userId } },
+      where: { orderStatus: 1, [Op.or]: { hostId: userId, deliverId: userId } },
       include: [
         {
           model: db.user,

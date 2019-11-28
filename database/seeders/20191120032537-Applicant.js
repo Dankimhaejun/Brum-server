@@ -64,6 +64,33 @@ module.exports = {
         applyComment: '비싼만큼 확실하게!!!!!!!!!!!!',
         createdAt: '2019-11-23 00:00:00',
         updatedAt: '2019-11-23 00:00:00'
+      },
+      {
+        applicantId: 8,
+        orderId: 6,
+        userId: 3,
+        bidPrice: '20000',
+        applyComment: '비싼만큼 확실하게!!!!!!!!!!!!',
+        createdAt: '2019-11-23 00:00:00',
+        updatedAt: '2019-11-23 00:00:00'
+      },
+      {
+        applicantId: 9,
+        orderId: 7,
+        userId: 4,
+        bidPrice: '10000',
+        applyComment: '이정도면 페이크데이터?',
+        createdAt: '2019-11-23 00:00:00',
+        updatedAt: '2019-11-23 00:00:00'
+      },
+      {
+        applicantId: 10,
+        orderId: 8,
+        userId: 5,
+        bidPrice: '5000',
+        applyComment: '독일에서 갑니다',
+        createdAt: '2019-11-23 00:00:00',
+        updatedAt: '2019-11-23 00:00:00'
       }
     ]);
   },
