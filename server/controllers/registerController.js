@@ -21,30 +21,30 @@ const register = async (req, res, next) => {
       const campus = isRegister.dataValues.campus;
       const token = await createToken(userId, campus);
       //////////////////
-      const firebaseRegister = await firebaseSDK
-        .auth()
-        .createUser({
-          uid: userId + '', // uid는 회원의 숫자로 이용
-          email: phone + '@vroom.com', //email 도 회원 숫자로 이용하지롱
-          emailVerified: false, // 어차피 fake email 이에요
-          phoneNumber: '+82' + phone.slice(1), // 국가번호 있어야된대..
-          password: password,
-          displayName: nickname,
-          disabled: false
-        })
-        .then(function(userRecord) {
-          // See the UserRecord reference doc for the contents of userRecord.
-          console.log('Successfully created new user:', userRecord.uid);
-          return userRecord;
-        })
-        .catch(function(error) {
-          console.log('Error creating new user:', error);
-          return error;
-        });
+      // const firebaseRegister = await firebaseSDK
+      //   .auth()
+      //   .createUser({
+      //     uid: userId + '', // uid는 회원의 숫자로 이용
+      //     email: phone + '@vroom.com', //email 도 회원 숫자로 이용하지롱
+      //     emailVerified: false, // 어차피 fake email 이에요
+      //     phoneNumber: '+82' + phone.slice(1), // 국가번호 있어야된대..
+      //     password: password,
+      //     displayName: nickname,
+      //     disabled: false
+      //   })
+      //   .then(function(userRecord) {
+      //     // See the UserRecord reference doc for the contents of userRecord.
+      //     console.log('Successfully created new user:', userRecord.uid);
+      //     return userRecord;
+      //   })
+      //   .catch(function(error) {
+      //     console.log('Error creating new user:', error);
+      //     return error;
+      //   });
       //////////////////////////////
       res.json(
         vroomRes(true, token, '등록이 완료되었으며, token에 토큰이 담겨있습니다. asyncStorage로 옮겨주세요', {
-          firebaseRegister
+          /* firebaseRegister */
         })
       );
     }
@@ -92,11 +92,15 @@ const login = async (req, res, next) => {
     //     return error;
     //   });
 
-    const firebaseLogin = await firebaseSDK.auth().getUser(userId + '');
+    // const firebaseLogin = await firebaseSDK.auth().getUser(userId + '');
 
     //////////////////
     res.json(
-      vroomRes(true, token, '로그인이 되었습니다. token에 토큰이 발급되었으니 storage로 옮겨주세요', { firebaseLogin })
+      vroomRes(
+        true,
+        token,
+        '로그인이 되었습니다. token에 토큰이 발급되었으니 storage로 옮겨주세요' /* { firebaseLogin } */
+      )
     );
   } catch (e) {
     console.error(e);
