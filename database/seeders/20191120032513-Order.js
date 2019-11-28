@@ -16,8 +16,8 @@ module.exports = {
         details: '집으로 보내주세요!!',
         price: '10000',
         isPrice: true,
-        deliverId: null,
-        orderStatus: 0,
+        deliverId: 3,
+        orderStatus: 1,
         actualArrivalTime: null,
         createdAt: '2019-11-26 09:00:00',
         updatedAt: '2019-11-26 09:00:00'
@@ -54,8 +54,8 @@ module.exports = {
         details: '필요한 책은 경영학개론 2019년 개정판입니다. 지금 바로 부탁드려요! 가격은 제시해주세요!!',
         price: null,
         isPrice: false,
-        deliverId: null,
-        orderStatus: 0,
+        deliverId: 3,
+        orderStatus: 1,
         actualArrivalTime: null,
         createdAt: '2019-11-26 09:20:00',
         updatedAt: '2019-11-26 09:20:00'
