@@ -11,7 +11,7 @@ const createChatAsAdmin = async orderId => {
     .catch(err => console.error(err));
 };
 
-const readUserAllChatsByUserId = async userId => {
+const readUserAllChatsByUserIdStatus1 = async userId => {
   console.log('userId', userId);
   return await db.order
     .findAll({
@@ -56,6 +56,6 @@ const readOneChatDetailByOrderId = async orderId => {
 
 module.exports = {
   createChatAsAdmin,
-  readUserAllChatsByUserId,
+  readUserAllChatsByUserIdStatus1,
   readOneChatDetailByOrderId
 };

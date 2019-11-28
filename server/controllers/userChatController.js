@@ -1,10 +1,10 @@
 import { vroomRes } from '../middlewares/vroomRes';
-import { readUserAllChatsByUserId, readOneChatDetailByOrderId } from '../models/chatModel';
+import { readUserAllChatsByUserIdStatus1, readOneChatDetailByOrderId } from '../models/chatModel';
 
 const getAllChatsByUserId = async (req, res, next) => {
   try {
     const userId = req.decoded.id;
-    const userChatInfo = await readUserAllChatsByUserId(userId);
+    const userChatInfo = await readUserAllChatsByUserIdStatus1(userId);
     console.log('userChatInfo', userChatInfo);
     res.json({
       isSuccess: true,
