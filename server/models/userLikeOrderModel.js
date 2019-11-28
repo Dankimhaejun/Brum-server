@@ -13,14 +13,17 @@ const readAllUserLikeOrder = async userId => {
 };
 
 const createUserLikeOrder = async (userId, orderId) => {
-  return await db.userLikeOrder.create({
-    userId,
-    orderId
-  });
+  console.log('userId, orderId', userId, orderId);
+  return await db.userLikeOrder
+    .create({
+      userId,
+      orderId
+    })
+    .catch(err => console.log(err));
 };
 
 const deleteUserLikeOneOrder = async (userId, orderId) => {
-  return await db.userLikeOrder.destroy({ where: { userId, orderId } });
+  return await db.userLikeOrder.destroy({ where: { userId, orderId } }).catch(err => console.log(err));
 };
 
 module.exports = {
