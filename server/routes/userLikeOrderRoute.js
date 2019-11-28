@@ -9,7 +9,7 @@ router.use('/', checkToken);
 
 router.get('/', getAllOrdersUserLike);
 
-router.put('/:orderId', postUserLikeOrder);
+router.post('/:orderId', postUserLikeOrder);
 
 router.delete('/:orderId', deleteUserLikeOrder);
 
