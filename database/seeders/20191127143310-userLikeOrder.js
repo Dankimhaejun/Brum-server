@@ -7,7 +7,7 @@ module.exports = {
         userLikeOrderId: 1,
         userId: 2,
         orderId: 5,
-        likeOrder: true,
+
         createdAt: '2019-11-23 00:00:00',
         updatedAt: '2019-11-23 00:00:00'
       },
@@ -15,7 +15,7 @@ module.exports = {
         userLikeOrderId: 2,
         userId: 2,
         orderId: 4,
-        likeOrder: true,
+
         createdAt: '2019-11-23 00:00:00',
         updatedAt: '2019-11-23 00:00:00'
       },
@@ -23,7 +23,7 @@ module.exports = {
         userLikeOrderId: 3,
         userId: 3,
         orderId: 5,
-        likeOrder: true,
+
         createdAt: '2019-11-23 00:00:00',
         updatedAt: '2019-11-23 00:00:00'
       },
@@ -31,7 +31,7 @@ module.exports = {
         userLikeOrderId: 4,
         userId: 3,
         orderId: 4,
-        likeOrder: true,
+
         createdAt: '2019-11-23 00:00:00',
         updatedAt: '2019-11-23 00:00:00'
       },
@@ -39,7 +39,7 @@ module.exports = {
         userLikeOrderId: 5,
         userId: 4,
         orderId: 3,
-        likeOrder: true,
+
         createdAt: '2019-11-23 00:00:00',
         updatedAt: '2019-11-23 00:00:00'
       },
@@ -47,7 +47,7 @@ module.exports = {
         userLikeOrderId: 6,
         userId: 4,
         orderId: 4,
-        likeOrder: true,
+
         createdAt: '2019-11-23 00:00:00',
         updatedAt: '2019-11-23 00:00:00'
       },
@@ -55,7 +55,7 @@ module.exports = {
         userLikeOrderId: 7,
         userId: 5,
         orderId: 4,
-        likeOrder: true,
+
         createdAt: '2019-11-23 00:00:00',
         updatedAt: '2019-11-23 00:00:00'
       },
@@ -63,7 +63,7 @@ module.exports = {
         userLikeOrderId: 8,
         userId: 5,
         orderId: 5,
-        likeOrder: true,
+
         createdAt: '2019-11-23 00:00:00',
         updatedAt: '2019-11-23 00:00:00'
       }

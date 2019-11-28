@@ -16,10 +16,6 @@ module.exports = function(sequelize, Datatypes) {
       orderId: {
         type: Datatypes.INTEGER,
         allowNull: false
-      },
-      likeOrder: {
-        type: Datatypes.BOOLEAN,
-        defaultValue: true
       }
     },
     {
