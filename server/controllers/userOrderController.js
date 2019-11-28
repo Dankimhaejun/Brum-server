@@ -59,8 +59,8 @@ const deleteMyOneOrder = async (req, res, next) => {
   try {
     const userId = req.decoded.id;
     const orderId = req.params.orderId;
-    const deleteAllApplicants = await deleteApplicants(orderId);
-    const deleteAllOrderImages = await deleteOrderImages(orderId);
+    // const deleteAllApplicants = await deleteApplicants(orderId);
+    // const deleteAllOrderImages = await deleteOrderImages(orderId);
     const deleteOrder = await deleteMyOrder(userId, orderId);
     console.log('deleteOrder', deleteOrder);
     res.json(vroomRes(true, true, '내 주문이 삭제되었습니다', deleteOrder));

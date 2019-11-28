@@ -59,7 +59,8 @@ module.exports = function(sequelize, Datatypes) {
     },
     {
       underscored: false,
-      freezeTableName: true
+      freezeTableName: true,
+      paranoid: true
     }
   );
   user.associate = function(db) {

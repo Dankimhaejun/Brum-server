@@ -12,8 +12,21 @@ const readAllUserLikeOrder = async userId => {
   });
 };
 
+const createUserLikeOrder = async (userId, orderId) => {
+  return await db.userLikeOrder.create({
+    userId,
+    orderId
+  });
+};
+
+const deleteUserLikeOneOrder = async (userId, orderId) => {
+  return await db.userLikeOrder.destroy({ where: { userId, orderId } });
+};
+
 module.exports = {
-  readAllUserLikeOrder
+  readAllUserLikeOrder,
+  createUserLikeOrder,
+  deleteUserLikeOneOrder
 };
 /* await db.order
     .findAll({
