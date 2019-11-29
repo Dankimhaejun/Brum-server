@@ -90,6 +90,22 @@ module.exports = {
         chatDetail: '안나와야대',
         createdAt: '2019-11-23 00:10:00',
         updatedAt: '2019-11-23 00:00:00'
+      },
+      {
+        chatId: 12,
+        orderId: 6,
+        userId: 5,
+        chatDetail: '희안하게 이건 나올수도',
+        createdAt: '2019-11-23 00:09:00',
+        updatedAt: '2019-11-23 00:00:00'
+      },
+      {
+        chatId: 13,
+        orderId: 6,
+        userId: 5,
+        chatDetail: '안나와야대',
+        createdAt: '2019-11-23 00:10:00',
+        updatedAt: '2019-11-23 00:00:00'
       }
     ]);
     /*

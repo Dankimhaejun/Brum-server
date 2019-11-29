@@ -32,8 +32,7 @@ module.exports = function(sequelize, Datatypes) {
     },
     {
       underscored: false,
-      freezeTableName: true,
-      paranoid: true
+      freezeTableName: true
     }
   );
   applicant.associate = function(db) {
