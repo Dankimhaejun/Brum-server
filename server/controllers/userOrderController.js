@@ -18,8 +18,8 @@ const getMyOrders = async (req, res, next) => {
       })
     );
   } catch (e) {
-    console.error(e);
     next(e);
+    throw e;
   }
 };
 
@@ -36,8 +36,8 @@ const getMyOneOrder = async (req, res, next) => {
       })
     );
   } catch (e) {
-    console.error(e);
     next(e);
+    throw e;
   }
 };
 
@@ -51,8 +51,8 @@ const putMyOneOrder = async (req, res, next) => {
     const updatedOrder = await updateMyOrder(body);
     res.json(vroomRes(true, true, '주문이 업데이트 되었습니다. 업데이트 내용은 아래와 같습니다', { body }));
   } catch (e) {
-    console.error(e);
     next(e);
+    throw e;
   }
 };
 
@@ -66,8 +66,8 @@ const deleteMyOneOrder = async (req, res, next) => {
     console.log('deleteOrder', deleteOrder);
     res.json(vroomRes(true, true, '내 주문이 삭제되었습니다', deleteOrder));
   } catch (e) {
-    console.error(e);
     next(e);
+    throw e;
   }
 };
 
@@ -81,8 +81,8 @@ const getMyOrderApplicant = async (req, res, next) => {
       })
     );
   } catch (e) {
-    console.error(e);
     next(e);
+    throw e;
   }
 };
 
@@ -106,8 +106,8 @@ const putMyOrderApplicant = async (req, res, next) => {
       )
     );
   } catch (e) {
-    console.error(e);
     next(e);
+    throw e;
   }
 };
 
