@@ -9,6 +9,7 @@ const getMyInfo = async (req, res, next) => {
     res.json(vroomRes(true, true, '유저의 개인정보, 평점을 제공합니다.', userInfo));
   } catch (e) {
     next(e);
+    throw e;
   }
 };
 
@@ -33,6 +34,7 @@ const updateUserImage = async (req, res, next) => {
     }
   } catch (e) {
     next(e);
+    throw e;
   }
 };
 
@@ -55,6 +57,7 @@ const updateUserCampus = async (req, res, next) => {
     }
   } catch (e) {
     next(e);
+    throw e;
   }
 };
 

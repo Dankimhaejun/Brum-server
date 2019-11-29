@@ -40,6 +40,24 @@ const readUserPushToken = async deliverId => {
       throw err;
     });
 };
+
+const readHostPushTokenByOrderId = async orderId => {
+  return await db.order
+    .findOne({
+      where: { orderId },
+      include: [
+        {
+          model: db.user,
+          as: 'hostInfo'
+        }
+      ]
+    })
+    .then(result => result.dataValues.hostInfo.pushToken)
+    .catch(err => {
+      throw err;
+    });
+};
+
 const updateImage = async (userId, image) => {
   return await db.user.update({ image }, { where: { userId } }).catch(err => {
     throw err;
@@ -54,7 +72,8 @@ const updateCampus = async (userId, campus, major) => {
 
 module.exports = {
   readUserInfo,
+  readUserPushToken,
+  readHostPushTokenByOrderId,
   updateImage,
-  updateCampus,
-  readUserPushToken
+  updateCampus
 };

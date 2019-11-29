@@ -15,6 +15,7 @@ const getAllChatsByUserId = async (req, res, next) => {
     });
   } catch (e) {
     next(e);
+    throw e;
   }
 };
 
@@ -33,6 +34,7 @@ const getChatDetailByOrderId = async (req, res, next) => {
     );
   } catch (e) {
     next(e);
+    throw e;
   }
 };
 

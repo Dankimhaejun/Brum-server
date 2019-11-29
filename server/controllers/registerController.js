@@ -13,8 +13,8 @@ const main = async (req, res, next) => {
   try {
     return res.json({ message: 'welcome' });
   } catch (e) {
-    console.error(e);
     next(e);
+    throw e;
   }
 };
 
@@ -56,8 +56,8 @@ const register = async (req, res, next) => {
       );
     }
   } catch (e) {
-    console.error(e);
     next(e);
+    throw e;
   }
 };
 
@@ -71,8 +71,8 @@ const checkDuplicatedPhone = async (req, res, next) => {
     }
     res.json(vroomRes(false, null, '중복된 휴대폰 번호입니다. 이용불가합니다.', phone));
   } catch (e) {
-    console.error(e);
     next(e);
+    throw e;
   }
 };
 
@@ -113,8 +113,8 @@ const login = async (req, res, next) => {
       )
     );
   } catch (e) {
-    console.error(e);
     next(e);
+    throw e;
   }
 };
 
@@ -134,8 +134,8 @@ const changePassword = async (req, res, next) => {
     }
     res.send();
   } catch (e) {
-    console.error(e);
     next(e);
+    throw e;
   }
 };
 const logout = (req, res, next) => {
@@ -143,8 +143,8 @@ const logout = (req, res, next) => {
     res.clearCookie('jwt');
     res.json(vroomRes(true, false, null, 'Logged out, token is deleted'));
   } catch (e) {
-    console.error(e);
     next(e);
+    throw e;
   }
 };
 module.exports = {
