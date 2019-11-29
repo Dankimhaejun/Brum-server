@@ -9,7 +9,7 @@ const checkPhone = async phone => {
     .catch(err => console.error(err));
 };
 
-const createUser = async (phone, password, nickname, sex, agreementAd, campus, age) => {
+const createUser = async (phone, password, nickname, sex, agreementAd, pushToken, campus, age) => {
   const hashedPassword = hashPassword(password);
   return await db.user
     .create({
@@ -18,6 +18,7 @@ const createUser = async (phone, password, nickname, sex, agreementAd, campus, a
       nickname,
       sex,
       agreementAd,
+      pushToken,
       campus,
       age,
       image: 'https://vroom-database.s3.ap-northeast-2.amazonaws.com/userImage/default'
@@ -36,13 +37,17 @@ const handleLogin = async (phone, password) => {
 
 const updateUserPassword = async (phone, password) => {
   const hashedPassword = await hashPassword(password);
-  return await db.user
-    .update({ password: hashedPassword }, { where: { phone: phone } })
-    .catch(err => console.error(err));
+  return await db.user.update({ password: hashedPassword }, { where: { phone } }).catch(err => console.error(err));
 };
+
+const updatePushTokenByLogin = async (userId, pushToken) => {
+  return await db.user.update({ pushToken }, { where: { userId } });
+};
+
 module.exports = {
   handleLogin,
   checkPhone,
   createUser,
-  updateUserPassword
+  updateUserPassword,
+  updatePushTokenByLogin
 };

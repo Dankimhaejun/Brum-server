@@ -1,15 +1,19 @@
 const db = require('../../database/models');
 
 const readAllUserLikeOrder = async userId => {
-  return await db.userLikeOrder.findAll({
-    where: { userId },
-    order: [['orderId', 'ASC']],
-    include: [
-      {
-        model: db.order
-      }
-    ]
-  });
+  return await db.userLikeOrder
+    .findAll({
+      where: { userId },
+      order: [['orderId', 'ASC']],
+      include: [
+        {
+          model: db.order
+        }
+      ]
+    })
+    .catch(err => {
+      throw err;
+    });
 };
 
 const createUserLikeOrder = async (userId, orderId) => {
@@ -19,11 +23,15 @@ const createUserLikeOrder = async (userId, orderId) => {
       userId,
       orderId
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      throw err;
+    });
 };
 
 const deleteUserLikeOneOrder = async (userId, orderId) => {
-  return await db.userLikeOrder.destroy({ where: { userId, orderId } }).catch(err => console.log(err));
+  return await db.userLikeOrder.destroy({ where: { userId, orderId } }).catch(err => {
+    throw err;
+  });
 };
 
 module.exports = {

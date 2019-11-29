@@ -1,5 +1,6 @@
 import { vroomRes } from '../middlewares/vroomRes';
-import { readUserInfo } from '../models/userModel';
+import { sendPushNotification } from '../middlewares/notifications';
+import { readUserInfo, readUserPushToken } from '../models/userModel';
 import { readMyOrders, readMyOneOrder, updateMyOrderDeliver, updateMyOrder, deleteMyOrder } from '../models/orderModel';
 import { deleteOrderImages } from '../models/orderImageModel';
 import { readApplicants, deleteApplicants } from '../models/applicantModel';
@@ -87,12 +88,15 @@ const getMyOrderApplicant = async (req, res, next) => {
 
 const putMyOrderApplicant = async (req, res, next) => {
   try {
+    const userId = req.decoded.id;
     const orderId = req.params.orderId;
     let deliverId = req.body.deliverId;
     deliverId = String(deliverId);
     const putApplicant = await updateMyOrderDeliver(orderId, deliverId); // 배달자 지정해줌
     const createChat = await createChatAsAdmin(orderId); // 채팅방 생성해주는 모델
     const deliverInfo = await readUserInfo(deliverId);
+    const userPushToken = await readUserPushToken(userId);
+    await sendPushNotification(userPushToken);
     return res.json(
       vroomRes(
         true,

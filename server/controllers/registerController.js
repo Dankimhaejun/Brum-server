@@ -1,4 +1,10 @@
-import { handleLogin, checkPhone, createUser, updateUserPassword } from '../models/registerModel';
+import {
+  handleLogin,
+  checkPhone,
+  createUser,
+  updateUserPassword,
+  updatePushTokenByLogin
+} from '../models/registerModel';
 import { vroomRes } from '../middlewares/vroomRes';
 import { createToken } from '../middlewares/jwt';
 import { firebaseSDK } from '../middlewares/firebase';
@@ -14,8 +20,8 @@ const main = async (req, res, next) => {
 
 const register = async (req, res, next) => {
   try {
-    const { phone, password, nickname, sex, agreementAd, campus, age } = req.body;
-    const isRegister = await createUser(phone, password, nickname, sex, agreementAd, campus, age);
+    const { phone, password, nickname, sex, agreementAd, campus, age, pushToken } = req.body;
+    const isRegister = await createUser(phone, password, nickname, sex, agreementAd, pushToken, campus, age);
     if (isRegister.dataValues) {
       const userId = isRegister.dataValues.userId;
       const campus = isRegister.dataValues.campus;
@@ -71,7 +77,7 @@ const checkDuplicatedPhone = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   try {
-    const { phone, password } = req.body;
+    const { phone, password, pushToken } = req.body;
     const isLogin = await handleLogin(phone, password);
     if (!isLogin) {
       res.json(vroomRes(false, false, '잘못된 정보를 입력하여 로그인 할 수 없습니다.', null));
@@ -79,6 +85,7 @@ const login = async (req, res, next) => {
     }
     const userId = isLogin.dataValues.userId;
     const campus = isLogin.dataValues.campus;
+    const updatePushToken = await updatePushTokenByLogin(userId, pushToken);
     const token = await createToken(userId, campus);
     //////////////////
 

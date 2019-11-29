@@ -27,19 +27,34 @@ const readUserInfo = async userId => {
         }
       ]
     })
-    .catch(err => console.error(err));
+    .catch(err => {
+      throw err;
+    });
 };
 
+const readUserPushToken = async userId => {
+  return await db.user
+    .findOne({ where: { userId } })
+    .then(result => result.dataValues.pushToken)
+    .catch(err => {
+      throw err;
+    });
+};
 const updateImage = async (userId, image) => {
-  return await db.user.update({ image }, { where: { userId } }).catch(err => console.error(err));
+  return await db.user.update({ image }, { where: { userId } }).catch(err => {
+    throw err;
+  });
 };
 
 const updateCampus = async (userId, campus, major) => {
-  return await db.user.update({ campus, major }, { where: { userId } }).catch(err => console.error(err));
+  return await db.user.update({ campus, major }, { where: { userId } }).catch(err => {
+    throw err;
+  });
 };
 
 module.exports = {
   readUserInfo,
   updateImage,
-  updateCampus
+  updateCampus,
+  readUserPushToken
 };
