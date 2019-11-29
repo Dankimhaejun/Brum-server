@@ -8,8 +8,7 @@ const sendPushNotificationByAxios = async (pushToken, message) => {
         to: pushToken,
         sound: 'default',
         title: 'Vroom',
-        body: message,
-        icon: './ssapPossible.png'
+        body: message
       },
       {
         headers: {
