@@ -1,5 +1,5 @@
 import { vroomRes } from '../middlewares/vroomRes';
-import { sendPushNotification } from '../middlewares/notifications';
+import { sendPushNotificationByAxios } from '../middlewares/notifications';
 import { readUserInfo, readUserPushToken } from '../models/userModel';
 import { readMyOrders, readMyOneOrder, updateMyOrderDeliver, updateMyOrder, deleteMyOrder } from '../models/orderModel';
 import { deleteOrderImages } from '../models/orderImageModel';
@@ -96,7 +96,7 @@ const putMyOrderApplicant = async (req, res, next) => {
     const createChat = await createChatAsAdmin(orderId); // 채팅방 생성해주는 모델
     const deliverInfo = await readUserInfo(deliverId);
     const userPushToken = await readUserPushToken(userId);
-    await sendPushNotification(userPushToken);
+    await sendPushNotificationByAxios(userPushToken);
     return res.json(
       vroomRes(
         true,

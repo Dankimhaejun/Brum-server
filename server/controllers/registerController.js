@@ -78,6 +78,7 @@ const checkDuplicatedPhone = async (req, res, next) => {
 const login = async (req, res, next) => {
   try {
     const { phone, password, pushToken } = req.body;
+    console.log('pushToken', pushToken);
     const isLogin = await handleLogin(phone, password);
     if (!isLogin) {
       res.json(vroomRes(false, false, '잘못된 정보를 입력하여 로그인 할 수 없습니다.', null));
@@ -86,6 +87,7 @@ const login = async (req, res, next) => {
     const userId = isLogin.dataValues.userId;
     const campus = isLogin.dataValues.campus;
     const updatePushToken = await updatePushTokenByLogin(userId, pushToken);
+    console.log('updatePushToken', updatePushToken);
     const token = await createToken(userId, campus);
     //////////////////
 
