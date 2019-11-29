@@ -9,8 +9,9 @@ const checkPhone = async phone => {
     .catch(err => console.error(err));
 };
 
-const createUser = async (phone, password, nickname, sex, agreementAd, pushToken, campus, age) => {
+const createUser = async (phone, password, nickname, sex, agreementAd, campus, age, pushToken) => {
   const hashedPassword = hashPassword(password);
+  console.log('pushToken', pushToken);
   return await db.user
     .create({
       phone,

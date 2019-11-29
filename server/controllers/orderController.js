@@ -102,6 +102,7 @@ const postOrderApply = async (req, res, next) => {
     const checkApply = await readUserApplyOrNot(orderId, userId);
     if (checkApply === null) {
       const postApply = await createOrderApply(orderId, userId, bidPrice, applyComment);
+
       res.json(
         vroomRes(
           true,
@@ -114,8 +115,8 @@ const postOrderApply = async (req, res, next) => {
       res.json(vroomRes(false, true, '이미 지원한 유저입니다. 다시 확인해주세요', null));
     }
   } catch (e) {
-    console.error(e);
     await next(e);
+    throw e;
   }
 };
 

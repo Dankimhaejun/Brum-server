@@ -32,9 +32,9 @@ const readUserInfo = async userId => {
     });
 };
 
-const readUserPushToken = async userId => {
+const readUserPushToken = async deliverId => {
   return await db.user
-    .findOne({ where: { userId } })
+    .findOne({ where: { userId: deliverId } })
     .then(result => result.dataValues.pushToken)
     .catch(err => {
       throw err;

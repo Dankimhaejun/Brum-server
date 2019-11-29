@@ -21,7 +21,8 @@ const main = async (req, res, next) => {
 const register = async (req, res, next) => {
   try {
     const { phone, password, nickname, sex, agreementAd, campus, age, pushToken } = req.body;
-    const isRegister = await createUser(phone, password, nickname, sex, agreementAd, pushToken, campus, age);
+    console.log('pushToken', pushToken);
+    const isRegister = await createUser(phone, password, nickname, sex, agreementAd, campus, age, pushToken);
     if (isRegister.dataValues) {
       const userId = isRegister.dataValues.userId;
       const campus = isRegister.dataValues.campus;
