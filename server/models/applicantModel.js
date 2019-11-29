@@ -34,7 +34,9 @@ const readApplicants = async orderId => {
         }
       ]
     })
-    .catch(err => console.error(err));
+    .catch(err => {
+      throw err;
+    });
 };
 
 const createOrderApply = async (orderId, userId, bidPrice, applyComment) => {
@@ -45,26 +47,34 @@ const createOrderApply = async (orderId, userId, bidPrice, applyComment) => {
       bidPrice,
       applyComment
     })
-    .catch(err => console.error(err));
+    .catch(err => {
+      throw err;
+    });
 };
 
 const readUserApplyOrNot = async (orderId, userId) => {
-  return await db.applicant.findOne({ where: { orderId, userId } }).catch(err => console.error(err));
+  return await db.applicant.findOne({ where: { orderId, userId } }).catch(err => {
+    throw err;
+  });
 };
 
 const updateOrderApply = async (orderId, userId, bidPrice, applyComment) => {
   console.log('bidPrice, applyComment', bidPrice, applyComment);
-  return await db.applicant
-    .update({ bidPrice, applyComment }, { where: { orderId, userId } })
-    .catch(err => console.error(err));
+  return await db.applicant.update({ bidPrice, applyComment }, { where: { orderId, userId } }).catch(err => {
+    throw err;
+  });
 };
 
 const deleteMyOrderApply = async (orderId, userId) => {
-  return await db.applicant.destroy({ where: { orderId, userId } }).catch(err => console.error(err));
+  return await db.applicant.destroy({ where: { orderId, userId } }).catch(err => {
+    throw err;
+  });
 };
 
 const deleteApplicants = async orderId => {
-  return await db.applicant.destroy({ where: { orderId } }).catch(err => console.error(err));
+  return await db.applicant.destroy({ where: { orderId } }).catch(err => {
+    throw err;
+  });
 };
 
 module.exports = {

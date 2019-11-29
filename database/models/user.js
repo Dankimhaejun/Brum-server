@@ -48,6 +48,9 @@ module.exports = function(sequelize, Datatypes) {
         type: Datatypes.STRING,
         defaultValue: null
       },
+      pushToken: {
+        type: Datatypes.STRING
+      },
       agreementAd: {
         type: Datatypes.BOOLEAN,
         defaultValue: false

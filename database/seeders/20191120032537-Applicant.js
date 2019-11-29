@@ -40,8 +40,8 @@ module.exports = {
       },
       {
         applicantId: 5,
-        orderId: 3,
-        userId: 3,
+        orderId: 4,
+        userId: 2,
         bidPrice: '5000',
         applyComment: '누구보다 빠르게 남들보다 다르게',
         createdAt: '2019-11-23 00:00:00',
@@ -49,8 +49,8 @@ module.exports = {
       },
       {
         applicantId: 6,
-        orderId: 3,
-        userId: 4,
+        orderId: 4,
+        userId: 3,
         bidPrice: '3000',
         applyComment: '10분안에 만날 각',
         createdAt: '2019-11-23 00:00:00',
@@ -58,8 +58,8 @@ module.exports = {
       },
       {
         applicantId: 7,
-        orderId: 3,
-        userId: 6,
+        orderId: 4,
+        userId: 4,
         bidPrice: '20000',
         applyComment: '비싼만큼 확실하게!!!!!!!!!!!!',
         createdAt: '2019-11-23 00:00:00',
