@@ -1,13 +1,13 @@
 const axios = require('axios');
 
-const sendPushNotificationByAxios = async (pushToken, message) => {
-  await axios
+const sendPushNotificationByAxios = async (pushToken, title, message) => {
+  return await axios
     .post(
       'https://exp.host/--/api/v2/push/send',
       {
         to: pushToken,
         sound: 'default',
-        title: 'Vroom',
+        title: title,
         body: message
       },
       {

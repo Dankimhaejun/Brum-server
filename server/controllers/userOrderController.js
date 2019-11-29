@@ -96,7 +96,7 @@ const putMyOrderApplicant = async (req, res, next) => {
     const createChat = await createChatAsAdmin(orderId); // 채팅방 생성해주는 모델
     const deliverInfo = await readUserInfo(deliverId);
     const userPushToken = await readUserPushToken(deliverId);
-    await sendPushNotificationByAxios(userPushToken, '지원하신 주문에 배달자로 선정되었습니다. 채팅 확인해주세요.');
+    await sendPushNotificationByAxios(userPushToken, '(경)당첨(축)', '배달하러 갑시다 채팅방을 여세요');
     return res.json(
       vroomRes(
         true,
