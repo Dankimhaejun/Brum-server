@@ -78,7 +78,9 @@ const postOrder = async (req, res, next) => {
       console.log('req.files.file', req.files.file);
       console.log('body', body);
       const filesArray = req.files.file;
-      body.thumbnailURL = req.files.thumbnail[0].location;
+      if (req.files) {
+        body.thumbnailURL = req.files.thumbnail[0].location;
+      }
       body.hostId = hostId;
       body.campus = campus;
       const newOrder = await createOrder(body);
