@@ -70,12 +70,13 @@ const postOrder = async (req, res, next) => {
       }
       const hostId = req.decoded.id;
       const campus = req.decoded.campus;
-      const body = req.body;
+      const body = req.body.formData;
       console.log('hostId, campus', hostId, campus);
-      console.log('req.body', req.body);
+      console.log('req.bodyformData', req.body.formData);
       console.log('req.files', req.files);
       console.log('req.files.thumbnail', req.files.thumbnail);
       console.log('req.files.file', req.files.file);
+      console.log('body', body);
       const filesArray = req.files.file;
       body.thumbnailURL = req.files.thumbnail[0].location;
       body.hostId = hostId;
