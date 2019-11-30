@@ -1,6 +1,7 @@
 import { vroomRes } from '../middlewares/vroomRes';
 import { createOrder, readAllOrders, readAllOrdersByCampus, readOneOrder } from '../models/orderModel';
 import { createOrderImages } from '../models/orderImageModel';
+import { uploadOrderImages } from '../middlewares/s3';
 
 const getOrders = async (req, res, next) => {
   try {
@@ -62,31 +63,39 @@ const getIdOrder = async (req, res, next) => {
 
 const postOrder = async (req, res, next) => {
   try {
-    const hostId = req.decoded.id;
-    const campus = req.decoded.campus;
-    const body = req.body;
-    const filesArray = req.files.file;
-    body.thumbnailURL = req.files.thumbnail[0].location;
-    console.log('body', body), console.log('req.files', req.files);
-    console.log('req.files.thumbnail', req.files.thumbnail);
-    console.log('req.files.file', req.files.file);
-    body.hostId = hostId;
-    body.campus = campus;
-    const newOrder = await createOrder(body);
-    const orderId = newOrder.dataValues.orderId;
-    if (filesArray.length) {
-      await createOrderImages(filesArray, orderId);
-    }
-    return res.json(
-      vroomRes(
-        true,
-        true,
-        '새로운 주문이 추가되었습니다. 주문 정보는 아래와 같습니다. 주문의 orderId를 참고해서 [GET] /user/order/:orderId로 새로 작성한 주문을 바로 볼수 있게 작성해주세요',
-        {
-          order: newOrder
-        }
-      )
-    );
+    const uploadImage = uploadOrderImages.fields([{ name: 'thumbnail' }, { name: 'file' }]);
+    await uploadImage(req, res, async function(err) {
+      if (err) {
+        console.error(err);
+      }
+      const hostId = req.decoded.id;
+      const campus = req.decoded.campus;
+      const body = req.body;
+      console.log('hostId, campus', hostId, campus);
+      console.log('req.body', req.body);
+      console.log('req.files', req.files);
+      console.log('req.files.thumbnail', req.files.thumbnail);
+      console.log('req.files.file', req.files.file);
+      const filesArray = req.files.file;
+      body.thumbnailURL = req.files.thumbnail[0].location;
+      body.hostId = hostId;
+      body.campus = campus;
+      const newOrder = await createOrder(body);
+      const orderId = newOrder.dataValues.orderId;
+      if (filesArray.length) {
+        await createOrderImages(filesArray, orderId);
+      }
+      return res.json(
+        vroomRes(
+          true,
+          true,
+          '새로운 주문이 추가되었습니다. 주문 정보는 아래와 같습니다. 주문의 orderId를 참고해서 [GET] /user/order/:orderId로 새로 작성한 주문을 바로 볼수 있게 작성해주세요',
+          {
+            order: newOrder
+          }
+        )
+      );
+    });
   } catch (e) {
     next(e);
     throw e;

@@ -17,7 +17,7 @@ router.use('/', checkToken);
 
 router.get('/:orderId', getIdOrder);
 
-router.post('/', uploadOrderImages.fields([{ name: 'thumbnail' }, { name: 'file' }]), postOrder);
+router.post('/', postOrder);
 
 router.post('/:orderId/apply', postOrderApply);
 
