@@ -83,7 +83,7 @@ const postOrder = async (req, res, next) => {
       body.campus = campus;
       const newOrder = await createOrder(body);
       const orderId = newOrder.dataValues.orderId;
-      if (filesArray.length) {
+      if (filesArray) {
         await createOrderImages(filesArray, orderId);
       }
       return res.json(
