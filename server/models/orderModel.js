@@ -1,6 +1,25 @@
 const db = require('../../database/models');
 
 const createOrder = async body => {
+  console.log('body', body);
+  console.log(
+    'campus,title,hostId,departures,depLat,depLng,arrivals,arrLat,arrLng,category,thumbnailURL,desiredArrivalTime, details,price,isPrice',
+    campus,
+    title,
+    hostId,
+    departures,
+    depLat,
+    depLng,
+    arrivals,
+    arrLat,
+    arrLng,
+    category,
+    thumbnailURL,
+    desiredArrivalTime,
+    details,
+    price,
+    isPrice
+  );
   const {
     campus,
     title,
@@ -37,6 +56,7 @@ const createOrder = async body => {
       isPrice
     })
     .catch(err => {
+      console.error(err);
       throw err;
     });
 };
@@ -198,9 +218,13 @@ const updateMyOrder = async body => {
   );
 };
 
+const updateOrderStatus = async (orderId, orderStatus) => {
+  return db.order.update({ orderStatus }, { where: { orderId }, silent: true }).catch(err => {
+    throw err;
+  });
+};
+
 const updateMyOrderDeliver = async (orderId, deliverId) => {
-  console.log('deliverId', deliverId);
-  console.log('orderId', orderId);
   await db.applicant.update({ applyStatus: 'chosen' }, { where: { orderId, userId: deliverId } });
   return await db.order.update({ deliverId, orderStatus: 1 }, { where: { orderId }, silent: true }).catch(err => {
     throw err;
@@ -221,6 +245,7 @@ module.exports = {
   readMyOrders,
   readMyOneOrder,
   updateMyOrder,
+  updateOrderStatus,
   updateMyOrderDeliver,
   deleteMyOrder
 };

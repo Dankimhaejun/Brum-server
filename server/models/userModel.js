@@ -32,9 +32,9 @@ const readUserInfo = async userId => {
     });
 };
 
-const readUserPushToken = async deliverId => {
+const readUserPushToken = async userId => {
   return await db.user
-    .findOne({ where: { userId: deliverId } })
+    .findOne({ where: { userId: userId } })
     .then(result => result.dataValues.pushToken)
     .catch(err => {
       throw err;
@@ -58,6 +58,23 @@ const readHostPushTokenByOrderId = async orderId => {
     });
 };
 
+const readDeliverPushTokenByOrderId = async orderId => {
+  return await db.order
+    .findOne({
+      where: { orderId },
+      include: [
+        {
+          model: db.user,
+          as: 'deliverInfo'
+        }
+      ]
+    })
+    .then(result => result.dataValues.deliverInfo.pushToken)
+    .catch(err => {
+      throw err;
+    });
+};
+
 const updateImage = async (userId, image) => {
   return await db.user.update({ image }, { where: { userId } }).catch(err => {
     throw err;
@@ -74,6 +91,7 @@ module.exports = {
   readUserInfo,
   readUserPushToken,
   readHostPushTokenByOrderId,
+  readDeliverPushTokenByOrderId,
   updateImage,
   updateCampus
 };

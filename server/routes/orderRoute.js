@@ -1,16 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
+import { postOrder, getOrders, getIdOrder, getAllOrdersByCampus } from '../controllers/orderController';
+import { postOrderApply, putOrderApply, deleteOrderApply } from '../controllers/orderApplyController';
+import { putOrderStatus } from '../controllers/orderStatusController';
 import { checkToken } from '../middlewares/jwt';
-import {
-  postOrder,
-  getOrders,
-  getIdOrder,
-  postOrderApply,
-  putOrderApply,
-  deleteOrderApply,
-  getAllOrdersByCampus
-} from '../controllers/orderController';
 import { uploadOrderImages } from '../middlewares/s3';
 /* GET home page. */
 
@@ -30,5 +24,7 @@ router.post('/:orderId/apply', postOrderApply);
 router.put('/:orderId/apply', putOrderApply);
 
 router.delete('/:orderId/apply', deleteOrderApply);
+
+router.put('/:orderId/status/:orderStatus', putOrderStatus);
 
 module.exports = router;
