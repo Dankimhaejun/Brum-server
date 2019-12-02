@@ -27,7 +27,7 @@ const putOrderStatus = async (req, res) => {
         '배송자님 고생하셨습니다! 모든 거래가 마무리 되었습니다!'
       );
     }
-    res.json(vroomRes(true, true, `${orderStatus}번 버튼을 눌렀습니다`, checkOrderStatus));
+    return res.json(vroomRes(true, true, `${orderStatus}번 버튼을 눌렀습니다`, checkOrderStatus));
   } catch (e) {
     console.error(e);
     throw e;

@@ -14,7 +14,7 @@ const postOrderApply = async (req, res) => {
     if (checkApply === null) {
       const postApply = await createOrderApply(orderId, userId, bidPrice, applyComment);
       await sendPushNotificationByAxios(hostPushToken, '지원자 발생', '내 주문에 지원자가 발생했습니다. 확인 바람');
-      res.json(
+      return res.json(
         vroomRes(
           true,
           true,
@@ -23,7 +23,7 @@ const postOrderApply = async (req, res) => {
         )
       );
     } else {
-      res.json(vroomRes(false, true, '이미 지원한 유저입니다. 다시 확인해주세요', null));
+      return res.json(vroomRes(false, true, '이미 지원한 유저입니다. 다시 확인해주세요', null));
     }
   } catch (e) {
     console.error(e);
@@ -58,7 +58,7 @@ const deleteOrderApply = async (req, res) => {
     const orderId = req.params.orderId;
     const deleteApply = await deleteMyOrderApply(orderId, userId);
     console.log('deleteApply', deleteApply);
-    res.json(
+    return res.json(
       vroomRes(
         true,
         true,

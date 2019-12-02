@@ -2,9 +2,9 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('mannerScore', [
+    return queryInterface.bulkInsert('review', [
       {
-        mannerScoreId: 1,
+        reviewId: 1,
         evaluatorId: 3,
         receiverId: 2,
         score: 5,
@@ -12,7 +12,7 @@ module.exports = {
         updatedAt: '2019-11-23 00:00:00'
       },
       {
-        mannerScoreId: 2,
+        reviewId: 2,
         evaluatorId: 4,
         receiverId: 2,
         score: 4,
@@ -20,7 +20,7 @@ module.exports = {
         updatedAt: '2019-11-23 00:00:00'
       },
       {
-        mannerScoreId: 3,
+        reviewId: 3,
         evaluatorId: 5,
         receiverId: 2,
         score: 2,
@@ -28,7 +28,7 @@ module.exports = {
         updatedAt: '2019-11-23 00:00:00'
       },
       {
-        mannerScoreId: 4,
+        reviewId: 4,
         evaluatorId: 2,
         receiverId: 3,
         score: 5,
@@ -36,7 +36,7 @@ module.exports = {
         updatedAt: '2019-11-23 00:00:00'
       },
       {
-        mannerScoreId: 5,
+        reviewId: 5,
         evaluatorId: 4,
         receiverId: 3,
         score: 4,
@@ -44,7 +44,7 @@ module.exports = {
         updatedAt: '2019-11-23 00:00:00'
       },
       {
-        mannerScoreId: 6,
+        reviewId: 6,
         evaluatorId: 5,
         receiverId: 3,
         score: 1,
@@ -52,7 +52,7 @@ module.exports = {
         updatedAt: '2019-11-23 00:00:00'
       },
       {
-        mannerScoreId: 7,
+        reviewId: 7,
         evaluatorId: 2,
         receiverId: 4,
         score: 2,
@@ -60,7 +60,7 @@ module.exports = {
         updatedAt: '2019-11-23 00:00:00'
       },
       {
-        mannerScoreId: 8,
+        reviewId: 8,
         evaluatorId: 3,
         receiverId: 4,
         score: 5,
@@ -68,7 +68,7 @@ module.exports = {
         updatedAt: '2019-11-23 00:00:00'
       },
       {
-        mannerScoreId: 9,
+        reviewId: 9,
         evaluatorId: 5,
         receiverId: 4,
         score: 4,
@@ -76,7 +76,7 @@ module.exports = {
         updatedAt: '2019-11-23 00:00:00'
       },
       {
-        mannerScoreId: 10,
+        reviewId: 10,
         evaluatorId: 2,
         receiverId: 5,
         score: 3,
@@ -84,7 +84,7 @@ module.exports = {
         updatedAt: '2019-11-23 00:00:00'
       },
       {
-        mannerScoreId: 11,
+        reviewId: 11,
         evaluatorId: 3,
         receiverId: 5,
         score: 3,
@@ -92,7 +92,7 @@ module.exports = {
         updatedAt: '2019-11-23 00:00:00'
       },
       {
-        mannerScoreId: 12,
+        reviewId: 12,
         evaluatorId: 4,
         receiverId: 5,
         score: 4,
@@ -113,7 +113,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('mannerScore', null, {});
+    return queryInterface.bulkDelete('review', null, {});
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.

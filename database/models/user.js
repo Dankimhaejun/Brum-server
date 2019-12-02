@@ -70,8 +70,8 @@ module.exports = function(sequelize, Datatypes) {
     user.hasMany(db.applicant, { foreignKey: 'userId' });
     user.hasMany(db.order, { foreignKey: 'hostId' });
     user.hasMany(db.order, { foreignKey: 'deliverId' });
-    user.hasMany(db.mannerScore, { as: 'evaluator', foreignKey: 'evaluatorId' });
-    user.hasMany(db.mannerScore, { as: 'getScore', foreignKey: 'receiverId' });
+    user.hasMany(db.review, { as: 'evaluator', foreignKey: 'evaluatorId' });
+    user.hasMany(db.review, { as: 'getScore', foreignKey: 'receiverId' });
     user.hasMany(db.chat, { foreignKey: 'userId' });
     user.hasMany(db.userLikeOrder, { foreignKey: 'userId' });
   };

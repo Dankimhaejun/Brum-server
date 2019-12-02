@@ -1,10 +1,10 @@
 const db = require('./index');
 
 module.exports = function(sequelize, Datatypes) {
-  const mannerScore = sequelize.define(
-    'mannerScore',
+  const review = sequelize.define(
+    'review',
     {
-      mannerScoreId: {
+      reviewId: {
         type: Datatypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
@@ -25,7 +25,7 @@ module.exports = function(sequelize, Datatypes) {
         type: Datatypes.INTEGER,
         allowNull: false
       },
-      review: {
+      userReview: {
         type: Datatypes.STRING
       }
     },
@@ -34,15 +34,15 @@ module.exports = function(sequelize, Datatypes) {
       freezeTableName: true
     }
   );
-  mannerScore.associate = function(db) {
-    mannerScore.belongsTo(db.user, {
+  review.associate = function(db) {
+    review.belongsTo(db.user, {
       as: 'evaluator',
       foreignKey: 'evaluatorId'
     });
-    mannerScore.belongsTo(db.user, { as: 'getScore', foreignKey: 'receiverId' });
-    mannerScore.belongsTo(db.order, {
+    review.belongsTo(db.user, { as: 'getScore', foreignKey: 'receiverId' });
+    review.belongsTo(db.order, {
       foreignKey: 'orderId'
     });
   };
-  return mannerScore;
+  return review;
 };

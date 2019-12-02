@@ -7,7 +7,7 @@ import { uploadOrderImages } from '../middlewares/s3';
 const getOrders = async (req, res) => {
   try {
     const getAllOrders = await readAllOrders();
-    res.json(
+    return res.json(
       vroomRes(
         true,
         true,
@@ -27,7 +27,7 @@ const getAllOrdersByCampus = async (req, res) => {
   try {
     const campus = req.params.campus;
     const getOrdersByCampus = await readAllOrdersByCampus(campus);
-    res.json(
+    return res.json(
       vroomRes(
         true,
         true,
@@ -48,7 +48,7 @@ const getIdOrder = async (req, res) => {
     const userId = req.decoded.id;
     const orderId = req.params.orderId;
     const getOrder = await readOneOrder(orderId);
-    res.json(
+    return res.json(
       vroomRes(
         true,
         true,

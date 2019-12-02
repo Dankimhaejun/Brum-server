@@ -1,12 +1,12 @@
 import { vroomRes } from '../middlewares/vroomRes';
-import { readUserAllChatsByUserIdStatus1, readOneChatDetailByOrderId } from '../models/chatModel';
+import { readUserAllChatsByUserIdStatus, readOneChatDetailByOrderId } from '../models/chatModel';
 
 const getAllChatsByUserId = async (req, res) => {
   try {
     const userId = req.decoded.id;
-    const userChatInfo = await readUserAllChatsByUserIdStatus1(userId);
+    const userChatInfo = await readUserAllChatsByUserIdStatus(userId);
     console.log('userChatInfo', userChatInfo);
-    res.json({
+    return res.json({
       isSuccess: true,
       token: true,
       comment: '유저가 속해있는 order의 모든 채팅 정보를 제공합니다',
@@ -24,7 +24,7 @@ const getChatDetailByOrderId = async (req, res) => {
     const userId = req.decoded.id;
     const orderId = req.params.orderId;
     const getChatInfoByOrderId = await readOneChatDetailByOrderId(orderId);
-    res.json(
+    return res.json(
       vroomRes(
         true,
         true,
