@@ -1,46 +1,4 @@
-const db = require('../../database/models');
-
-const createOrder = async body => {
-  const {
-    campus,
-    title,
-    hostId,
-    departures,
-    depLat,
-    depLng,
-    arrivals,
-    arrLat,
-    arrLng,
-    category,
-    thumbnailURL,
-    desiredArrivalTime,
-    details,
-    price,
-    isPrice
-  } = body;
-  return await db.order
-    .create({
-      campus,
-      title,
-      hostId,
-      departures,
-      depLat,
-      depLng,
-      arrivals,
-      arrLat,
-      arrLng,
-      category,
-      thumbnailURL,
-      desiredArrivalTime,
-      details,
-      price,
-      isPrice
-    })
-    .catch(err => {
-      console.error(err);
-      throw err;
-    });
-};
+const db = require('../../../database/models');
 
 const readAllOrders = async () => {
   return await db.order
@@ -197,47 +155,7 @@ const readMyOneOrder = async (userId, orderId) => {
     });
 };
 
-const updateMyOrder = async body => {
-  const { orderId, hostId, title, departures, arrivals, desiredArrivalTime, details, price, isPrice } = body;
-  return await db.order
-    .update(
-      {
-        title,
-        departures,
-        arrivals,
-        desiredArrivalTime,
-        details,
-        price,
-        isPrice
-      },
-      { where: { orderId, hostId } }
-    )
-    .catch(err => {
-      console.error(err);
-      throw err;
-    });
-};
-
-const updateOrderStatus = async (orderId, orderStatus) => {
-  return db.order.update({ orderStatus }, { where: { orderId }, silent: true }).catch(err => {
-    throw err;
-  });
-};
-
-const updateMyOrderDeliver = async (orderId, deliverId) => {
-  await db.applicant.update({ applyStatus: 'chosen' }, { where: { orderId, userId: deliverId } });
-  return await db.order.update({ deliverId, orderStatus: 1 }, { where: { orderId }, silent: true }).catch(err => {
-    console.error(err);
-    throw err;
-  });
-};
-
-const deleteMyOrder = async (userId, orderId) => {
-  return await db.order.destroy({ where: { orderId, hostId: userId } }).catch(err => {
-    console.error(err);
-    throw err;
-  });
-};
+const readHostAndDeliverIdByOrderIdNotMe = async orderId => {};
 
 const readAllOrdersAsHost = async userId => {
   console.log('userId', userId);
@@ -269,16 +187,12 @@ const readAllOrdersAsDeliver = async userId => {
 };
 
 module.exports = {
-  createOrder,
   readAllOrders,
   readAllOrdersByCampus,
   readOneOrder,
   readMyOrders,
   readMyOneOrder,
-  updateMyOrder,
-  updateOrderStatus,
-  updateMyOrderDeliver,
-  deleteMyOrder,
+  readHostAndDeliverIdByOrderIdNotMe,
   readAllOrdersAsHost,
   readAllOrdersAsDeliver
 };

@@ -1,15 +1,9 @@
 import { vroomRes } from '../middlewares/vroomRes';
 import { sendPushNotificationByAxios } from '../middlewares/notifications';
 import { readUserInfo, readUserPushToken } from '../models/userModel';
-import {
-  readMyOrders,
-  readMyOneOrder,
-  updateMyOrderDeliver,
-  updateMyOrder,
-  deleteMyOrder,
-  readAllOrdersAsHost,
-  readAllOrdersAsDeliver
-} from '../models/orderModel';
+import { readMyOrders, readMyOneOrder, readAllOrdersAsHost, readAllOrdersAsDeliver } from '../models/orderModel/read';
+import { updateMyOrderDeliver, updateMyOrder } from '../models/orderModel/update';
+import { deleteMyOrder } from '../models/orderModel/delete';
 import { readApplicants } from '../models/applicantModel';
 import { createChatAsAdmin } from '../models/chatModel';
 
@@ -55,7 +49,7 @@ const putMyOneOrder = async (req, res) => {
     const orderId = req.params.orderId;
     body.hostId = hostId;
     body.orderId = orderId;
-    const updatedOrder = await updateMyOrder(body);
+    await updateMyOrder(body);
     res.json(vroomRes(true, true, '주문이 업데이트 되었습니다. 업데이트 내용은 아래와 같습니다', { body }));
   } catch (e) {
     console.error(e);
@@ -116,18 +110,26 @@ const putMyOrderApplicant = async (req, res) => {
 };
 
 const getMyOrdersAsHost = async (req, res) => {
-  const userId = req.decoded.id;
-  const orderInfoAsHost = await readAllOrdersAsHost(userId);
-  return res.json(vroomRes(true, true, '내가 host인 주문 내역을 보내드립니다.', orderInfoAsHost));
+  try {
+    const userId = req.decoded.id;
+    const orderInfoAsHost = await readAllOrdersAsHost(userId);
+    return res.json(vroomRes(true, true, '내가 host인 주문 내역을 보내드립니다.', orderInfoAsHost));
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
 };
 
 const getMyOrdersAsDeliver = async (req, res) => {
-  const userId = req.decoded.id;
-  const orderInfoAsDeliver = await readAllOrdersAsDeliver(userId);
-  return res.json(vroomRes(true, true, '내가 deliver인 주문 내역을 보내드립니다', orderInfoAsDeliver));
+  try {
+    const userId = req.decoded.id;
+    const orderInfoAsDeliver = await readAllOrdersAsDeliver(userId);
+    return res.json(vroomRes(true, true, '내가 deliver인 주문 내역을 보내드립니다', orderInfoAsDeliver));
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
 };
-
-const getMyOrdersLiked = async (req, res) => {};
 
 module.exports = {
   getMyOrders,
@@ -137,6 +139,5 @@ module.exports = {
   getMyOrderApplicant,
   putMyOrderApplicant,
   getMyOrdersAsHost,
-  getMyOrdersAsDeliver,
-  getMyOrdersLiked
+  getMyOrdersAsDeliver
 };

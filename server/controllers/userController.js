@@ -1,19 +1,19 @@
 import { vroomRes } from '../middlewares/vroomRes';
 import { readUserInfo, updateImage, updateCampus } from '../models/userModel';
 
-const getMyInfo = async (req, res, next) => {
+const getMyInfo = async (req, res) => {
   try {
     const userId = req.decoded.id;
     console.log('userId', userId);
     const userInfo = await readUserInfo(userId);
     res.json(vroomRes(true, true, '유저의 개인정보, 평점을 제공합니다.', userInfo));
   } catch (e) {
-    next(e);
+    console.error(e);
     throw e;
   }
 };
 
-const updateUserImage = async (req, res, next) => {
+const updateUserImage = async (req, res) => {
   try {
     console.log('req.body', req.body);
     console.log('req.headers', req.headers);
@@ -33,12 +33,12 @@ const updateUserImage = async (req, res, next) => {
       res.json(vroomRes(false, true, '업로드가 실패했습니다.', null));
     }
   } catch (e) {
-    next(e);
+    console.error(e);
     throw e;
   }
 };
 
-const updateUserCampus = async (req, res, next) => {
+const updateUserCampus = async (req, res) => {
   try {
     const userId = req.decoded.id;
     const { campus, major } = req.body;
@@ -56,7 +56,7 @@ const updateUserCampus = async (req, res, next) => {
       );
     }
   } catch (e) {
-    next(e);
+    console.error(e);
     throw e;
   }
 };
