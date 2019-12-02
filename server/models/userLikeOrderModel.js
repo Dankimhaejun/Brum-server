@@ -7,7 +7,7 @@ const readAllUserLikeOrder = async userId => {
       include: [
         {
           model: db.order,
-          order: [['orderId', 'ASC']]
+          order: [['orderId', 'DESC']]
         }
       ]
     })
@@ -45,7 +45,7 @@ module.exports = {
 /* await db.order
     .findAll({
       where: { userId },
-      order: [['orderId', 'ASC']],
+      order: [['orderId', 'DESC']],
       include: [
         {
           model: db.orderImage,

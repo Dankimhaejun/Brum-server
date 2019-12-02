@@ -45,7 +45,7 @@ const createOrder = async body => {
 const readAllOrders = async () => {
   return await db.order
     .findAll({
-      order: [['orderId', 'ASC']],
+      order: [['orderId', 'DESC']],
       include: [
         {
           model: db.orderImage,
@@ -72,7 +72,7 @@ const readAllOrdersByCampus = async campus => {
   return await db.order
     .findAll({
       where: { campus },
-      order: [['orderId', 'ASC']],
+      order: [['orderId', 'DESC']],
       include: [
         {
           model: db.orderImage,
@@ -135,7 +135,7 @@ const readMyOrders = async userId => {
   return await db.order
     .findAll({
       where: { hostId: userId },
-      order: [['orderId', 'ASC']],
+      order: [['orderId', 'DESC']],
       include: [
         {
           model: db.orderImage,
@@ -244,7 +244,7 @@ const readAllOrdersAsHost = async userId => {
   return await db.order
     .findAll({
       where: { hostId: userId },
-      order: [['orderId', 'ASC']],
+      order: [['orderId', 'DESC']],
       include: [{ model: db.mannerScore }]
     })
     .catch(err => {
@@ -257,7 +257,7 @@ const readAllOrdersAsDeliver = async userId => {
   return await db.order
     .findAll({
       where: { deliverId: userId },
-      order: [['orderId', 'ASC']],
+      order: [['orderId', 'DESC']],
       include: [{ model: db.mannerScore }]
     })
     .catch(err => {
