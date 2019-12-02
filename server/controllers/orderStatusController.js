@@ -1,9 +1,9 @@
 import { vroomRes } from '../middlewares/vroomRes';
 import { sendPushNotificationByAxios } from '../middlewares/notifications';
 import { readHostPushTokenByOrderId, readDeliverPushTokenByOrderId } from '../models/userModel';
-import { updateOrderStatus } from '../models/orderModel';
+import { updateOrderStatus } from '../models/orderModel/update';
 
-const putOrderStatus = async (req, res, next) => {
+const putOrderStatus = async (req, res) => {
   try {
     const { orderId, orderStatus } = req.params;
     const hostPushToken = await readHostPushTokenByOrderId(orderId); //주문자 푸시토큰 찾기
@@ -29,7 +29,7 @@ const putOrderStatus = async (req, res, next) => {
     }
     res.json(vroomRes(true, true, `${orderStatus}번 버튼을 눌렀습니다`, checkOrderStatus));
   } catch (e) {
-    next(e);
+    console.error(e);
     throw e;
   }
 };

@@ -7,18 +7,17 @@ import {
 } from '../models/registerModel';
 import { vroomRes } from '../middlewares/vroomRes';
 import { createToken } from '../middlewares/jwt';
-import { firebaseSDK } from '../middlewares/firebase';
 
-const main = async (req, res, next) => {
+const main = async (req, res) => {
   try {
     return res.json({ message: 'welcome' });
   } catch (e) {
-    next(e);
+    console.error(e);
     throw e;
   }
 };
 
-const register = async (req, res, next) => {
+const register = async (req, res) => {
   try {
     const { phone, password, nickname, sex, agreementAd, campus, age, pushToken } = req.body;
     console.log('pushToken', pushToken);
@@ -56,12 +55,12 @@ const register = async (req, res, next) => {
       );
     }
   } catch (e) {
-    next(e);
+    console.error(e);
     throw e;
   }
 };
 
-const checkDuplicatedPhone = async (req, res, next) => {
+const checkDuplicatedPhone = async (req, res) => {
   try {
     const phone = req.body.phone;
     const isDuplicate = await checkPhone(phone);
@@ -71,12 +70,12 @@ const checkDuplicatedPhone = async (req, res, next) => {
     }
     res.json(vroomRes(false, null, '중복된 휴대폰 번호입니다. 이용불가합니다.', phone));
   } catch (e) {
-    next(e);
+    console.error(e);
     throw e;
   }
 };
 
-const login = async (req, res, next) => {
+const login = async (req, res) => {
   try {
     const { phone, password, pushToken } = req.body;
     console.log('pushToken', pushToken);
@@ -113,12 +112,12 @@ const login = async (req, res, next) => {
       )
     );
   } catch (e) {
-    next(e);
+    console.error(e);
     throw e;
   }
 };
 
-const changePassword = async (req, res, next) => {
+const changePassword = async (req, res) => {
   try {
     const { phone, password } = req.body;
     const isUser = await checkPhone(phone);
@@ -134,16 +133,16 @@ const changePassword = async (req, res, next) => {
     }
     res.send();
   } catch (e) {
-    next(e);
+    console.error(e);
     throw e;
   }
 };
-const logout = (req, res, next) => {
+const logout = (req, res) => {
   try {
     res.clearCookie('jwt');
     res.json(vroomRes(true, false, null, 'Logged out, token is deleted'));
   } catch (e) {
-    next(e);
+    console.error(e);
     throw e;
   }
 };

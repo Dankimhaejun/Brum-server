@@ -1,7 +1,7 @@
 import { vroomRes } from '../middlewares/vroomRes';
 import { readUserAllChatsByUserIdStatus1, readOneChatDetailByOrderId } from '../models/chatModel';
 
-const getAllChatsByUserId = async (req, res, next) => {
+const getAllChatsByUserId = async (req, res) => {
   try {
     const userId = req.decoded.id;
     const userChatInfo = await readUserAllChatsByUserIdStatus1(userId);
@@ -14,12 +14,12 @@ const getAllChatsByUserId = async (req, res, next) => {
       data: userChatInfo
     });
   } catch (e) {
-    next(e);
+    console.error(e);
     throw e;
   }
 };
 
-const getChatDetailByOrderId = async (req, res, next) => {
+const getChatDetailByOrderId = async (req, res) => {
   try {
     const userId = req.decoded.id;
     const orderId = req.params.orderId;
@@ -33,7 +33,7 @@ const getChatDetailByOrderId = async (req, res, next) => {
       )
     );
   } catch (e) {
-    next(e);
+    console.error(e);
     throw e;
   }
 };

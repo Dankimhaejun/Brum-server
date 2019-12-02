@@ -1,9 +1,10 @@
 import { vroomRes } from '../middlewares/vroomRes';
-import { createOrder, readAllOrders, readAllOrdersByCampus, readOneOrder } from '../models/orderModel';
+import { createOrder } from '../models/orderModel/create';
+import { readAllOrders, readAllOrdersByCampus, readOneOrder } from '../models/orderModel/read';
 import { createOrderImages } from '../models/orderImageModel';
 import { uploadOrderImages } from '../middlewares/s3';
 
-const getOrders = async (req, res, next) => {
+const getOrders = async (req, res) => {
   try {
     const getAllOrders = await readAllOrders();
     res.json(
@@ -17,12 +18,12 @@ const getOrders = async (req, res, next) => {
       )
     );
   } catch (e) {
-    next(e);
+    console.error(e);
     throw e;
   }
 };
 
-const getAllOrdersByCampus = async (req, res, next) => {
+const getAllOrdersByCampus = async (req, res) => {
   try {
     const campus = req.params.campus;
     const getOrdersByCampus = await readAllOrdersByCampus(campus);
@@ -37,12 +38,12 @@ const getAllOrdersByCampus = async (req, res, next) => {
       )
     );
   } catch (e) {
-    next(e);
+    console.error(e);
     throw e;
   }
 };
 
-const getIdOrder = async (req, res, next) => {
+const getIdOrder = async (req, res) => {
   try {
     const userId = req.decoded.id;
     const orderId = req.params.orderId;
@@ -56,12 +57,12 @@ const getIdOrder = async (req, res, next) => {
       )
     );
   } catch (e) {
-    next(e);
+    console.error(e);
     throw e;
   }
 };
 
-const postOrder = async (req, res, next) => {
+const postOrder = async (req, res) => {
   try {
     const uploadImage = uploadOrderImages.fields([{ name: 'thumbnail' }, { name: 'file' }]);
     await uploadImage(req, res, async function(err) {
@@ -92,7 +93,7 @@ const postOrder = async (req, res, next) => {
       );
     });
   } catch (e) {
-    next(e);
+    console.error(e);
     throw e;
   }
 };

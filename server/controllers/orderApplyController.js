@@ -3,7 +3,7 @@ import { sendPushNotificationByAxios } from '../middlewares/notifications';
 import { readHostPushTokenByOrderId } from '../models/userModel';
 import { createOrderApply, readUserApplyOrNot, updateOrderApply, deleteMyOrderApply } from '../models/applicantModel';
 
-const postOrderApply = async (req, res, next) => {
+const postOrderApply = async (req, res) => {
   try {
     const userId = req.decoded.id;
     const orderId = req.params.orderId;
@@ -26,12 +26,12 @@ const postOrderApply = async (req, res, next) => {
       res.json(vroomRes(false, true, '이미 지원한 유저입니다. 다시 확인해주세요', null));
     }
   } catch (e) {
-    next(e);
+    console.error(e);
     throw e;
   }
 };
 
-const putOrderApply = async (req, res, next) => {
+const putOrderApply = async (req, res) => {
   try {
     const userId = req.decoded.id;
     const orderId = req.params.orderId;
@@ -47,12 +47,12 @@ const putOrderApply = async (req, res, next) => {
       )
     );
   } catch (e) {
-    next(e);
+    console.error(e);
     throw e;
   }
 };
 
-const deleteOrderApply = async (req, res, next) => {
+const deleteOrderApply = async (req, res) => {
   try {
     const userId = req.decoded.id;
     const orderId = req.params.orderId;
@@ -67,7 +67,7 @@ const deleteOrderApply = async (req, res, next) => {
       )
     );
   } catch (e) {
-    next(e);
+    console.error(e);
     throw e;
   }
 };
