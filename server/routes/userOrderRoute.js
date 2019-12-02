@@ -9,8 +9,7 @@ import {
   getMyOrderApplicant,
   putMyOrderApplicant,
   getMyOrdersAsHost,
-  getMyOrdersAsDeliver,
-  getMyOrdersLiked
+  getMyOrdersAsDeliver
 } from '../controllers/userOrderController';
 
 import { checkToken } from '../middlewares/jwt';

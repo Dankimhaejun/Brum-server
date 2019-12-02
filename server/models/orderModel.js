@@ -245,7 +245,8 @@ const readAllOrdersAsHost = async userId => {
     .findAll({
       where: { hostId: userId },
       order: [['orderId', 'DESC']],
-      include: [{ model: db.mannerScore }]
+      include: [{ model: db.mannerScore }],
+      paranoid: false
     })
     .catch(err => {
       console.error(err);
@@ -258,6 +259,7 @@ const readAllOrdersAsDeliver = async userId => {
     .findAll({
       where: { deliverId: userId },
       order: [['orderId', 'DESC']],
+      paranoid: false,
       include: [{ model: db.mannerScore }]
     })
     .catch(err => {

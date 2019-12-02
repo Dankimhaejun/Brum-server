@@ -13,7 +13,8 @@ const userRouter = require('./routes/userRoute');
 const orderRouter = require('./routes/orderRoute');
 const userOrderRouter = require('./routes/userOrderRoute');
 const userChatRouter = require('./routes/userChatRoute');
-const userLikeOrderRouter = require('./routes/userLikeOrderRoute.js');
+const userLikeOrderRouter = require('./routes/userLikeOrderRoute');
+const userReviewRouter = require('./routes/userReviewRoute');
 
 const app = express();
 
@@ -41,6 +42,7 @@ app.use('/user', userRouter);
 app.use('/user/order', userOrderRouter);
 app.use('/user/chat', userChatRouter);
 app.use('/user/like/order', userLikeOrderRouter);
+app.use('/user/review/', userReviewRouter);
 
 // app.use('/user', express.static('public'));
 

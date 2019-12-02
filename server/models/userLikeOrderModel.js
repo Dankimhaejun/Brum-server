@@ -7,7 +7,8 @@ const readAllUserLikeOrder = async userId => {
       include: [
         {
           model: db.order,
-          order: [['orderId', 'DESC']]
+          order: [['orderId', 'DESC']],
+          paranoid: false
         }
       ]
     })

@@ -18,7 +18,7 @@ const readUserAllChatsByUserIdStatus1 = async userId => {
   console.log('userId', userId);
   return await db.order
     .findAll({
-      order: [['orderId', 'ASC']],
+      order: [['orderId', 'DESC']],
       where: {
         // [Op.not]: { orderStatus: 0 },
         orderStatus: { [Op.between]: [1, 4] },
