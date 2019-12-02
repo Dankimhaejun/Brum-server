@@ -70,7 +70,7 @@ const readOneOrder = async orderId => {
           attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image'],
           include: [
             {
-              model: db.mannerScore,
+              model: db.review,
               as: 'getScore',
               attributes: ['score']
             }
@@ -109,7 +109,7 @@ const readMyOrders = async userId => {
               attributes: ['userId', 'phone', 'nickname', 'sex', 'age', 'major', 'introduction', 'university', 'image'],
               include: [
                 {
-                  model: db.mannerScore,
+                  model: db.review,
                   as: 'getScore',
                   attributes: ['score']
                 }
@@ -155,7 +155,12 @@ const readMyOneOrder = async (userId, orderId) => {
     });
 };
 
-const readHostAndDeliverIdByOrderIdNotMe = async orderId => {};
+const readHostAndDeliverIdByOrderIdNotMe = async orderId => {
+  return await db.order.findOne({ where: { orderId }, attributes: ['hostId', 'deliverId'] }).catch(err => {
+    console.error(err);
+    throw err;
+  });
+};
 
 const readAllOrdersAsHost = async userId => {
   console.log('userId', userId);
@@ -163,7 +168,7 @@ const readAllOrdersAsHost = async userId => {
     .findAll({
       where: { hostId: userId },
       order: [['orderId', 'DESC']],
-      include: [{ model: db.mannerScore }],
+      include: [{ model: db.review }],
       paranoid: false
     })
     .catch(err => {
@@ -178,7 +183,7 @@ const readAllOrdersAsDeliver = async userId => {
       where: { deliverId: userId },
       order: [['orderId', 'DESC']],
       paranoid: false,
-      include: [{ model: db.mannerScore }]
+      include: [{ model: db.review }]
     })
     .catch(err => {
       console.error(err);

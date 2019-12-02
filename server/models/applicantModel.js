@@ -22,7 +22,7 @@ const readApplicants = async orderId => {
           ],
           include: [
             {
-              model: db.mannerScore,
+              model: db.review,
               as: 'getScore',
               attributes: ['score']
               // attributes: [[db.sequelize.fn('sum', db.sequelize.col('score')), 'rateAvg']],

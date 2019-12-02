@@ -18,7 +18,7 @@ const readUserInfo = async userId => {
       ],
       include: [
         {
-          model: db.mannerScore,
+          model: db.review,
           as: 'getScore',
           attributes: [
             [db.sequelize.fn('count', '*'), 'count'],
