@@ -8,6 +8,7 @@ const createOrderImages = async (filesArray, orderId) => {
         orderImageURL: filesArray[i].location
       })
       .catch(err => {
+        console.error(err);
         throw err;
       });
   }
@@ -16,6 +17,7 @@ const createOrderImages = async (filesArray, orderId) => {
 
 const deleteOrderImages = async orderId => {
   return await db.orderImage.destroy({ where: { orderId } }).catch(err => {
+    console.error(err);
     throw err;
   });
 };

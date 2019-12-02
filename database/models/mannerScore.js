@@ -9,6 +9,10 @@ module.exports = function(sequelize, Datatypes) {
         autoIncrement: true,
         primaryKey: true
       },
+      orderId: {
+        type: Datatypes.INTEGER,
+        allowNull: false
+      },
       evaluatorId: {
         type: Datatypes.INTEGER,
         allowNull: false
@@ -18,13 +22,16 @@ module.exports = function(sequelize, Datatypes) {
         allowNull: false
       },
       score: {
-        type: Datatypes.INTEGER
+        type: Datatypes.INTEGER,
+        allowNull: false
+      },
+      review: {
+        type: Datatypes.STRING
       }
     },
     {
       underscored: false,
-      freezeTableName: true,
-      paranoid: true
+      freezeTableName: true
     }
   );
   mannerScore.associate = function(db) {
@@ -33,6 +40,9 @@ module.exports = function(sequelize, Datatypes) {
       foreignKey: 'evaluatorId'
     });
     mannerScore.belongsTo(db.user, { as: 'getScore', foreignKey: 'receiverId' });
+    mannerScore.belongsTo(db.order, {
+      foreignKey: 'orderId'
+    });
   };
   return mannerScore;
 };

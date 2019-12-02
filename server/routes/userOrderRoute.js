@@ -23,8 +23,6 @@ router.get('/host', getMyOrdersAsHost);
 
 router.get('/deliver', getMyOrdersAsDeliver);
 
-router.get('/like', getMyOrdersLiked);
-
 router.get('/:orderId', getMyOneOrder);
 
 router.put('/:orderId', putMyOneOrder);

@@ -6,7 +6,10 @@ const checkPhone = async phone => {
     .findOne({
       where: { phone: phone }
     })
-    .catch(err => console.error(err));
+    .catch(err => {
+      console.error(err);
+      throw err;
+    });
 };
 
 const createUser = async (phone, password, nickname, sex, agreementAd, campus, age, pushToken) => {
@@ -24,7 +27,10 @@ const createUser = async (phone, password, nickname, sex, agreementAd, campus, a
       age,
       image: 'https://vroom-database.s3.ap-northeast-2.amazonaws.com/userImage/default'
     })
-    .catch(err => console.error(err));
+    .catch(err => {
+      console.error(err);
+      throw err;
+    });
 };
 
 const handleLogin = async (phone, password) => {
@@ -33,16 +39,25 @@ const handleLogin = async (phone, password) => {
     .findOne({
       where: { phone: phone, password: hashedPassword }
     })
-    .catch(err => console.error(err));
+    .catch(err => {
+      console.error(err);
+      throw err;
+    });
 };
 
 const updateUserPassword = async (phone, password) => {
   const hashedPassword = await hashPassword(password);
-  return await db.user.update({ password: hashedPassword }, { where: { phone } }).catch(err => console.error(err));
+  return await db.user.update({ password: hashedPassword }, { where: { phone } }).catch(err => {
+    console.error(err);
+    throw err;
+  });
 };
 
 const updatePushTokenByLogin = async (userId, pushToken) => {
-  return await db.user.update({ pushToken }, { where: { userId } });
+  return await db.user.update({ pushToken }, { where: { userId } }).catch(err => {
+    console.error(err);
+    throw err;
+  });
 };
 
 module.exports = {

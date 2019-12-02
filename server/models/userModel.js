@@ -28,6 +28,7 @@ const readUserInfo = async userId => {
       ]
     })
     .catch(err => {
+      console.error(err);
       throw err;
     });
 };
@@ -54,6 +55,7 @@ const readHostPushTokenByOrderId = async orderId => {
     })
     .then(result => result.dataValues.hostInfo.pushToken)
     .catch(err => {
+      console.error(err);
       throw err;
     });
 };
@@ -71,18 +73,21 @@ const readDeliverPushTokenByOrderId = async orderId => {
     })
     .then(result => result.dataValues.deliverInfo.pushToken)
     .catch(err => {
+      console.error(err);
       throw err;
     });
 };
 
 const updateImage = async (userId, image) => {
   return await db.user.update({ image }, { where: { userId } }).catch(err => {
+    console.error(err);
     throw err;
   });
 };
 
 const updateCampus = async (userId, campus, major) => {
   return await db.user.update({ campus, major }, { where: { userId } }).catch(err => {
+    console.error(err);
     throw err;
   });
 };

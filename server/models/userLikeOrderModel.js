@@ -4,14 +4,15 @@ const readAllUserLikeOrder = async userId => {
   return await db.userLikeOrder
     .findAll({
       where: { userId },
-      order: [['orderId', 'ASC']],
       include: [
         {
-          model: db.order
+          model: db.order,
+          order: [['orderId', 'ASC']]
         }
       ]
     })
     .catch(err => {
+      console.error(err);
       throw err;
     });
 };
@@ -24,12 +25,14 @@ const createUserLikeOrder = async (userId, orderId) => {
       orderId
     })
     .catch(err => {
+      console.error(err);
       throw err;
     });
 };
 
 const deleteUserLikeOneOrder = async (userId, orderId) => {
   return await db.userLikeOrder.destroy({ where: { userId, orderId } }).catch(err => {
+    console.error(err);
     throw err;
   });
 };

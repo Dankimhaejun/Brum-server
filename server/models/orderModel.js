@@ -135,6 +135,7 @@ const readMyOrders = async userId => {
   return await db.order
     .findAll({
       where: { hostId: userId },
+      order: [['orderId', 'ASC']],
       include: [
         {
           model: db.orderImage,
@@ -198,10 +199,23 @@ const readMyOneOrder = async (userId, orderId) => {
 
 const updateMyOrder = async body => {
   const { orderId, hostId, title, departures, arrivals, desiredArrivalTime, details, price, isPrice } = body;
-  return await db.order.update(
-    { title, departures, arrivals, desiredArrivalTime, details, price, isPrice },
-    { where: { orderId, hostId } }
-  );
+  return await db.order
+    .update(
+      {
+        title,
+        departures,
+        arrivals,
+        desiredArrivalTime,
+        details,
+        price,
+        isPrice
+      },
+      { where: { orderId, hostId } }
+    )
+    .catch(err => {
+      console.error(err);
+      throw err;
+    });
 };
 
 const updateOrderStatus = async (orderId, orderStatus) => {
@@ -227,17 +241,29 @@ const deleteMyOrder = async (userId, orderId) => {
 
 const readAllOrdersAsHost = async userId => {
   console.log('userId', userId);
-  return await db.order.findAll({ where: { hostId: userId } }).catch(err => {
-    console.error(err);
-    throw err;
-  });
+  return await db.order
+    .findAll({
+      where: { hostId: userId },
+      order: [['orderId', 'ASC']],
+      include: [{ model: db.mannerScore }]
+    })
+    .catch(err => {
+      console.error(err);
+      throw err;
+    });
 };
 
 const readAllOrdersAsDeliver = async userId => {
-  return await db.order.findAll({ where: { deliverId: userId } }).catch(err => {
-    console.error(err);
-    throw err;
-  });
+  return await db.order
+    .findAll({
+      where: { deliverId: userId },
+      order: [['orderId', 'ASC']],
+      include: [{ model: db.mannerScore }]
+    })
+    .catch(err => {
+      console.error(err);
+      throw err;
+    });
 };
 
 module.exports = {
