@@ -7,7 +7,10 @@ import {
   putMyOneOrder,
   deleteMyOneOrder,
   getMyOrderApplicant,
-  putMyOrderApplicant
+  putMyOrderApplicant,
+  getMyOrdersAsHost,
+  getMyOrdersAsDeliver,
+  getMyOrdersLiked
 } from '../controllers/userOrderController';
 
 import { checkToken } from '../middlewares/jwt';
@@ -15,6 +18,12 @@ import { checkToken } from '../middlewares/jwt';
 router.use('/', checkToken);
 
 router.get('/', getMyOrders);
+
+router.get('/host', getMyOrdersAsHost);
+
+router.get('/deliver', getMyOrdersAsDeliver);
+
+router.get('/like', getMyOrdersLiked);
 
 router.get('/:orderId', getMyOneOrder);
 

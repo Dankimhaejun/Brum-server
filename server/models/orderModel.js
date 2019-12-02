@@ -1,25 +1,6 @@
 const db = require('../../database/models');
 
 const createOrder = async body => {
-  console.log('body', body);
-  console.log(
-    'campus,title,hostId,departures,depLat,depLng,arrivals,arrLat,arrLng,category,thumbnailURL,desiredArrivalTime, details,price,isPrice',
-    campus,
-    title,
-    hostId,
-    departures,
-    depLat,
-    depLng,
-    arrivals,
-    arrLat,
-    arrLng,
-    category,
-    thumbnailURL,
-    desiredArrivalTime,
-    details,
-    price,
-    isPrice
-  );
   const {
     campus,
     title,
@@ -82,6 +63,7 @@ const readAllOrders = async () => {
       ]
     })
     .catch(err => {
+      console.error(err);
       throw err;
     });
 };
@@ -108,6 +90,7 @@ const readAllOrdersByCampus = async campus => {
       ]
     })
     .catch(err => {
+      console.error(err);
       throw err;
     });
 };
@@ -143,6 +126,7 @@ const readOneOrder = async orderId => {
       ]
     })
     .catch(err => {
+      console.error(err);
       throw err;
     });
 };
@@ -182,6 +166,7 @@ const readMyOrders = async userId => {
       ]
     })
     .catch(err => {
+      console.error(err);
       throw err;
     });
 };
@@ -206,6 +191,7 @@ const readMyOneOrder = async (userId, orderId) => {
       ]
     })
     .catch(err => {
+      console.error(err);
       throw err;
     });
 };
@@ -227,12 +213,29 @@ const updateOrderStatus = async (orderId, orderStatus) => {
 const updateMyOrderDeliver = async (orderId, deliverId) => {
   await db.applicant.update({ applyStatus: 'chosen' }, { where: { orderId, userId: deliverId } });
   return await db.order.update({ deliverId, orderStatus: 1 }, { where: { orderId }, silent: true }).catch(err => {
+    console.error(err);
     throw err;
   });
 };
 
 const deleteMyOrder = async (userId, orderId) => {
   return await db.order.destroy({ where: { orderId, hostId: userId } }).catch(err => {
+    console.error(err);
+    throw err;
+  });
+};
+
+const readAllOrdersAsHost = async userId => {
+  console.log('userId', userId);
+  return await db.order.findAll({ where: { hostId: userId } }).catch(err => {
+    console.error(err);
+    throw err;
+  });
+};
+
+const readAllOrdersAsDeliver = async userId => {
+  return await db.order.findAll({ where: { deliverId: userId } }).catch(err => {
+    console.error(err);
     throw err;
   });
 };
@@ -247,5 +250,7 @@ module.exports = {
   updateMyOrder,
   updateOrderStatus,
   updateMyOrderDeliver,
-  deleteMyOrder
+  deleteMyOrder,
+  readAllOrdersAsHost,
+  readAllOrdersAsDeliver
 };
