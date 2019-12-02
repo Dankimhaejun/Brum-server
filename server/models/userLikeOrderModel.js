@@ -4,6 +4,7 @@ const readAllUserLikeOrder = async userId => {
   return await db.userLikeOrder
     .findAll({
       where: { userId },
+      paranoid: false,
       include: [
         {
           model: db.order,
