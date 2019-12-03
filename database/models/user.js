@@ -57,7 +57,7 @@ module.exports = function(sequelize, Datatypes) {
         defaultValue: false
       },
       authCode: {
-        type: Datatypes.BOOLEAN,
+        type: Datatypes.STRING,
         defaultValue: null
       },
       pushToken: {

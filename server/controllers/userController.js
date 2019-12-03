@@ -73,7 +73,9 @@ const checkAuthAndPutEmail = async (req, res) => {
   try {
     const userId = req.decoded.id;
     const { email } = req.body;
-    const authCodeSixNumber = Math.floor(Math.random() * 1000000);
+    const authCodeSixNumber = String(Math.random()).substr(2, 6);
+    console.log('authCodeSixNumber', authCodeSixNumber);
+    console.log('userId, email, authCodeSixNumber', userId, email, authCodeSixNumber);
     await updateUserEmailNotAuthed(userId, email, authCodeSixNumber);
     await sendMailToClient(email, authCodeSixNumber);
     return res.json(
@@ -81,7 +83,7 @@ const checkAuthAndPutEmail = async (req, res) => {
         true,
         true,
         '메일인증을 요청한 유저에게 메일을 전송했습니다. 유저는 6자리 숫자로된 인증코드를 받을 것입니다',
-        sendMailToClient
+        { email }
       )
     );
   } catch (e) {

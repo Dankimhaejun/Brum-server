@@ -93,6 +93,7 @@ const updateCampus = async (userId, campus, major) => {
 };
 
 const updateUserEmailNotAuthed = async (userId, email, authCode) => {
+  typeof authCode;
   return await db.user.update({ email, authCode }, { where: { userId } }).catch(err => {
     console.error(err);
     throw err;
