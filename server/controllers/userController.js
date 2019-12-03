@@ -6,7 +6,7 @@ import {
   updateCampus,
   updateUserEmailNotAuthed,
   checkAuthCodeWithUserId,
-  updateIsAuthedWithUserId
+  updateIsAuthedAndUniversity
 } from '../models/userModel';
 
 const getMyInfo = async (req, res) => {
@@ -94,12 +94,12 @@ const checkAuthAndPutEmail = async (req, res) => {
 
 const checkAuthCode = async (req, res) => {
   const userId = req.decoded.id;
-  const { authCode } = req.body;
+  const { authCode, university } = req.body;
   const checkCorrectAuthCode = await checkAuthCodeWithUserId(userId, authCode);
   if (checkCorrectAuthCode === null) {
     return res.json(vroomRes(false, true, '잘못된 인증코드입니다. 다시 확인하세요'));
   }
-  await updateIsAuthedWithUserId(userId);
+  await updateIsAuthedAndUniversity(userId, university);
   return res.json(vroomRes(true, true, '보내주신 이메일로 인증이 완료되었습니다. 이 유저는 인증되었습니다'));
 };
 

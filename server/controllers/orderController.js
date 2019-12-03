@@ -46,7 +46,7 @@ const getAllOrdersByCampus = async (req, res) => {
 const getIdOrder = async (req, res) => {
   try {
     const userId = req.decoded.id;
-    const orderId = req.params.orderId;
+    const orderId = Number(req.params.orderId);
     const getOrder = await readOneOrder(orderId);
     return res.json(
       vroomRes(

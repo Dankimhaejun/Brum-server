@@ -22,7 +22,7 @@ const getAllChatsByUserId = async (req, res) => {
 const getChatDetailByOrderId = async (req, res) => {
   try {
     const userId = req.decoded.id;
-    const orderId = req.params.orderId;
+    const orderId = Number(req.params.orderId);
     const getChatInfoByOrderId = await readOneChatDetailByOrderId(orderId);
     return res.json(
       vroomRes(

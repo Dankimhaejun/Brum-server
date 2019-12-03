@@ -27,7 +27,7 @@ const getMyOrders = async (req, res) => {
 const getMyOneOrder = async (req, res) => {
   try {
     const userId = req.decoded.id;
-    const orderId = req.params.orderId;
+    const orderId = Number(req.params.orderId);
     const getMyInfo = await readUserInfo(userId);
     const getMyOneOrder = await readMyOneOrder(userId, orderId);
     return res.json(
@@ -46,7 +46,7 @@ const putMyOneOrder = async (req, res) => {
   try {
     const hostId = req.decoded.id;
     const body = req.body;
-    const orderId = req.params.orderId;
+    const orderId = Number(req.params.orderId);
     body.hostId = hostId;
     body.orderId = orderId;
     await updateMyOrder(body);
@@ -60,7 +60,7 @@ const putMyOneOrder = async (req, res) => {
 const deleteMyOneOrder = async (req, res) => {
   try {
     const userId = req.decoded.id;
-    const orderId = req.params.orderId;
+    const orderId = Number(req.params.orderId);
     const deleteOrder = await deleteMyOrder(userId, orderId);
     console.log('deleteOrder', deleteOrder);
     return res.json(vroomRes(true, true, '내 주문이 삭제되었습니다', deleteOrder));
@@ -72,7 +72,7 @@ const deleteMyOneOrder = async (req, res) => {
 
 const getMyOrderApplicant = async (req, res) => {
   try {
-    const orderId = req.params.orderId;
+    const orderId = Number(req.params.orderId);
     const getMyApplicant = await readApplicants(orderId);
     return res.json(
       vroomRes(true, true, '지원자들의 정보를 제공합니다, 지원자의 평점은 배열로 나와있으니 계산해주세요.', {
@@ -87,7 +87,7 @@ const getMyOrderApplicant = async (req, res) => {
 
 const putMyOrderApplicant = async (req, res) => {
   try {
-    const orderId = req.params.orderId;
+    const orderId = Number(req.params.orderId);
     let deliverId = req.body.deliverId;
     deliverId = String(deliverId);
     await updateMyOrderDeliver(orderId, deliverId); // 배달자 지정해줌

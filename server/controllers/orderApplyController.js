@@ -6,7 +6,7 @@ import { createOrderApply, readUserApplyOrNot, updateOrderApply, deleteMyOrderAp
 const postOrderApply = async (req, res) => {
   try {
     const userId = req.decoded.id;
-    const orderId = req.params.orderId;
+    const orderId = Number(req.params.orderId);
     const { bidPrice, applyComment } = req.body;
     const checkApply = await readUserApplyOrNot(orderId, userId);
     const hostPushToken = await readHostPushTokenByOrderId(orderId);
@@ -34,7 +34,7 @@ const postOrderApply = async (req, res) => {
 const putOrderApply = async (req, res) => {
   try {
     const userId = req.decoded.id;
-    const orderId = req.params.orderId;
+    const orderId = Number(req.params.orderId);
     const { bidPrice, applyComment } = req.body;
     const updateApply = await updateOrderApply(orderId, userId, bidPrice, applyComment);
     console.log('updateApply', updateApply);
@@ -55,7 +55,7 @@ const putOrderApply = async (req, res) => {
 const deleteOrderApply = async (req, res) => {
   try {
     const userId = req.decoded.id;
-    const orderId = req.params.orderId;
+    const orderId = Number(req.params.orderId);
     const deleteApply = await deleteMyOrderApply(orderId, userId);
     console.log('deleteApply', deleteApply);
     return res.json(

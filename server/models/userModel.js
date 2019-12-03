@@ -107,8 +107,8 @@ const checkAuthCodeWithUserId = async (userId, authCode) => {
   });
 };
 
-const updateIsAuthedWithUserId = async userId => {
-  return await db.user.update({ isAuthed: true }, { where: { userId } }).catch(err => {
+const updateIsAuthedAndUniversity = async (userId, university) => {
+  return await db.user.update({ isAuthed: true, university }, { where: { userId } }).catch(err => {
     console.error(err);
     throw err;
   });
@@ -122,6 +122,6 @@ module.exports = {
   updateImage,
   updateCampus,
   updateUserEmailNotAuthed,
-  updateIsAuthedWithUserId,
+  updateIsAuthedAndUniversity,
   checkAuthCodeWithUserId
 };

@@ -5,7 +5,7 @@ import { createScoreAndReview, readMyReviewforCheck, updateMyReview, deleteMyRev
 const postUserReview = async (req, res) => {
   try {
     const userId = req.decoded.id;
-    const orderId = req.params.orderId;
+    const orderId = Number(req.params.orderId);
     const { score, userReview } = req.body;
     console.log('score, userReview', score, userReview);
     const checkMyReview = await readMyReviewforCheck(userId, orderId);
@@ -30,7 +30,7 @@ const postUserReview = async (req, res) => {
 const putUserReview = async (req, res) => {
   try {
     const userId = req.decoded.id;
-    const orderId = req.params.orderId;
+    const orderId = Number(req.params.orderId);
     const { score, userReview } = req.body;
     await updateMyReview(orderId, userId, score, userReview);
     return res.json(
@@ -48,9 +48,15 @@ const putUserReview = async (req, res) => {
 };
 
 const deleteUserReview = async (req, res) => {
-  const userId = req.decoded.id;
-  const orderId = req.params.orderId;
-  await deleteMyReview(orderId, userId);
+  try {
+    const userId = req.decoded.id;
+    const orderId = Number(req.params.orderId);
+    await deleteMyReview(orderId, userId);
+    return res.json(vroomRes(true, true, '성공적으로 지워졌습니다 다시 한번 페이지를 확인해보세요'));
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
 };
 
 module.exports = {
