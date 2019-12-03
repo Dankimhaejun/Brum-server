@@ -19,6 +19,7 @@ const main = async (req, res) => {
 
 const register = async (req, res) => {
   try {
+    console.log('req.body', req.body);
     const { phone, password, nickname, sex, agreementAd, campus, age, pushToken } = req.body;
     console.log('pushToken', pushToken);
     const isRegister = await createUser(phone, password, nickname, sex, agreementAd, campus, age, pushToken);
