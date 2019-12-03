@@ -1,5 +1,13 @@
 import { vroomRes } from '../middlewares/vroomRes';
-import { readUserInfo, updateImage, updateCampus } from '../models/userModel';
+import { sendMailToClient } from '../middlewares/nodemailer';
+import {
+  readUserInfo,
+  updateImage,
+  updateCampus,
+  updateUserEmailNotAuthed,
+  checkAuthCodeWithUserId,
+  updateIsAuthedWithUserId
+} from '../models/userModel';
 
 const getMyInfo = async (req, res) => {
   try {
@@ -61,8 +69,42 @@ const updateUserCampus = async (req, res) => {
   }
 };
 
+const checkAuthAndPutEmail = async (req, res) => {
+  try {
+    const userId = req.decoded.id;
+    const { email } = req.body;
+    const authCodeSixNumber = Math.floor(Math.random() * 1000000);
+    await updateUserEmailNotAuthed(userId, email, authCodeSixNumber);
+    await sendMailToClient(email, authCodeSixNumber);
+    return res.json(
+      vroomRes(
+        true,
+        true,
+        '메일인증을 요청한 유저에게 메일을 전송했습니다. 유저는 6자리 숫자로된 인증코드를 받을 것입니다',
+        sendMailToClient
+      )
+    );
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+};
+
+const checkAuthCode = async (req, res) => {
+  const userId = req.decoded.id;
+  const { authCode } = req.body;
+  const checkCorrectAuthCode = await checkAuthCodeWithUserId(userId, authCode);
+  if (checkCorrectAuthCode === null) {
+    return res.json(vroomRes(false, true, '잘못된 인증코드입니다. 다시 확인하세요'));
+  }
+  await updateIsAuthedWithUserId(userId);
+  return res.json(vroomRes(true, true, '보내주신 이메일로 인증이 완료되었습니다. 이 유저는 인증되었습니다'));
+};
+
 module.exports = {
   getMyInfo,
   updateUserImage,
-  updateUserCampus
+  updateUserCampus,
+  checkAuthAndPutEmail,
+  checkAuthCode
 };
