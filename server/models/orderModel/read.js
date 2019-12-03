@@ -179,7 +179,14 @@ const readAllOrdersAsHost = async userId => {
     .findAll({
       where: { hostId: userId },
       order: [['orderId', 'DESC']],
-      include: [{ model: db.review }],
+      include: [
+        { model: db.review },
+        {
+          model: db.user,
+          as: 'deliverInfo',
+          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image', 'isAuthed']
+        }
+      ],
       paranoid: false
     })
     .catch(err => {
@@ -194,7 +201,14 @@ const readAllOrdersAsDeliver = async userId => {
       where: { deliverId: userId },
       order: [['orderId', 'DESC']],
       paranoid: false,
-      include: [{ model: db.review }]
+      include: [
+        { model: db.review },
+        {
+          model: db.user,
+          as: 'hostInfo',
+          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image', 'isAuthed']
+        }
+      ]
     })
     .catch(err => {
       console.error(err);
