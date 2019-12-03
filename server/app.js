@@ -42,7 +42,7 @@ app.use('/user', userRouter);
 app.use('/user/order', userOrderRouter);
 app.use('/user/chat', userChatRouter);
 app.use('/user/like/order', userLikeOrderRouter);
-app.use('/user/review/', userReviewRouter);
+app.use('/user/review', userReviewRouter);
 
 // app.use('/user', express.static('public'));
 
