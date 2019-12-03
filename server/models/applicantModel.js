@@ -18,7 +18,8 @@ const readApplicants = async orderId => {
             'major',
             'university',
             'introduction',
-            'image'
+            'image',
+            'isAuthed'
           ],
           include: [
             {
