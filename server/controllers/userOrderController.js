@@ -87,13 +87,14 @@ const getMyOrderApplicant = async (req, res) => {
 
 const putMyOrderApplicant = async (req, res) => {
   try {
-    const orderId = Number(req.params.orderId);
+    const orderId = req.params.orderId;
     let deliverId = req.body.deliverId;
     deliverId = String(deliverId);
     await updateMyOrderDeliver(orderId, deliverId); // 배달자 지정해줌
     await createChatAsAdmin(orderId); // 채팅방 생성해주는 모델 (어드민으로 만들어줌)
     const deliverInfo = await readUserInfo(deliverId); // 배달자 정보 제공 (없어도 무관함)
     const userPushToken = await readUserPushToken(deliverId);
+    console.log('userPushToken', userPushToken);
     await sendPushNotificationByAxios(userPushToken, '(경)당첨(축)', '배달하러 갑시다 채팅방을 여세요');
     return res.json(
       vroomRes(

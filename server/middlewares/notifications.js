@@ -1,7 +1,7 @@
 const axios = require('axios');
 
-const sendPushNotificationByAxios = (pushToken, title, message) => {
-  return axios
+const sendPushNotificationByAxios = async (pushToken, title, message) => {
+  return await axios
     .post(
       'https://exp.host/--/api/v2/push/send',
       {
@@ -23,7 +23,6 @@ const sendPushNotificationByAxios = (pushToken, title, message) => {
       throw err;
     });
 };
-
 module.exports = {
   sendPushNotificationByAxios
 };
