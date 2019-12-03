@@ -1,6 +1,6 @@
 import { vroomRes } from '../middlewares/vroomRes';
 import { readHostAndDeliverIdByOrderIdNotMe } from '../models/orderModel/read';
-import { createScoreAndReview, readMyReviewforCheck, updateMyReview } from '../models/reviewModel';
+import { createScoreAndReview, readMyReviewforCheck, updateMyReview, deleteMyReview } from '../models/reviewModel';
 
 const postUserReview = async (req, res) => {
   try {
@@ -28,13 +28,33 @@ const postUserReview = async (req, res) => {
 };
 
 const putUserReview = async (req, res) => {
+  try {
+    const userId = req.decoded.id;
+    const orderId = req.params.orderId;
+    const { score, userReview } = req.body;
+    await updateMyReview(orderId, userId, score, userReview);
+    return res.json(
+      vroomRes(true, true, '성공적으로 업데이트 되었습니다.', {
+        orderId,
+        userId,
+        score,
+        userReview
+      })
+    );
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+};
+
+const deleteUserReview = async (req, res) => {
   const userId = req.decoded.id;
   const orderId = req.params.orderId;
-  const { score, userReview } = req.body;
-  const updateReview = updateMyReview(userId, orderId, score, userReview);
+  await deleteMyReview(orderId, userId);
 };
 
 module.exports = {
   postUserReview,
-  putUserReview
+  putUserReview,
+  deleteUserReview
 };

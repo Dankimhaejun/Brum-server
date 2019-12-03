@@ -9,15 +9,37 @@ const readMyReviewforCheck = async (userId, orderId) => {
 };
 
 const createScoreAndReview = async (orderId, evaluatorId, receiverId, score, userReview) => {
-  return await db.review.create({
-    orderId,
-    evaluatorId,
-    receiverId,
-    score,
-    userReview
+  return await db.review
+    .create({
+      orderId,
+      evaluatorId,
+      receiverId,
+      score,
+      userReview
+    })
+    .catch(err => {
+      console.error(err);
+      throw err;
+    });
+};
+
+const updateMyReview = async (orderId, evaluatorId, score, userReview) => {
+  return await db.review.update({ score, userReview }, { where: { orderId, evaluatorId } }).catch(err => {
+    console.error(err);
+    throw err;
   });
 };
+
+const deleteMyReview = async (orderId, evaluatorId) => {
+  return await db.review.destroy({ where: { orderId, evaluatorId } }).catch(err => {
+    console.error(err);
+    throw err;
+  });
+};
+
 module.exports = {
+  createScoreAndReview,
   readMyReviewforCheck,
-  createScoreAndReview
+  updateMyReview,
+  deleteMyReview
 };

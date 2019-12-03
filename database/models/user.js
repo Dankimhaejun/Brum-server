@@ -48,6 +48,18 @@ module.exports = function(sequelize, Datatypes) {
         type: Datatypes.STRING,
         defaultValue: null
       },
+      email: {
+        type: Datatypes.STRING,
+        defaultValue: null
+      },
+      isAuthed: {
+        type: Datatypes.BOOLEAN,
+        defaultValue: false
+      },
+      authCode: {
+        type: Datatypes.BOOLEAN,
+        defaultValue: null
+      },
       pushToken: {
         type: Datatypes.STRING
       },
