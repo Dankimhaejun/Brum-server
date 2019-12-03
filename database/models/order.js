@@ -91,7 +91,7 @@ module.exports = function(sequelize, Datatypes) {
     order.belongsTo(db.user, { as: 'deliverInfo', foreignKey: 'deliverId' });
     order.hasMany(db.chat, { foreignKey: 'orderId' });
     order.hasMany(db.userLikeOrder, { foreignKey: 'orderId' });
-    order.hasMany(db.mannerScore, { foreignKey: 'orderId' });
+    order.hasMany(db.review, { foreignKey: 'orderId' });
   };
   return order;
 };

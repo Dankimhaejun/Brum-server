@@ -14,7 +14,7 @@ const createChatAsAdmin = async orderId => {
     });
 };
 
-const readUserAllChatsByUserIdStatus1 = async userId => {
+const readUserAllChatsByUserIdStatus = async userId => {
   console.log('userId', userId);
   return await db.order
     .findAll({
@@ -28,12 +28,12 @@ const readUserAllChatsByUserIdStatus1 = async userId => {
         {
           model: db.user,
           as: 'hostInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
+          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image', 'isAuthed']
         },
         {
           model: db.user,
           as: 'deliverInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
+          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image', 'isAuthed']
         },
         { model: db.chat }
       ]
@@ -52,12 +52,12 @@ const readOneChatDetailByOrderId = async orderId => {
         {
           model: db.user,
           as: 'hostInfo',
-          attributes: ['userId', 'nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
+          attributes: ['userId', 'nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image', 'isAuthed']
         },
         {
           model: db.user,
           as: 'deliverInfo',
-          attributes: ['userId', 'nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image']
+          attributes: ['userId', 'nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image', 'isAuthed']
         },
         { model: db.chat }
       ]
@@ -70,6 +70,6 @@ const readOneChatDetailByOrderId = async orderId => {
 
 module.exports = {
   createChatAsAdmin,
-  readUserAllChatsByUserIdStatus1,
+  readUserAllChatsByUserIdStatus,
   readOneChatDetailByOrderId
 };

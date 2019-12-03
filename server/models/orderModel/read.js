@@ -1,46 +1,4 @@
-const db = require('../../database/models');
-
-const createOrder = async body => {
-  const {
-    campus,
-    title,
-    hostId,
-    departures,
-    depLat,
-    depLng,
-    arrivals,
-    arrLat,
-    arrLng,
-    category,
-    thumbnailURL,
-    desiredArrivalTime,
-    details,
-    price,
-    isPrice
-  } = body;
-  return await db.order
-    .create({
-      campus,
-      title,
-      hostId,
-      departures,
-      depLat,
-      depLng,
-      arrivals,
-      arrLat,
-      arrLng,
-      category,
-      thumbnailURL,
-      desiredArrivalTime,
-      details,
-      price,
-      isPrice
-    })
-    .catch(err => {
-      console.error(err);
-      throw err;
-    });
-};
+const db = require('../../../database/models');
 
 const readAllOrders = async () => {
   return await db.order
@@ -54,7 +12,7 @@ const readAllOrders = async () => {
         {
           model: db.user,
           as: 'hostInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image']
+          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image', 'isAuthed']
         },
         {
           model: db.applicant,
@@ -81,7 +39,7 @@ const readAllOrdersByCampus = async campus => {
         {
           model: db.user,
           as: 'hostInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image']
+          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image', 'isAuthed']
         },
         {
           model: db.applicant,
@@ -109,10 +67,10 @@ const readOneOrder = async orderId => {
         {
           model: db.user,
           as: 'hostInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image'],
+          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image', 'isAuthed'],
           include: [
             {
-              model: db.mannerScore,
+              model: db.review,
               as: 'getScore',
               attributes: ['score']
             }
@@ -148,10 +106,21 @@ const readMyOrders = async userId => {
             {
               model: db.user,
               as: 'applicantInfo',
-              attributes: ['userId', 'phone', 'nickname', 'sex', 'age', 'major', 'introduction', 'university', 'image'],
+              attributes: [
+                'userId',
+                'phone',
+                'nickname',
+                'sex',
+                'age',
+                'major',
+                'introduction',
+                'university',
+                'image',
+                'isAuthed'
+              ],
               include: [
                 {
-                  model: db.mannerScore,
+                  model: db.review,
                   as: 'getScore',
                   attributes: ['score']
                 }
@@ -162,7 +131,7 @@ const readMyOrders = async userId => {
         {
           model: db.user,
           as: 'deliverInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image']
+          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image', 'isAuthed']
         }
       ]
     })
@@ -187,7 +156,7 @@ const readMyOneOrder = async (userId, orderId) => {
         {
           model: db.user,
           as: 'deliverInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image']
+          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image', 'isAuthed']
         }
       ]
     })
@@ -197,43 +166,8 @@ const readMyOneOrder = async (userId, orderId) => {
     });
 };
 
-const updateMyOrder = async body => {
-  const { orderId, hostId, title, departures, arrivals, desiredArrivalTime, details, price, isPrice } = body;
-  return await db.order
-    .update(
-      {
-        title,
-        departures,
-        arrivals,
-        desiredArrivalTime,
-        details,
-        price,
-        isPrice
-      },
-      { where: { orderId, hostId } }
-    )
-    .catch(err => {
-      console.error(err);
-      throw err;
-    });
-};
-
-const updateOrderStatus = async (orderId, orderStatus) => {
-  return db.order.update({ orderStatus }, { where: { orderId }, silent: true }).catch(err => {
-    throw err;
-  });
-};
-
-const updateMyOrderDeliver = async (orderId, deliverId) => {
-  await db.applicant.update({ applyStatus: 'chosen' }, { where: { orderId, userId: deliverId } });
-  return await db.order.update({ deliverId, orderStatus: 1 }, { where: { orderId }, silent: true }).catch(err => {
-    console.error(err);
-    throw err;
-  });
-};
-
-const deleteMyOrder = async (userId, orderId) => {
-  return await db.order.destroy({ where: { orderId, hostId: userId } }).catch(err => {
+const readHostAndDeliverIdByOrderIdNotMe = async orderId => {
+  return await db.order.findOne({ where: { orderId }, attributes: ['hostId', 'deliverId'] }).catch(err => {
     console.error(err);
     throw err;
   });
@@ -245,7 +179,7 @@ const readAllOrdersAsHost = async userId => {
     .findAll({
       where: { hostId: userId },
       order: [['orderId', 'DESC']],
-      include: [{ model: db.mannerScore }],
+      include: [{ model: db.review }],
       paranoid: false
     })
     .catch(err => {
@@ -260,7 +194,7 @@ const readAllOrdersAsDeliver = async userId => {
       where: { deliverId: userId },
       order: [['orderId', 'DESC']],
       paranoid: false,
-      include: [{ model: db.mannerScore }]
+      include: [{ model: db.review }]
     })
     .catch(err => {
       console.error(err);
@@ -269,16 +203,12 @@ const readAllOrdersAsDeliver = async userId => {
 };
 
 module.exports = {
-  createOrder,
   readAllOrders,
   readAllOrdersByCampus,
   readOneOrder,
   readMyOrders,
   readMyOneOrder,
-  updateMyOrder,
-  updateOrderStatus,
-  updateMyOrderDeliver,
-  deleteMyOrder,
+  readHostAndDeliverIdByOrderIdNotMe,
   readAllOrdersAsHost,
   readAllOrdersAsDeliver
 };

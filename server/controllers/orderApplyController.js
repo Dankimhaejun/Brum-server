@@ -3,7 +3,7 @@ import { sendPushNotificationByAxios } from '../middlewares/notifications';
 import { readHostPushTokenByOrderId } from '../models/userModel';
 import { createOrderApply, readUserApplyOrNot, updateOrderApply, deleteMyOrderApply } from '../models/applicantModel';
 
-const postOrderApply = async (req, res, next) => {
+const postOrderApply = async (req, res) => {
   try {
     const userId = req.decoded.id;
     const orderId = req.params.orderId;
@@ -14,7 +14,7 @@ const postOrderApply = async (req, res, next) => {
     if (checkApply === null) {
       const postApply = await createOrderApply(orderId, userId, bidPrice, applyComment);
       await sendPushNotificationByAxios(hostPushToken, '지원자 발생', '내 주문에 지원자가 발생했습니다. 확인 바람');
-      res.json(
+      return res.json(
         vroomRes(
           true,
           true,
@@ -23,15 +23,15 @@ const postOrderApply = async (req, res, next) => {
         )
       );
     } else {
-      res.json(vroomRes(false, true, '이미 지원한 유저입니다. 다시 확인해주세요', null));
+      return res.json(vroomRes(false, true, '이미 지원한 유저입니다. 다시 확인해주세요', null));
     }
   } catch (e) {
-    next(e);
+    console.error(e);
     throw e;
   }
 };
 
-const putOrderApply = async (req, res, next) => {
+const putOrderApply = async (req, res) => {
   try {
     const userId = req.decoded.id;
     const orderId = req.params.orderId;
@@ -47,18 +47,18 @@ const putOrderApply = async (req, res, next) => {
       )
     );
   } catch (e) {
-    next(e);
+    console.error(e);
     throw e;
   }
 };
 
-const deleteOrderApply = async (req, res, next) => {
+const deleteOrderApply = async (req, res) => {
   try {
     const userId = req.decoded.id;
     const orderId = req.params.orderId;
     const deleteApply = await deleteMyOrderApply(orderId, userId);
     console.log('deleteApply', deleteApply);
-    res.json(
+    return res.json(
       vroomRes(
         true,
         true,
@@ -67,7 +67,7 @@ const deleteOrderApply = async (req, res, next) => {
       )
     );
   } catch (e) {
-    next(e);
+    console.error(e);
     throw e;
   }
 };

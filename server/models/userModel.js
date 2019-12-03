@@ -18,7 +18,7 @@ const readUserInfo = async userId => {
       ],
       include: [
         {
-          model: db.mannerScore,
+          model: db.review,
           as: 'getScore',
           attributes: [
             [db.sequelize.fn('count', '*'), 'count'],
@@ -92,11 +92,36 @@ const updateCampus = async (userId, campus, major) => {
   });
 };
 
+const updateUserEmailNotAuthed = async (userId, email, authCode) => {
+  typeof authCode;
+  return await db.user.update({ email, authCode }, { where: { userId } }).catch(err => {
+    console.error(err);
+    throw err;
+  });
+};
+
+const checkAuthCodeWithUserId = async (userId, authCode) => {
+  return await db.user.findOne({ where: { userId, authCode } }).catch(err => {
+    console.error(err);
+    throw err;
+  });
+};
+
+const updateIsAuthedWithUserId = async userId => {
+  return await db.user.update({ isAuthed: true }, { where: { userId } }).catch(err => {
+    console.error(err);
+    throw err;
+  });
+};
+
 module.exports = {
   readUserInfo,
   readUserPushToken,
   readHostPushTokenByOrderId,
   readDeliverPushTokenByOrderId,
   updateImage,
-  updateCampus
+  updateCampus,
+  updateUserEmailNotAuthed,
+  updateIsAuthedWithUserId,
+  checkAuthCodeWithUserId
 };

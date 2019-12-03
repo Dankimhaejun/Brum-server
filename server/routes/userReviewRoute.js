@@ -1,16 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
-import { getAllOrdersUserLike, postUserLikeOrder, deleteUserLikeOrder } from '../controllers/userLikeOrderController';
+import { postUserReview, putUserReview, deleteUserReview } from '../controllers/userReviewController';
 import { checkToken } from '../middlewares/jwt';
 /* GET users listing. */
 
 router.use('/', checkToken);
 
-router.get('/', getAllOrdersUserLike);
+router.post('/:orderId', postUserReview);
 
-router.post('/:orderId', postUserLikeOrder);
+router.put('/:orderId', putUserReview);
 
-router.delete('/:orderId', deleteUserLikeOrder);
+router.delete('/:orderId', deleteUserReview);
 
 module.exports = router;

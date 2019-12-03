@@ -48,6 +48,18 @@ module.exports = function(sequelize, Datatypes) {
         type: Datatypes.STRING,
         defaultValue: null
       },
+      email: {
+        type: Datatypes.STRING,
+        defaultValue: null
+      },
+      isAuthed: {
+        type: Datatypes.BOOLEAN,
+        defaultValue: false
+      },
+      authCode: {
+        type: Datatypes.STRING,
+        defaultValue: null
+      },
       pushToken: {
         type: Datatypes.STRING
       },
@@ -70,8 +82,8 @@ module.exports = function(sequelize, Datatypes) {
     user.hasMany(db.applicant, { foreignKey: 'userId' });
     user.hasMany(db.order, { foreignKey: 'hostId' });
     user.hasMany(db.order, { foreignKey: 'deliverId' });
-    user.hasMany(db.mannerScore, { as: 'evaluator', foreignKey: 'evaluatorId' });
-    user.hasMany(db.mannerScore, { as: 'getScore', foreignKey: 'receiverId' });
+    user.hasMany(db.review, { as: 'evaluator', foreignKey: 'evaluatorId' });
+    user.hasMany(db.review, { as: 'getScore', foreignKey: 'receiverId' });
     user.hasMany(db.chat, { foreignKey: 'userId' });
     user.hasMany(db.userLikeOrder, { foreignKey: 'userId' });
   };
