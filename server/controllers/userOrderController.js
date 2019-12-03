@@ -31,10 +31,15 @@ const getMyOneOrder = async (req, res) => {
     const getMyInfo = await readUserInfo(userId);
     const getMyOneOrder = await readMyOneOrder(userId, orderId);
     return res.json(
-      vroomRes(true, true, 'myInfo는 유저의 정보, order는 주문 정보를 제공합니다.', {
-        myInfo: getMyInfo,
-        order: getMyOneOrder
-      })
+      vroomRes(
+        true,
+        true,
+        '내가 요청한 주문에 대한 주문 정보를 제공합니다. (/order/:orderId와의 차이점은 view++ 유무 입니다)',
+        {
+          userId,
+          order: getMyOneOrder
+        }
+      )
     );
   } catch (e) {
     console.error(e);

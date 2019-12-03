@@ -144,20 +144,29 @@ const readMyOrders = async userId => {
 const readMyOneOrder = async (userId, orderId) => {
   return await db.order
     .findOne({
-      where: { hostId: userId, orderId: orderId },
+      where: { orderId },
       include: [
         {
           model: db.orderImage,
           attributes: ['orderImageId', 'orderImageURL']
         },
-        // {
-        //   model: db.applicant
-        // },
         {
           model: db.user,
-          as: 'deliverInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image', 'isAuthed']
-        }
+          as: 'hostInfo',
+          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image', 'isAuthed'],
+          include: [
+            {
+              model: db.review,
+              as: 'getScore',
+              attributes: ['score']
+            }
+          ]
+        },
+        {
+          model: db.applicant,
+          attributes: ['userId']
+        },
+        { model: db.userLikeOrder, attributes: ['userId'] }
       ]
     })
     .catch(err => {
