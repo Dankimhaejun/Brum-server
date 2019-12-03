@@ -189,6 +189,39 @@ const readAllOrdersAsHost = async userId => {
       where: { hostId: userId },
       order: [['orderId', 'DESC']],
       include: [
+        {
+          model: db.orderImage,
+          attributes: ['orderImageId', 'orderImageURL']
+        },
+        {
+          model: db.applicant,
+          attributes: ['bidPrice', 'createdAt'],
+          include: [
+            {
+              model: db.user,
+              as: 'applicantInfo',
+              attributes: [
+                'userId',
+                'phone',
+                'nickname',
+                'sex',
+                'age',
+                'major',
+                'introduction',
+                'university',
+                'image',
+                'isAuthed'
+              ],
+              include: [
+                {
+                  model: db.review,
+                  as: 'getScore',
+                  attributes: ['score']
+                }
+              ]
+            }
+          ]
+        },
         { model: db.review },
         {
           model: db.user,
@@ -211,6 +244,39 @@ const readAllOrdersAsDeliver = async userId => {
       order: [['orderId', 'DESC']],
       paranoid: false,
       include: [
+        {
+          model: db.orderImage,
+          attributes: ['orderImageId', 'orderImageURL']
+        },
+        {
+          model: db.applicant,
+          attributes: ['bidPrice', 'createdAt'],
+          include: [
+            {
+              model: db.user,
+              as: 'applicantInfo',
+              attributes: [
+                'userId',
+                'phone',
+                'nickname',
+                'sex',
+                'age',
+                'major',
+                'introduction',
+                'university',
+                'image',
+                'isAuthed'
+              ],
+              include: [
+                {
+                  model: db.review,
+                  as: 'getScore',
+                  attributes: ['score']
+                }
+              ]
+            }
+          ]
+        },
         { model: db.review },
         {
           model: db.user,

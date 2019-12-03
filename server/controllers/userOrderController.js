@@ -28,7 +28,6 @@ const getMyOneOrder = async (req, res) => {
   try {
     const userId = req.decoded.id;
     const orderId = Number(req.params.orderId);
-    const getMyInfo = await readUserInfo(userId);
     const getMyOneOrder = await readMyOneOrder(userId, orderId);
     return res.json(
       vroomRes(

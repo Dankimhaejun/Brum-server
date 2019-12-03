@@ -19,16 +19,11 @@ module.exports = function(sequelize, Datatypes) {
       },
       chatDetail: {
         type: Datatypes.STRING
-      },
-      isDeleted: {
-        type: Datatypes.BOOLEAN,
-        defaultValue: false
       }
     },
     {
       underscored: false,
-      freezeTableName: true,
-      paranoid: true
+      freezeTableName: true
     }
   );
   chat.associate = function(db) {
