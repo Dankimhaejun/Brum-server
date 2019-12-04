@@ -49,6 +49,11 @@ const readAllOrdersByCampus = async campus => {
         {
           model: db.applicant,
           attributes: ['applicantId']
+        },
+        {
+          model: db.userLikeOrder,
+          foreignKey: 'orderId',
+          attributes: ['userLikeOrderId']
         }
       ]
     })
