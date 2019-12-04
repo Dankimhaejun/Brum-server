@@ -1,6 +1,6 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
-import { vroomRes } from './vroomRes';
+import { vroomRes } from './customized';
 
 const createToken = (id, campus) =>
   new Promise((resolve, reject) => {

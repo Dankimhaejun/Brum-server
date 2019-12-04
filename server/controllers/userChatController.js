@@ -1,4 +1,4 @@
-import { vroomRes } from '../middlewares/vroomRes';
+import { vroomRes } from '../middlewares/customized';
 import { uploadChatImage } from '../middlewares/s3';
 import { readUserAllChatsByUserIdStatus, readOneChatDetailByOrderId } from '../models/chatModel';
 import { createImageAndReturnURL } from '../models/chatImageModel';

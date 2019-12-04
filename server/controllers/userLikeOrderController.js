@@ -1,4 +1,4 @@
-import { vroomRes } from '../middlewares/vroomRes';
+import { vroomRes } from '../middlewares/customized';
 import { readAllUserLikeOrder, createUserLikeOrder, deleteUserLikeOneOrder } from '../models/userLikeOrderModel';
 
 const getAllOrdersUserLike = async (req, res) => {

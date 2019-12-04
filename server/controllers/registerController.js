@@ -5,7 +5,7 @@ import {
   updateUserPassword,
   updatePushTokenByLogin
 } from '../models/registerModel';
-import { vroomRes } from '../middlewares/vroomRes';
+import { vroomRes } from '../middlewares/customized';
 import { createToken } from '../middlewares/jwt';
 
 const main = async (req, res) => {

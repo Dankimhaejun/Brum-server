@@ -1,9 +1,10 @@
-import { vroomRes } from '../middlewares/vroomRes';
+import { vroomRes } from '../middlewares/customized';
+import { sendPushNotificationByAxios } from '../middlewares/notification';
+import { readUserPushToken } from '../models/userModel';
 import { readHostAndDeliverIdByOrderIdNotMe } from '../models/orderModel/read';
 import {
   createScoreAndReview,
   readAllMyReviews,
-  readReviewEvaluated,
   readMyReviewforCheck,
   updateMyReview,
   deleteMyReview
@@ -13,7 +14,7 @@ const getAllMyReviews = async (req, res) => {
   try {
     const userId = req.decoded.id;
     const myAllReviews = await readAllMyReviews(userId);
-    res.json(
+    return res.json(
       vroomRes(
         true,
         true,
@@ -35,7 +36,7 @@ const getEvaluatedReview = async (req, res) => {
     const userId = req.decoded.id;
     const orderId = Number(req.params.orderId);
     const readReview = await readMyReviewforCheck(orderId, userId);
-    res.json(
+    return res.json(
       vroomRes(true, true, '내가 작성한 리뷰의 정보를 봅니다', {
         userId,
         readReview
@@ -53,16 +54,20 @@ const postUserReview = async (req, res) => {
     const { score, userReview } = req.body;
     console.log('score, userReview', score, userReview);
     const checkMyReview = await readMyReviewforCheck(orderId, userId);
-    if (checkMyReview !== null) {
-      return res.json(vroomRes(false, true, '이미 리뷰를 작성했습니다. 확인해주세요', checkMyReview));
-    }
+
     const getHostOrDeliverId = await readHostAndDeliverIdByOrderIdNotMe(orderId); // 객체로 id 반환 {hostId:16, deliverId: 19}
     const { hostId, deliverId } = getHostOrDeliverId;
-    console.log('hostId, deliverId', hostId, deliverId);
+    if (checkMyReview !== null) {
+      return res.json(vroomRes(false, true, '이미 리뷰를 작성했습니다. 확인해주세요', checkMyReview));
+    } // 이미 리뷰를 작성했을때
     if (userId === hostId) {
       await createScoreAndReview(orderId, userId, deliverId, score, userReview);
+      const deliverPushToken = await readUserPushToken(deliverId);
+      await sendPushNotificationByAxios(deliverPushToken, '리뷰알림', '누군가 리뷰를 남겨주셨어요 확인해볼까요?');
     } else {
       await createScoreAndReview(orderId, userId, hostId, score, userReview);
+      const hostPushToken = await readUserPushToken(hostId);
+      await sendPushNotificationByAxios(hostPushToken, '리뷰알림', '누군가 리뷰를 남겨주셨어요 확인해볼까요?');
     }
     return res.json(vroomRes(true, true, '리뷰를 작성하였습니다 새로고침해보세요!'));
   } catch (e) {

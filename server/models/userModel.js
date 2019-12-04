@@ -78,6 +78,12 @@ const readDeliverPushTokenByOrderId = async orderId => {
     });
 };
 
+const updateUserInfo = async (userId, nickname, major, introduction) => {
+  return await db.user.update({ nickname, major, introduction }, { where: { userId } }).catch(err => {
+    console.error(err);
+    throw err;
+  });
+};
 const updateImage = async (userId, image) => {
   return await db.user.update({ image }, { where: { userId } }).catch(err => {
     console.error(err);
@@ -119,6 +125,7 @@ module.exports = {
   readUserPushToken,
   readHostPushTokenByOrderId,
   readDeliverPushTokenByOrderId,
+  updateUserInfo,
   updateImage,
   updateCampus,
   updateUserEmailNotAuthed,

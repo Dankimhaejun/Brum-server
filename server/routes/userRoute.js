@@ -3,6 +3,7 @@ const router = express.Router();
 
 import {
   getMyInfo,
+  putMyInfo,
   updateUserImage,
   updateUserCampus,
   checkAuthAndPutEmail,
@@ -15,6 +16,8 @@ import { uploadUserImage } from '../middlewares/s3';
 router.use('/', checkToken);
 
 router.get('/mypage', getMyInfo);
+
+router.put('/mypage', putMyInfo);
 
 router.put('/image', uploadUserImage.single('file'), updateUserImage);
 

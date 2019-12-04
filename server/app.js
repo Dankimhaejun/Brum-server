@@ -15,6 +15,7 @@ const userOrderRouter = require('./routes/userOrderRoute');
 const userChatRouter = require('./routes/userChatRoute');
 const userLikeOrderRouter = require('./routes/userLikeOrderRoute');
 const userReviewRouter = require('./routes/userReviewRoute');
+import { updateOrderStatusEveryHour } from './middlewares/customized';
 
 const app = express();
 
@@ -44,7 +45,8 @@ app.use('/user/chat', userChatRouter);
 app.use('/user/like/order', userLikeOrderRouter);
 app.use('/user/review', userReviewRouter);
 
-// app.use('/user', express.static('public'));
+// 1시간마다 24시간동안 orderStatus가 0인 상태를 77로 변환합니다.
+updateOrderStatusEveryHour();
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -55,6 +57,7 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
+  console.log('req.app.get("env")', req.app.get('env'));
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page

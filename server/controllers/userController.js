@@ -1,7 +1,8 @@
-import { vroomRes } from '../middlewares/vroomRes';
+import { vroomRes } from '../middlewares/customized';
 import { sendMailToClient } from '../middlewares/nodemailer';
 import {
   readUserInfo,
+  updateUserInfo,
   updateImage,
   updateCampus,
   updateUserEmailNotAuthed,
@@ -15,6 +16,24 @@ const getMyInfo = async (req, res) => {
     console.log('userId', userId);
     const userInfo = await readUserInfo(userId);
     return res.json(vroomRes(true, true, '유저의 개인정보, 평점을 제공합니다.', userInfo));
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+};
+
+const putMyInfo = async (req, res) => {
+  try {
+    const userId = req.decoded.id;
+    const { nickname, major, introduction } = req.body;
+    await updateUserInfo(userId, nickname, major, introduction);
+    return res.json(
+      vroomRes(true, true, '전송된 닉네임, 전공, 소개가 변경됩니다. 아래는 변경되는 데이터입니다.', {
+        nickname,
+        major,
+        introduction
+      })
+    );
   } catch (e) {
     console.error(e);
     throw e;
@@ -105,6 +124,7 @@ const checkAuthCode = async (req, res) => {
 
 module.exports = {
   getMyInfo,
+  putMyInfo,
   updateUserImage,
   updateUserCampus,
   checkAuthAndPutEmail,
