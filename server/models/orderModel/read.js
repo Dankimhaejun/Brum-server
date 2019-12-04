@@ -12,7 +12,18 @@ const readAllOrders = async () => {
         {
           model: db.user,
           as: 'hostInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image', 'isAuthed']
+          attributes: [
+            'nickname',
+            'phone',
+            'sex',
+            'age',
+            'campus',
+            'major',
+            'introduction',
+            'university',
+            'image',
+            'isAuthed'
+          ]
         },
         {
           model: db.applicant,
@@ -44,7 +55,18 @@ const readAllOrdersByCampus = async campus => {
         {
           model: db.user,
           as: 'hostInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image', 'isAuthed']
+          attributes: [
+            'nickname',
+            'phone',
+            'sex',
+            'age',
+            'campus',
+            'major',
+            'introduction',
+            'university',
+            'image',
+            'isAuthed'
+          ]
         },
         {
           model: db.applicant,
@@ -77,7 +99,18 @@ const readOneOrder = async orderId => {
         {
           model: db.user,
           as: 'hostInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image', 'isAuthed'],
+          attributes: [
+            'nickname',
+            'phone',
+            'sex',
+            'age',
+            'campus',
+            'major',
+            'introduction',
+            'university',
+            'image',
+            'isAuthed'
+          ],
           include: [
             {
               model: db.review,
@@ -141,7 +174,18 @@ const readMyOrders = async userId => {
         {
           model: db.user,
           as: 'deliverInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image', 'isAuthed']
+          attributes: [
+            'nickname',
+            'phone',
+            'sex',
+            'age',
+            'campus',
+            'major',
+            'introduction',
+            'university',
+            'image',
+            'isAuthed'
+          ]
         }
       ]
     })
@@ -163,7 +207,18 @@ const readMyOneOrder = async (userId, orderId) => {
         {
           model: db.user,
           as: 'hostInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image', 'isAuthed'],
+          attributes: [
+            'nickname',
+            'phone',
+            'sex',
+            'age',
+            'campus',
+            'major',
+            'introduction',
+            'university',
+            'image',
+            'isAuthed'
+          ],
           include: [
             {
               model: db.review,
@@ -236,7 +291,18 @@ const readAllOrdersAsHost = async userId => {
         {
           model: db.user,
           as: 'deliverInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image', 'isAuthed']
+          attributes: [
+            'nickname',
+            'phone',
+            'sex',
+            'age',
+            'campus',
+            'major',
+            'introduction',
+            'university',
+            'image',
+            'isAuthed'
+          ]
         }
       ],
       paranoid: false
@@ -291,7 +357,18 @@ const readAllOrdersAsDeliver = async userId => {
         {
           model: db.user,
           as: 'hostInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'university', 'image', 'isAuthed']
+          attributes: [
+            'nickname',
+            'phone',
+            'sex',
+            'age',
+            'campus',
+            'major',
+            'introduction',
+            'university',
+            'image',
+            'isAuthed'
+          ]
         }
       ]
     })
