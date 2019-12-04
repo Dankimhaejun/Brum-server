@@ -3,6 +3,7 @@ import { readHostAndDeliverIdByOrderIdNotMe } from '../models/orderModel/read';
 import {
   createScoreAndReview,
   readAllMyReviews,
+  readReviewEvaluated,
   readMyReviewforCheck,
   updateMyReview,
   deleteMyReview
@@ -13,10 +14,15 @@ const getAllMyReviews = async (req, res) => {
     const userId = req.decoded.id;
     const myAllReviews = await readAllMyReviews(userId);
     res.json(
-      vroomRes(true, true, '내 모든 리뷰 정보를 제공합니다', {
-        userId,
-        myAllReviews
-      })
+      vroomRes(
+        true,
+        true,
+        '내가 받은 모든 리뷰 정보를 제공합니다. 주문과 연결하고 싶다면 링크를 통해 /order/:orderId 로 이동시켜주세요',
+        {
+          userId,
+          myAllReviews
+        }
+      )
     );
   } catch (e) {
     console.error(e);
@@ -24,13 +30,29 @@ const getAllMyReviews = async (req, res) => {
   }
 };
 
+const getEvaluatedReview = async (req, res) => {
+  try {
+    const userId = req.decoded.id;
+    const orderId = Number(req.params.orderId);
+    const readReview = await readMyReviewforCheck(orderId, userId);
+    res.json(
+      vroomRes(true, true, '내가 작성한 리뷰의 정보를 봅니다', {
+        userId,
+        readReview
+      })
+    );
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+};
 const postUserReview = async (req, res) => {
   try {
     const userId = req.decoded.id;
     const orderId = Number(req.params.orderId);
     const { score, userReview } = req.body;
     console.log('score, userReview', score, userReview);
-    const checkMyReview = await readMyReviewforCheck(userId, orderId);
+    const checkMyReview = await readMyReviewforCheck(orderId, userId);
     if (checkMyReview !== null) {
       return res.json(vroomRes(false, true, '이미 리뷰를 작성했습니다. 확인해주세요', checkMyReview));
     }
@@ -83,6 +105,7 @@ const deleteUserReview = async (req, res) => {
 
 module.exports = {
   getAllMyReviews,
+  getEvaluatedReview,
   postUserReview,
   putUserReview,
   deleteUserReview

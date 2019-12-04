@@ -17,6 +17,11 @@ const readAllOrders = async () => {
         {
           model: db.applicant,
           attributes: ['applicantId']
+        },
+        {
+          model: db.userLikeOrder,
+          foreignKey: 'orderId',
+          attributes: ['userLikeOrderId']
         }
       ]
     })

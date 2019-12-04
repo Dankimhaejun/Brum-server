@@ -54,7 +54,8 @@ module.exports = function(sequelize, Datatypes) {
         allowNull: false
       },
       desiredArrivalTime: {
-        type: Datatypes.DATE
+        type: Datatypes.STRING,
+        defaultValue: null
       },
       details: {
         type: Datatypes.STRING,
