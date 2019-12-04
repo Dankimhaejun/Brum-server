@@ -93,6 +93,7 @@ module.exports = function(sequelize, Datatypes) {
     order.hasMany(db.chat, { foreignKey: 'orderId' });
     order.hasMany(db.userLikeOrder, { foreignKey: 'orderId' });
     order.hasMany(db.review, { foreignKey: 'orderId' });
+    order.hasMany(db.chatImage, { foreignKey: 'orderId' });
   };
   return order;
 };

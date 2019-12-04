@@ -9,10 +9,6 @@ module.exports = function(sequelize, Datatypes) {
         autoIncrement: true,
         primaryKey: true
       },
-      chatId: {
-        type: Datatypes.INTEGER,
-        allowNull: false
-      },
       orderId: {
         type: Datatypes.INTEGER,
         allowNull: false

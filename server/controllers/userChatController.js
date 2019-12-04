@@ -1,5 +1,7 @@
 import { vroomRes } from '../middlewares/vroomRes';
+import { uploadChatImage } from '../middlewares/s3';
 import { readUserAllChatsByUserIdStatus, readOneChatDetailByOrderId } from '../models/chatModel';
+import { createImageAndReturnURL } from '../models/chatImageModel';
 
 const getAllChatsByUserId = async (req, res) => {
   try {
@@ -38,7 +40,33 @@ const getChatDetailByOrderId = async (req, res) => {
   }
 };
 
+const postChatImageReturnUrl = async (req, res) => {
+  try {
+    const uploadImage = await uploadChatImage.single('file');
+    uploadImage(req, res, async function(err) {
+      if (err) {
+        console.error(err);
+        throw err;
+      }
+      const userId = req.decoded.id;
+      const orderId = Number(req.params.orderId);
+      const chatImageURL = req.file.location;
+      const createAndGetUrl = await createImageAndReturnURL(orderId, userId, chatImageURL);
+      console.log('createAndGetUrl', createAndGetUrl);
+      return res.json(
+        vroomRes(true, true, '이미지를 s3에 업로드 하였습니다. 아래는 업로드 된 이미지의 url 입니다!', {
+          url: createAndGetUrl
+        })
+      );
+    });
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+};
+
 module.exports = {
   getAllChatsByUserId,
-  getChatDetailByOrderId
+  getChatDetailByOrderId,
+  postChatImageReturnUrl
 };

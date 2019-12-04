@@ -64,10 +64,11 @@ const getIdOrder = async (req, res) => {
 
 const postOrder = async (req, res) => {
   try {
-    const uploadImage = uploadOrderImages.fields([{ name: 'thumbnail' }, { name: 'file' }]);
-    await uploadImage(req, res, async function(err) {
+    const uploadImage = await uploadOrderImages.fields([{ name: 'thumbnail' }, { name: 'file' }]);
+    uploadImage(req, res, async function(err) {
       if (err) {
         console.error(err);
+        throw err;
       }
       const hostId = req.decoded.id;
       const campus = req.decoded.campus;

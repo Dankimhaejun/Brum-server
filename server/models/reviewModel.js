@@ -33,8 +33,35 @@ const readMyReviewforCheck = async (orderId, evaluatorId) => {
       include: [
         {
           model: db.user,
+          as: 'evaluator',
+          attributes: [
+            'userId',
+            'phone',
+            'nickname',
+            'sex',
+            'age',
+            'campus',
+            'major',
+            'university',
+            'introduction',
+            'image'
+          ]
+        },
+        {
+          model: db.user,
           as: 'getScore',
-          attributes: ['phone', 'nickname', 'sex', 'age', 'campus', 'major', 'university', 'introduction', 'image']
+          attributes: [
+            'userId',
+            'phone',
+            'nickname',
+            'sex',
+            'age',
+            'campus',
+            'major',
+            'university',
+            'introduction',
+            'image'
+          ]
         }
       ]
     })
