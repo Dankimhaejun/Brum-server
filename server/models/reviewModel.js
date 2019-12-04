@@ -1,6 +1,13 @@
 const db = require('../../database/models');
 const Op = db.Sequelize.Op;
 
+const readAllMyReviews = async receiverId => {
+  return await db.review.findAll({ where: { receiverId } }).catch(err => {
+    console.error(err);
+    throw err;
+  });
+};
+
 const readMyReviewforCheck = async (userId, orderId) => {
   return await db.review.findOne({ where: { orderId, evaluatorId: userId } }).catch(err => {
     console.error(err);
@@ -39,6 +46,7 @@ const deleteMyReview = async (orderId, evaluatorId) => {
 
 module.exports = {
   createScoreAndReview,
+  readAllMyReviews,
   readMyReviewforCheck,
   updateMyReview,
   deleteMyReview

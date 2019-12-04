@@ -1,6 +1,28 @@
 import { vroomRes } from '../middlewares/vroomRes';
 import { readHostAndDeliverIdByOrderIdNotMe } from '../models/orderModel/read';
-import { createScoreAndReview, readMyReviewforCheck, updateMyReview, deleteMyReview } from '../models/reviewModel';
+import {
+  createScoreAndReview,
+  readAllMyReviews,
+  readMyReviewforCheck,
+  updateMyReview,
+  deleteMyReview
+} from '../models/reviewModel';
+
+const getAllMyReviews = async (req, res) => {
+  try {
+    const userId = req.decoded.id;
+    const myAllReviews = await readAllMyReviews(userId);
+    res.json(
+      vroomRes(true, true, '내 모든 리뷰 정보를 제공합니다', {
+        userId,
+        myAllReviews
+      })
+    );
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+};
 
 const postUserReview = async (req, res) => {
   try {
@@ -60,6 +82,7 @@ const deleteUserReview = async (req, res) => {
 };
 
 module.exports = {
+  getAllMyReviews,
   postUserReview,
   putUserReview,
   deleteUserReview
