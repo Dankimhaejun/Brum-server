@@ -99,7 +99,9 @@ const putMyOrderApplicant = async (req, res) => {
     const deliverInfo = await readUserInfo(deliverId); // 배달자 정보 제공 (없어도 무관함)
     const userPushToken = await readUserPushToken(deliverId);
     console.log('userPushToken', userPushToken);
-    await sendPushNotificationByAxios(userPushToken, '(경)당첨(축)', '배달하러 갑시다 채팅방을 여세요');
+    if (userPushToken) {
+      await sendPushNotificationByAxios(userPushToken, '(경)당첨(축)', '배달하러 갑시다 채팅방을 여세요');
+    }
     return res.json(
       vroomRes(
         true,

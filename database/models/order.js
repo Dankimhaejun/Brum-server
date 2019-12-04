@@ -27,7 +27,12 @@ module.exports = function(sequelize, Datatypes) {
         allowNull: false
       },
       departures: {
-        type: Datatypes.STRING
+        type: Datatypes.STRING,
+        defaultValue: null
+      },
+      subDepartures: {
+        type: Datatypes.STRING,
+        defaultValue: null
       },
       depLat: {
         type: Datatypes.STRING
@@ -38,6 +43,10 @@ module.exports = function(sequelize, Datatypes) {
       arrivals: {
         type: Datatypes.STRING,
         allowNull: false
+      },
+      subArrivals: {
+        type: Datatypes.STRING,
+        defaultValue: null
       },
       arrLat: {
         type: Datatypes.STRING

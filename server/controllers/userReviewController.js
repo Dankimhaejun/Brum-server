@@ -63,11 +63,15 @@ const postUserReview = async (req, res) => {
     if (userId === hostId) {
       await createScoreAndReview(orderId, userId, deliverId, score, userReview);
       const deliverPushToken = await readUserPushToken(deliverId);
-      await sendPushNotificationByAxios(deliverPushToken, '리뷰알림', '누군가 리뷰를 남겨주셨어요 확인해볼까요?');
+      if (deliverPushToken) {
+        await sendPushNotificationByAxios(deliverPushToken, '리뷰알림', '누군가 리뷰를 남겨주셨어요 확인해볼까요?');
+      }
     } else {
       await createScoreAndReview(orderId, userId, hostId, score, userReview);
       const hostPushToken = await readUserPushToken(hostId);
-      await sendPushNotificationByAxios(hostPushToken, '리뷰알림', '누군가 리뷰를 남겨주셨어요 확인해볼까요?');
+      if (hostPushToken) {
+        await sendPushNotificationByAxios(hostPushToken, '리뷰알림', '누군가 리뷰를 남겨주셨어요 확인해볼까요?');
+      }
     }
     return res.json(vroomRes(true, true, '리뷰를 작성하였습니다 새로고침해보세요!'));
   } catch (e) {
