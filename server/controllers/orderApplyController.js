@@ -14,7 +14,7 @@ const postOrderApply = async (req, res) => {
     if (checkApply === null) {
       const postApply = await createOrderApply(orderId, userId, bidPrice, applyComment);
       if (hostPushToken) {
-        await sendPushNotificationByAxios(hostPushToken, '지원자 발생', '내 주문에 지원자가 발생했습니다. 확인 바람');
+        await sendPushNotificationByAxios(hostPushToken, '지원자가 나타났어요 확인해주세요');
       }
       return res.json(
         vroomRes(
