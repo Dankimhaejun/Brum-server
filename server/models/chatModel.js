@@ -28,12 +28,12 @@ const readUserAllChatsByUserIdStatus = async userId => {
         {
           model: db.user,
           as: 'hostInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image', 'isAuthed']
+          attributes: ['nickname', 'phone', 'sex', 'age', 'campus', 'major', 'introduction', 'image', 'isAuthed']
         },
         {
           model: db.user,
           as: 'deliverInfo',
-          attributes: ['nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image', 'isAuthed']
+          attributes: ['nickname', 'phone', 'sex', 'age', 'campus', 'major', 'introduction', 'image', 'isAuthed']
         },
         { model: db.chat }
       ]
@@ -52,12 +52,34 @@ const readOneChatDetailByOrderId = async orderId => {
         {
           model: db.user,
           as: 'hostInfo',
-          attributes: ['userId', 'nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image', 'isAuthed']
+          attributes: [
+            'userId',
+            'phone',
+            'nickname',
+            'sex',
+            'age',
+            'campus',
+            'major',
+            'introduction',
+            'image',
+            'isAuthed'
+          ]
         },
         {
           model: db.user,
           as: 'deliverInfo',
-          attributes: ['userId', 'nickname', 'sex', 'age', 'campus', 'major', 'introduction', 'image', 'isAuthed']
+          attributes: [
+            'userId',
+            'phone',
+            'nickname',
+            'sex',
+            'age',
+            'campus',
+            'major',
+            'introduction',
+            'image',
+            'isAuthed'
+          ]
         },
         { model: db.chat }
       ]
