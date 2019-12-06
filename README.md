@@ -1,3 +1,5 @@
+[![쌉가능](/asset/logo.png)](https://www.rocketpunch.com/companies/2luck)
+
 # 쌉가능 - Server
 
 Server for 쌉가능 Application
@@ -8,11 +10,11 @@ Built with Node.js, REST APIs<br>
 <br>
 These instructions will get you information of the project.<br>
 If you are studying build a server with Node.js, it would help you.<br>
-Thank you for visiting our Git Repo.
+Thank you for visiting our Git Repo.<br>
 <br>
 쌉가능 어플의 구동을 위한 서버 레파지토리입니다.<br>
 Node.js를 통해 만들어졌으며, REST APIs 를 지향하며 만든 첫번째 프로젝트 완성본입니다.<br>
-이 레파지토리가 지금 막 \_\_Node.js를 활용한 서버 구축에 관심이 있는 초급자 분들에게 도움이 되었으면 합니다.<br>
+이 레파지토리가 지금 막 **Node.js를 활용한 서버 구축에 관심이 있는 초급자 분들에게 도움이 되었으면 합니다.**<br>
 비평은 항상 환영입니다.<br>
 <br>
 
@@ -20,15 +22,17 @@ Node.js를 통해 만들어졌으며, REST APIs 를 지향하며 만든 첫번�
 
 ## How To Use
 
-- Please download the app to <********\_\_********>
+Please download the app to <https://www.rocketpunch.com/companies/2luck>
 
-### Prerequisites
+## Prerequisites
 
-Run a server is difficult due to personal information.<br>
+### Run a server is difficult due to personal information.<br>
+
 (You can change personal information at any time, as well as run a server by yourself.)<br>
 
-개인정보로 인해 즉시 실행은 되지 않습니다.<br>
-.env 파일에 아래 코드를 복사해 정보를 입력하면 구동가능합니다.<br>
+### 개인정보로 인해 즉시 실행은 되지 않습니다.<br>
+
+**.env 파일 생성 후 아래 코드를 복사해 정보를 입력하면 구동가능합니다.**<br>
 
 ```
 NODE_ENV="your information"
