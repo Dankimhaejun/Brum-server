@@ -1,4 +1,4 @@
-<img src="/asset/logo.png" width="128">(https://www.rocketpunch.com/companies/2luck)
+<a href="https://www.rocketpunch.com/companies/2luck" target="_blank"><img src="/asset/logo.png" width="128"></a>
 
 # 쌉가능 - Server
 
