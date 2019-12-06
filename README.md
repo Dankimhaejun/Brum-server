@@ -1,4 +1,4 @@
-[![쌉가능](/asset/logo.png =128x128)](https://www.rocketpunch.com/companies/2luck)
+<img src="/asset/logo.png" width="128">(https://www.rocketpunch.com/companies/2luck)
 
 # 쌉가능 - Server
 
