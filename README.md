@@ -1,41 +1,115 @@
-Brum Service - Server
+# 쌉가능 - Server
 
-<<API>>
+Server for 쌉가능 Application
 
-register - 등록, 로그인
-[POST]
-/register - 회원가입 후 로그인
-/register/phone - 휴대폰 중복 확인
-/login - 로그인
-/logout - 로그아웃
-[PUT]
-/password - 비밀번호 변경
+## Getting Started
 
-USER - 유저 데이터 관리
-[GET]
-/user/mypage - 사용자 정보 확인
-[POST]
-/user/image - 사용자 프로필 이미지 첨부
+Built with Node.js, REST APIs
 
-REQUEST - 요청 데이터 관리
-[GET]
-/request - 요청 정보 확인
-[POST]
-/request - 요청 생성
+These instructions will get you information of the project.
+If you are studying build a server with Node.js, it would help you.
+Thank you for visiting our Git Repo.
 
-2019.11.17 13:51:00
+쌉가능 어플의 구동을 위한 서버 레파지토리입니다.
+Node.js를 통해 만들어졌으며, REST APIs 를 지향하며 만든 첫번째 프로젝트 완성본입니다.
+이 레파지토리가 지금 막 Node.js를 활용한 서버 구축에 관심이 있는 초급자 분들에게 도움이 되었으면 합니다.
+비평은 항상 환영입니다.
 
-- register 기능 추가
-- register 휴대폰 중복 검사 추가
-- Login 기능 추가
+- 김해준 dan.kimhaejun@gmail.com
 
-  2019.11.18 23:21:00
+### Prerequisites
 
-- Logout 기능 추가
-- 유저 profile image 첨부 기능 추가
+Run a server is difficult due to personal information.
+(You can change personal information at any time, as well as run a server by yourself.)
 
-  2019.11.19 23:18:00
+개인정보로 인해 즉시 실행은 되지 않습니다.
+.env 파일에 아래 코드를 복사해 정보를 입력하면 구동가능합니다.
 
-- Update password 기능 추가
-- request 포스트 기능 추가
-- request 확인 기능 추가
+```
+NODE_ENV="your information"
+DEBUG="your information"
+PORT="your information"
+DB_USER="your information"
+DB_PW=whdmsdudalswotnr
+DB_HOST="your information"
+HASH_SALT="your information"
+JWT_SECRET="your information"
+S3_KEY="your information"
+S3_SECRETKEY="your information"
+ADMIN_MAIL="your information"
+ADMIN_MAIL_PASSWORD="your information"
+```
+
+## Built With
+
+- [김조은](https://github.com/kimgood29) - Team Leader, Front-end, Setup UI
+- [이영민](https://github.com/Dev-miniyoung) - Front-end, Customized map
+- [정재숙](https://github.com/DOMO9293) - Front-end, Build chat with Firebase
+
+## License
+
+This project is licensed under the 2Luck - see the (https://www.rocketpunch.com/companies/2luck) for details
+
+<!-- ### Installing
+
+A step by step series of examples that tell you how to get a development env running
+
+Say what the step will be
+
+```
+Give the example
+```
+
+And repeat
+
+```
+until finished
+```
+
+End with an example of getting some data out of the system or using it for a little demo
+
+## Running the tests
+
+Explain how to run the automated tests for this system
+
+### Break down into end to end tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+### And coding style tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+## Deployment
+
+Add additional notes about how to deploy this on a live system -->
+
+<!--
+## Contributing
+
+Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
+
+## Authors
+
+- **Billie Thompson** - _Initial work_ - [PurpleBooth](https://github.com/PurpleBooth)
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+
+## Acknowledgments
+
+- Hat tip to anyone whose code was used
+- Inspiration
+- etc -->
