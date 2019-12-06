@@ -18,7 +18,9 @@ Node.js를 통해 만들어졌으며, REST APIs 를 지향하며 만든 첫번�
 비평은 항상 환영입니다.<br>
 <br>
 
-- 김해준 <dan.kimhaejun@gmail.com>
+김해준
+<dan.kimhaejun@gmail.com>
+<https://github.com/Dankimhaejun>
 
 ## How To Use
 
