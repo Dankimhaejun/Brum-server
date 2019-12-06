@@ -6,7 +6,7 @@ Server for 쌉가능 Application
 
 ## Getting Started
 
-Built with Node.js, REST APIs<br>
+**Built with Node.js, REST APIs**<br>
 <br>
 These instructions will get you information of the project.<br>
 If you are studying build a server with Node.js, it would help you.<br>
@@ -18,9 +18,9 @@ Node.js를 통해 만들어졌으며, REST APIs 를 지향하며 만든 첫번�
 비평은 항상 환영입니다.<br>
 <br>
 
-김해준
-<dan.kimhaejun@gmail.com>
-<https://github.com/Dankimhaejun>
+김해준<br>
+<dan.kimhaejun@gmail.com><br>
+<https://github.com/Dankimhaejun><br>
 
 ## How To Use
 
@@ -28,12 +28,10 @@ Please download the app to <https://www.rocketpunch.com/companies/2luck>
 
 ## Prerequisites
 
-### Run a server is difficult due to personal information.<br>
-
+**Run a server is difficult due to personal information.**<br>
 (You can change personal information at any time, as well as run a server by yourself.)<br>
 
-### 개인정보로 인해 즉시 실행은 되지 않습니다.<br>
-
+개인정보로 인해 즉시 실행은 되지 않습니다.<br>
 **.env 파일 생성 후 아래 코드를 복사해 정보를 입력하면 구동가능합니다.**<br>
 
 ```
