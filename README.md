@@ -23,8 +23,8 @@ Node.js를 통해 만들어졌으며, REST APIs 를 지향하며 만든 첫번�
 <https://github.com/Dankimhaejun><br>
 
 ## How To Use
-
-Please download the app to <https://www.rocketpunch.com/companies/2luck>
+Not release yet.
+Presentation videos <https://youtu.be/zjM7Z7uHwLM?t=3283>
 
 ## Prerequisites
 
