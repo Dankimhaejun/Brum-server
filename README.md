@@ -5,7 +5,7 @@
 Server for 쌉가능 Application
 
 ## 기능 및 설명은 아래 링크를 참조해주세요<br>
-소개 문서 - <https://www.notion.so/TITI-with-2LUCK-6f1814abcf9a423387190cf339e0a54b>
+소개 문서 - <https://www.notion.so/TITI-with-2LUCK-6f1814abcf9a423387190cf339e0a54b><br>
 API 문서 - <https://www.notion.so/dankimhaejun/API-406ef3356bee4f33b6d38c9b2c45795e><br>
 발표 영상 - <https://youtu.be/zjM7Z7uHwLM?t=3283><br>
 
